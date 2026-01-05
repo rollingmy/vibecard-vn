@@ -6,10 +6,178 @@
         "description": "Vợt deal nhanh như người yêu cũ trở mặt"
     },
     {
+        "id": "flex-den-hoi-tho-cuoi",
+        "name": "Flex Đến Hơi Thở Cuối",
+        "color": "#00FF00",
+        "description": "Số dư tài khoản nhiều số 0 quá đếm không hết"
+    },
+    {
+        "id": "dai-gia-ngam",
+        "name": "Đại Gia Ngầm",
+        "color": "#B8860B",
+        "description": "Bên ngoài đổ nát hoang sơ, bên trong nội thất tiện nghi bất ngờ"
+    },
+    {
+        "id": "tap-doan-da-cap",
+        "name": "CEO Tập Đoàn Đa Cấp",
+        "color": "#000080",
+        "description": "Tư duy triệu phú, đánh thức tiềm năng (ngủ quên)"
+    },
+    {
+        "id": "rich-kid-tu-than",
+        "name": "Rich Kid Tự Thân",
+        "color": "#FF69B4",
+        "description": "Tự thân bố mẹ lo, khởi nghiệp từ vạch đích"
+    },
+    {
+        "id": "co-dat-dai-gia",
+        "name": "Cò Đất Đại Gia",
+        "color": "#8B4513",
+        "description": "Lô này đẹp, em để dành riêng cho anh chị"
+    },
+    {
+        "id": "shark-tank-deal",
+        "name": "Shark Tank Deal",
+        "color": "#00CED1",
+        "description": "Em đến đây để tìm người đi cùng (về nhà)"
+    },
+    {
+        "id": "the-black-card",
+        "name": "The Black Card",
+        "color": "#000000",
+        "description": "Quyền lực bóng tối, quẹt nát máy POS"
+    },
+    {
+        "id": "nha-suu-tap-xe",
+        "name": "Nhà Sưu Tập Xe",
+        "color": "#FF0000",
+        "description": "Gara chật quá, phải để bớt ngoài vỉa hè"
+    },
+    {
+        "id": "king-of-bitcoin",
+        "name": "King of Bitcoin",
+        "color": "#FFA500",
+        "description": "Hold to die, nhưng die trước khi to the moon"
+    },
+    {
         "id": "simp-lord",
         "name": "Simp Lord",
         "color": "#FFB6C1",
         "description": "Chỉ làm lốp dự phòng thôi cũng vui rồi"
+    },
+    {
+        "id": "red-flag-di-dong",
+        "name": "Red Flag Di Động",
+        "color": "#FF0000",
+        "description": "Cờ đỏ bay phấp phới, chạy ngay đi"
+    },
+    {
+        "id": "chua-he-biet-yeu",
+        "name": "Chưa Hề Biết Yêu",
+        "color": "#F0F8FF",
+        "description": "Giấy chứng nhận bảo tồn động vật quý hiếm"
+    },
+    {
+        "id": "trap-girl-chinh-hieu",
+        "name": "Trap Girl Chính Hiệu",
+        "color": "#800080",
+        "description": "Lưới trời lồng lộng, tuy thưa mà khó thoát"
+    },
+    {
+        "id": "good-boy-thanh-thien",
+        "name": "Good Boy Thánh Thiện",
+        "color": "#FFFFFF",
+        "description": "Ngoan xinh yêu, chỉ thiếu mỗi người yêu"
+    },
+    {
+        "id": "ex-files",
+        "name": "Hồ Sơ Ex",
+        "color": "#808080",
+        "description": "Tuyệt mật: Danh sách người yêu cũ dài như sớ Táo Quân"
+    },
+    {
+        "id": "friendzone-forever",
+        "name": "Friendzone Forever",
+        "color": "#FFFF00",
+        "description": "Mãi bên nhau bạn nhé, nhưng không yêu đâu"
+    },
+    {
+        "id": "match-tinder",
+        "name": "Top Pick Tinder",
+        "color": "#FF1493",
+        "description": "Quẹt phải mỏi tay, nhưng vẫn ế"
+    },
+    {
+        "id": "le-hoi-chia-tay",
+        "name": "Lễ Hội Chia Tay",
+        "color": "#000000",
+        "description": "Mừng em quay vào ô mất lượt"
+    },
+    {
+        "id": "crush-quoc-dan",
+        "name": "Crush Quốc Dân",
+        "color": "#FF69B4",
+        "description": "Người người theo đuổi, nhà nhà mong chờ"
+    },
+    {
+        "id": "chien-than-deadline",
+        "name": "Chiến Thần Deadline",
+        "color": "#FF4500",
+        "description": "Nước đến chân mới nhảy, mà nhảy là qua"
+    },
+    {
+        "id": "ke-huy-diet-bao-cao",
+        "name": "Kẻ Hủy Diệt Báo Cáo",
+        "color": "#708090",
+        "description": "Slide đẹp, nội dung thì... để tính sau"
+    },
+    {
+        "id": "senior-mom",
+        "name": "Senior Mõm",
+        "color": "#4682B4",
+        "description": "Code bằng mồm, fix bug bằng niềm tin"
+    },
+    {
+        "id": "intern-ngay-tho",
+        "name": "Intern Ngây Thơ",
+        "color": "#E6E6FA",
+        "description": "Em tưởng xóa database là giải phóng bộ nhớ?"
+    },
+    {
+        "id": "drama-queen-cong-so",
+        "name": "Drama Queen Công Sở",
+        "color": "#9932CC",
+        "description": "Ở đâu có biến, ở đó có em"
+    },
+    {
+        "id": "luong-thang-5-trieu",
+        "name": "Lương Tháng 5 Triệu",
+        "color": "#A9A9A9",
+        "description": "Nhưng tiêu như lương 50 triệu"
+    },
+    {
+        "id": "otp-cong-so",
+        "name": "OTP Công Sở",
+        "color": "#FFB6C1",
+        "description": "Ship cặp đôi sếp và thư ký (trong thầm lặng)"
+    },
+    {
+        "id": "truong-phong-he-du",
+        "name": "Trưởng Phòng Hệ Dù",
+        "color": "#20B2AA",
+        "description": "Chơi là chính, làm là phụ, dù che là chủ yếu"
+    },
+    {
+        "id": "tho-code-dao",
+        "name": "Thợ Code Dạo",
+        "color": "#00FF00",
+        "description": "Nhận fix bug giá rẻ, khuyến mãi thêm bug mới"
+    },
+    {
+        "id": "cau-thuy-tinh",
+        "name": "Nhân Viên Thủy Tinh",
+        "color": "#AFEEEE",
+        "description": "Mắng nhẹ cái là vỡ tan tành"
     },
     {
         "id": "the-bai-ma-thuat",
@@ -18,15 +186,417 @@
         "description": "Triệu hồi sức mạnh bóng tối (để đi ngủ)"
     },
     {
-        "id": "bang-khen-thoat-e",
-        "name": "Bằng Khen Thoát Ế",
-        "color": "#98FF98",
-        "description": "Chúc mừng bạn đã có người rước"
+        "id": "yasuo-gank-tem",
+        "name": "Yasuo Gank Tem",
+        "color": "#00BFFF",
+        "description": "Hasagi! Trăn trối (đồng đội)"
+    },
+    {
+        "id": "pro-player-pubg",
+        "name": "Pro Player PUBG",
+        "color": "#F4A460",
+        "description": "Nhảy dù xuống là thành cái hòm"
+    },
+    {
+        "id": "hacker-lor",
+        "name": "Hacker Lỏ",
+        "color": "#006400",
+        "description": "Hack được wifi nhà hàng xóm là giỏi lắm rồi"
+    },
+    {
+        "id": "game-over-screen",
+        "name": "Game Over",
+        "color": "#8B0000",
+        "description": "Cuộc đời là game khó, và bạn vừa hết mạng"
+    },
+    {
+        "id": "nintendo-switch",
+        "name": "Nintendo Player",
+        "color": "#FF4500",
+        "description": "Cầm Switch ra đường cho ngầu thôi"
+    },
+    {
+        "id": "keyboard-warrior",
+        "name": "Anh Hùng Bàn Phím",
+        "color": "#FF00FF",
+        "description": "Gõ phím bình thiên hạ, enter định giang sơn"
+    },
+    {
+        "id": "loi-404-not-found",
+        "name": "Lỗi 404 (Not Found)",
+        "color": "#696969",
+        "description": "Người yêu của bạn hiện không tìm thấy"
+    },
+    {
+        "id": "ai-robot-x",
+        "name": "Mecha Pilot X",
+        "color": "#708090",
+        "description": "Lái robot khổng lồ (trong giấc mơ)"
+    },
+    {
+        "id": "mining-coin-rig",
+        "name": "Trại Trâu Cày Coin",
+        "color": "#BDB76B",
+        "description": "Tiền điện tháng này cao hơn tiền lãi"
+    },
+    {
+        "id": "keo-ly-mai-dinh",
+        "name": "Keo Lỳ Mãi Đỉnh",
+        "color": "#FF1493",
+        "description": "Dính nhau như sam, gỡ không ra"
+    },
+    {
+        "id": "cham-zn",
+        "name": "Chằm Zn (Trầm Cảm)",
+        "color": "#778899",
+        "description": "Mệt mỏi vì quá đẹp trai/xinh gái"
+    },
+    {
+        "id": "ton-com-cha-me",
+        "name": "Tốn Cơm Cha Mẹ",
+        "color": "#FFA07A",
+        "description": "Nuôi tốn cơm mà chưa thấy báo đáp gì"
+    },
+    {
+        "id": "a-lo-ha",
+        "name": "Aloha (Cục Gạch)",
+        "color": "#3CB371",
+        "description": "Ném chó chó chết, ném tường tường thủng"
+    },
+    {
+        "id": "xu-ca-na",
+        "name": "Xu Cà Na",
+        "color": "#808000",
+        "description": "Đen thôi đỏ quên đi"
+    },
+    {
+        "id": "mai-det-ti-ni",
+        "name": "Mãi Đet-ti-ni",
+        "color": "#DC143C",
+        "description": "Định mệnh sắp đặt ta bên nhau (hoặc không)"
+    },
+    {
+        "id": "u-la-troi",
+        "name": "U Là Trời",
+        "color": "#4169E1",
+        "description": "Shock đến tận óc, ngỡ ngàng ngơ ngác"
+    },
+    {
+        "id": "khum",
+        "name": "Khum (Không)",
+        "color": "#FF6347",
+        "description": "Khum thích, khum làm, khum quan tâm"
+    },
+    {
+        "id": "lem-mon",
+        "name": "Lém Món (Lemon)",
+        "color": "#FFFF00",
+        "description": "Chua ngoa đanh đá số 2 không ai số 1"
+    },
+    {
+        "id": "flexing-time",
+        "name": "Giờ Flexing",
+        "color": "#DAA520",
+        "description": "Khoe nhẹ cái đồng hồ 5 tỷ (hàng rep 1:1)"
     },
     {
         "id": "can-cuoc-gen-z",
         "name": "Căn Cước Gen Z",
         "color": "#F0F0F0",
         "description": "Chứng nhận công dân vũ trụ Z"
+    },
+    {
+        "id": "ban-doi-ai",
+        "name": "Bạn Đời AI",
+        "color": "#E0FFFF",
+        "description": "Người yêu ảo, tình yêu thật (với cái máy)"
+    },
+    {
+        "id": "nguoi-toi-co",
+        "name": "Người Tối Cổ",
+        "color": "#8B4513",
+        "description": "Trend gì cũng không biết, chỉ biết ăn với ngủ"
+    },
+    {
+        "id": "cyberpunk-city",
+        "name": "Cyberpunk 2077",
+        "color": "#9400D3",
+        "description": "Sống ở năm 2077 nhưng lương năm 2007"
+    },
+    {
+        "id": "metaverse-avatar",
+        "name": "Metaverse Avatar",
+        "color": "#00FFFF",
+        "description": "Đất ảo thì có, đất thật thì không"
+    },
+    {
+        "id": "chat-gpt-mom",
+        "name": "Chat GPT Mõm",
+        "color": "#008080",
+        "description": "Hỏi gì cũng biết, nhưng làm thì chịu"
+    },
+    {
+        "id": "neural-link-chip",
+        "name": "Chip Cấy Não",
+        "color": "#FF00FF",
+        "description": "Tải kiến thức trực tiếp vào não (vẫn trượt môn)"
+    },
+    {
+        "id": "space-traveler",
+        "name": "Du Hành Gia",
+        "color": "#191970",
+        "description": "Bay cao bay xa, bay luôn không về"
+    },
+    {
+        "id": "time-machine-ticket",
+        "name": "Vé Cỗ Máy Thời Gian",
+        "color": "#B0C4DE",
+        "description": "Quay về quá khứ để chặn tay mình lúc gửi tin nhắn đó"
+    },
+    {
+        "id": "digital-nomad",
+        "name": "Du Mục Kỹ Thuật Số",
+        "color": "#20B2AA",
+        "description": "Làm việc mọi lúc mọi nơi (chủ yếu là quán cafe)"
+    },
+    {
+        "id": "pixel-mario",
+        "name": "Pixel Plumber",
+        "color": "#FF4500",
+        "description": "Ăn nấm để lớn, đụng rùa là đi"
+    },
+    {
+        "id": "tamagotchi-pet",
+        "name": "Thú Ảo Tamagotchi",
+        "color": "#FF69B4",
+        "description": "Nuôi con gì chết con đó, kể cả thú ảo"
+    },
+    {
+        "id": "windows-95-error",
+        "name": "Windows 95 Error",
+        "color": "#008080",
+        "description": "Huyền thoại màn hình xanh chết chóc"
+    },
+    {
+        "id": "bui-doi-cho-lon",
+        "name": "Bụi Đời Chợ Lớn",
+        "color": "#8B4513",
+        "description": "Phong trần bụi bặm, đậm chất xi nê"
+    },
+    {
+        "id": "cassette-tape",
+        "name": "Băng Cassette",
+        "color": "#708090",
+        "description": "Tua lại kỷ niệm xưa (bằng bút chì)"
+    },
+    {
+        "id": "vinyl-record",
+        "name": "Đĩa Than Cổ Điển",
+        "color": "#2F4F4F",
+        "description": "Nhạc hay vì nó cũ, người hay vì..."
+    },
+    {
+        "id": "vhs-glitch",
+        "name": "VHS Glitch",
+        "color": "#4B0082",
+        "description": "Băng video bị nhiễu, ký ức bị nhòe"
+    },
+    {
+        "id": "pacman-maze",
+        "name": "Pacman Maze",
+        "color": "#FFFF00",
+        "description": "Chạy trốn deadline như chạy ma"
+    },
+    {
+        "id": "tetris-block",
+        "name": "Xếp Hình Tetris",
+        "color": "#32CD32",
+        "description": "Cuộc đời là những mảnh ghép không vừa khít"
+    },
+    {
+        "id": "nokia-snake",
+        "name": "Rắn Săn Mồi",
+        "color": "#9ACD32",
+        "description": "Càng ăn càng dài, càng dài càng dễ chết"
+    },
+    {
+        "id": "overthinking-club",
+        "name": "Hội Overthinking",
+        "color": "#483D8B",
+        "description": "Nghĩ nhiều thì mệt, không nghĩ thì... vẫn mệt"
+    },
+    {
+        "id": "deadline-reaper",
+        "name": "Tử Thần Deadline",
+        "color": "#000000",
+        "description": "Gõ cửa từng nhà, hỏi thăm từng người"
+    },
+    {
+        "id": "tram-cam-tuoi-tre",
+        "name": "Trầm Cảm Tuổi Trẻ",
+        "color": "#778899",
+        "description": "Mặt cười nhưng lệ đổ trong tim"
+    },
+    {
+        "id": "introvert-cave",
+        "name": "Hang Ổ Hướng Nội",
+        "color": "#2F4F4F",
+        "description": "Vui lòng không làm phiền (trừ shipper)"
+    },
+    {
+        "id": "trash-can-vip",
+        "name": "Thùng Rác VIP",
+        "color": "#FFD700",
+        "description": "Rác nhưng là rác tái chế, rác có giá trị"
+    },
+    {
+        "id": "clown-license",
+        "name": "Chứng Chỉ Chú Hề",
+        "color": "#FF4500",
+        "description": "Diễn hài cho đời vui (nhưng đời toàn cười vào mặt)"
+    },
+    {
+        "id": "zombie-cong-so",
+        "name": "Zombie Công Sở",
+        "color": "#556B2F",
+        "description": "Sống lay lắt qua ngày chờ lương"
+    },
+    {
+        "id": "rip-luong",
+        "name": "R.I.P Lương",
+        "color": "#696969",
+        "description": "Vừa về đã đi, ra đi thanh thản"
+    },
+    {
+        "id": "to-nguoi-tieu-dung",
+        "name": "Tờ Người Tiêu Dùng",
+        "color": "#A52A2A",
+        "description": "Tiêu dùng thông thái (chỗ nào rẻ thì mua)"
+    },
+    {
+        "id": "drama-is-coming",
+        "name": "Drama Is Coming",
+        "color": "#800000",
+        "description": "Mùa đông chưa đến nhưng drama đã về"
+    },
+    {
+        "id": "ba-dong-online",
+        "name": "Bà Đồng Online",
+        "color": "#9400D3",
+        "description": "Phán đâu trúng đó (trừ xổ số)"
+    },
+    {
+        "id": "water-sign-thuy",
+        "name": "Hệ Nước (Water)",
+        "color": "#00BFFF",
+        "description": "Sống tình cảm, hay khóc thầm"
+    },
+    {
+        "id": "fire-sign-lua",
+        "name": "Hệ Lửa (Fire)",
+        "color": "#FF0000",
+        "description": "Nóng tính nhưng tốt bụng (đôi khi)"
+    },
+    {
+        "id": "earth-sign-dat",
+        "name": "Hệ Đất (Earth)",
+        "color": "#8B4513",
+        "description": "Vững chãi như núi, lì lợm như trâu"
+    },
+    {
+        "id": "air-sign-khi",
+        "name": "Hệ Khí (Air)",
+        "color": "#87CEEB",
+        "description": "Bay bổng lãng mạn, hay quên ví"
+    },
+    {
+        "id": "thay-boi-xem-voi",
+        "name": "Thầy Bói Xem Voi",
+        "color": "#4B0082",
+        "description": "Chỉ thấy cây mà không thấy rừng"
+    },
+    {
+        "id": "bua-yeu",
+        "name": "Bùa Yêu",
+        "color": "#FF1493",
+        "description": "Dán vào là dính, gỡ ra là tróc da"
+    },
+    {
+        "id": "full-moon-party",
+        "name": "Hội Trăng Tròn",
+        "color": "#FFD700",
+        "description": "Biến hình khi trăng lên (thành 'ngáo')"
+    },
+    {
+        "id": "than-so-hoc",
+        "name": "Thần Số Học",
+        "color": "#008080",
+        "description": "Số chủ đạo của bạn là số 0 (không có gì)"
+    },
+    {
+        "id": "ying-yang",
+        "name": "Âm Dương Sư",
+        "color": "#000000",
+        "description": "Cân bằng vạn vật, trừ số dư tài khoản"
+    },
+    {
+        "id": "bang-khen-thoat-e",
+        "name": "Bằng Khen Thoát Ế",
+        "color": "#98FF98",
+        "description": "Chúc mừng bạn đã có người rước"
+    },
+    {
+        "id": "food-reviewer",
+        "name": "Thánh Ăn Hàng",
+        "color": "#FFA500",
+        "description": "Ăn cả thế giới, review có tâm (tâm hồn ăn uống)"
+    },
+    {
+        "id": "coffee-holic",
+        "name": "Nghiện Cà Phê",
+        "color": "#8B4513",
+        "description": "Máu tham cafein, tim đập chân run"
+    },
+    {
+        "id": "phuot-thu",
+        "name": "Phượt Thủ Chuyên Nghiệp",
+        "color": "#556B2F",
+        "description": "Đi để trở về (nếu không lạc đường)"
+    },
+    {
+        "id": "beach-vibe",
+        "name": "Beach Vibe",
+        "color": "#00CED1",
+        "description": "Vitamin Sea là liều thuốc chữa lành duy nhất"
+    },
+    {
+        "id": "camping-chill",
+        "name": "Camping Chill",
+        "color": "#228B22",
+        "description": "Ra rừng ở cho muỗi đốt chơi"
+    },
+    {
+        "id": "gym-rat",
+        "name": "Gym Rat",
+        "color": "#FF4500",
+        "description": "Cơ bắp cuồn cuộn, não phẳng lì (đùa thôi)"
+    },
+    {
+        "id": "cat-lover",
+        "name": "Con Sen Chính Hiệu",
+        "color": "#FFB6C1",
+        "description": "Hoàng thượng vạn tuế, sen muôn năm"
+    },
+    {
+        "id": "dog-lover",
+        "name": "Người Yêu Chó",
+        "color": "#D2691E",
+        "description": "Trung thành tuyệt đối, hơn cả người yêu"
+    },
+    {
+        "id": "minimalist-white",
+        "name": "Minimalist (Trắng)",
+        "color": "#FFFFFF",
+        "description": "Đỉnh cao của nghệ thuật là sự đơn giản (lười vẽ)"
     }
 ]

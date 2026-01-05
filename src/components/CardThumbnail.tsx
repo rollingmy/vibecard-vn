@@ -291,9 +291,25 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({ template }) => {
                                 </>
                             );
 
-                        // Fallback
+                        // ===================================
+                        // DEFAULT FALLBACK (Construction Mode)
+                        // ===================================
                         default:
-                            return <text x="150" y="200" textAnchor="middle">Loading...</text>;
+                            return (
+                                <>
+                                    {/* Background */}
+                                    <rect width="300" height="400" fill="#F0F0F0" />
+                                    <pattern id="diagonal-stripe-mini" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                        <rect width="5" height="10" transform="translate(0,0)" fill="#000000" opacity="0.1" />
+                                    </pattern>
+                                    <rect width="300" height="400" fill="url(#diagonal-stripe-mini)" />
+
+                                    {/* Construction Sign */}
+                                    <rect x="75" y="120" width="150" height="150" fill="#FFD700" stroke="black" strokeWidth="4" />
+                                    <text x="150" y="200" textAnchor="middle" fontSize="50">🚧</text>
+                                    <text x="150" y="240" textAnchor="middle" fontWeight="black" fontSize="16">W.I.P</text>
+                                </>
+                            );
                     }
                 })()}
             </svg>
