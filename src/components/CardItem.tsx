@@ -6,9 +6,13 @@ interface CardItemProps {
     color?: string;
 }
 
-export default function CardItem({ title, icon, color = "bg-white" }: CardItemProps) {
+export default function CardItem({ title, icon, color }: CardItemProps) {
+    const isHex = color?.startsWith('#');
+    const style = isHex ? { backgroundColor: color } : {};
+    const className = `flex flex-col items-center p-6 border-4 border-black ${!isHex ? color : ''} shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1`;
+
     return (
-        <div className={`flex flex-col items-center p-6 border-4 border-black ${color} shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1`}>
+        <div className={className} style={style}>
             <div className="w-24 h-24 mb-4 border-2 border-black rounded-full flex items-center justify-center bg-white overflow-hidden">
                 {icon || (
                     <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">

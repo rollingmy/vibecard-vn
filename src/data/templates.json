@@ -1,0 +1,32 @@
+[
+    {
+        "id": "chien-than-san-sale",
+        "name": "Chiến Thần Săn Sale",
+        "color": "#FFD700",
+        "description": "Vợt deal nhanh như người yêu cũ trở mặt"
+    },
+    {
+        "id": "simp-lord",
+        "name": "Simp Lord",
+        "color": "#FFB6C1",
+        "description": "Chỉ làm lốp dự phòng thôi cũng vui rồi"
+    },
+    {
+        "id": "the-bai-ma-thuat",
+        "name": "Thẻ Bài Ma Thuật",
+        "color": "#4B0082",
+        "description": "Triệu hồi sức mạnh bóng tối (để đi ngủ)"
+    },
+    {
+        "id": "bang-khen-thoat-e",
+        "name": "Bằng Khen Thoát Ế",
+        "color": "#98FF98",
+        "description": "Chúc mừng bạn đã có người rước"
+    },
+    {
+        "id": "can-cuoc-gen-z",
+        "name": "Căn Cước Gen Z",
+        "color": "#F0F0F0",
+        "description": "Chứng nhận công dân vũ trụ Z"
+    }
+]
