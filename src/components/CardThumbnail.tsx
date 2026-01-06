@@ -4,13 +4,17 @@ import { LoveTheme } from './templates/LoveTheme';
 import { OfficeLifeTemplates } from './templates/OfficeTheme';
 import { GamingTheme } from './templates/GamingTheme';
 import { GenZTheme } from './templates/GenZTheme';
+import { RetroTemplates } from './templates/RetroTheme';
+import { DarkHumorTemplates } from './templates/DarkHumorTheme';
 
 const AllTemplates = {
     ...FlexTheme,
     ...LoveTheme,
     ...OfficeLifeTemplates,
     ...GamingTheme,
-    ...GenZTheme
+    ...GenZTheme,
+    ...RetroTemplates,
+    ...DarkHumorTemplates
 };
 
 interface Template {
@@ -79,7 +83,29 @@ const DEFAULT_NAMES: Record<string, string> = {
     'u-la-troi': "SỐC NGANG",
     'khum': "TỪ CHỐI HIỂU",
     'lem-mon': "LEM MÒN",
-    'flexing-time': "RICH KID"
+    'flexing-time': "RICH KID",
+    // Retro Theme
+    'pixel-mario': "GAME OVER",
+    'tamagotchi-pet': "MY PET",
+    'windows-95-error': "SYSTEM ERROR",
+    'bui-doi-cho-lon': "GIANG HỒ MẠNG",
+    'cassette-tape': "MIXTAPE 2023",
+    'vinyl-record': "CLASSIC VIBE",
+    'vhs-glitch': "NO SIGNAL",
+    'pacman-maze': "PAC-MAN",
+    'tetris-block': "TETRIS KING",
+    'nokia-snake': "RẮN SĂN MỒI",
+    // Dark Humor Theme
+    'overthinking-club': "OVERTHINKER",
+    'deadline-reaper': "DEADLINE ĐẾN",
+    'tram-cam-tuoi-tre': "LOW BATTERY",
+    'introvert-cave': "HƯỚNG NỘI",
+    'trash-can-vip': "VIP TRASH",
+    'clown-license': "CHÚ HỀ",
+    'zombie-cong-so': "ZOMBIE",
+    'rip-luong': "R.I.P LƯƠNG",
+    'to-nguoi-tieu-dung': "NGƯỜI TIÊU DÙNG",
+    'drama-is-coming': "DRAMA QUEEN"
 };
 
 export default function CardThumbnail({ template }: CardThumbnailProps) {
@@ -109,6 +135,7 @@ export default function CardThumbnail({ template }: CardThumbnailProps) {
                 userName={defaultName}
                 userImage=""
                 nameFontSize={nameFontSize}
+                description={template.description}
             />
         </svg>
     );

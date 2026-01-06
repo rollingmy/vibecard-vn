@@ -9,6 +9,8 @@ import { LoveTheme } from "./templates/LoveTheme";
 import { OfficeLifeTemplates } from "./templates/OfficeTheme";
 import { GamingTheme } from "./templates/GamingTheme";
 import { GenZTheme } from "./templates/GenZTheme";
+import { RetroTemplates } from "./templates/RetroTheme";
+import { DarkHumorTemplates } from "./templates/DarkHumorTheme";
 
 // Dynamic import for ImageCropper to optimize initial load
 const ImageCropper = dynamic(() => import("./ImageCropper"), {
@@ -21,7 +23,9 @@ const AllTemplates = {
     ...LoveTheme,
     ...OfficeLifeTemplates,
     ...GamingTheme,
-    ...GenZTheme
+    ...GenZTheme,
+    ...RetroTemplates,
+    ...DarkHumorTemplates
 };
 
 export interface TemplateData {
@@ -90,7 +94,29 @@ const DEFAULT_NAMES: Record<string, string> = {
     'u-la-troi': "SỐC NGANG",
     'khum': "TỪ CHỐI HIỂU",
     'lem-mon': "LEM MÒN",
-    'flexing-time': "RICH KID"
+    'flexing-time': "RICH KID",
+    // Retro Theme
+    'pixel-mario': "GAME OVER",
+    'tamagotchi-pet': "MY PET",
+    'windows-95-error': "SYSTEM ERROR",
+    'bui-doi-cho-lon': "GIANG HỒ MẠNG",
+    'cassette-tape': "MIXTAPE 2023",
+    'vinyl-record': "CLASSIC VIBE",
+    'vhs-glitch': "NO SIGNAL",
+    'pacman-maze': "PAC-MAN",
+    'tetris-block': "TETRIS KING",
+    'nokia-snake': "RẮN SĂN MỒI",
+    // Dark Humor Theme
+    'overthinking-club': "OVERTHINKER",
+    'deadline-reaper': "DEADLINE ĐẾN",
+    'tram-cam-tuoi-tre': "LOW BATTERY",
+    'introvert-cave': "HƯỚNG NỘI",
+    'trash-can-vip': "VIP TRASH",
+    'clown-license': "CHÚ HỀ",
+    'zombie-cong-so': "ZOMBIE",
+    'rip-luong': "R.I.P LƯƠNG",
+    'to-nguoi-tieu-dung': "NGƯỜI TIÊU DÙNG",
+    'drama-is-coming': "DRAMA QUEEN"
 };
 
 export default function CardEditor({ template }: CardEditorProps) {
@@ -247,7 +273,7 @@ export default function CardEditor({ template }: CardEditorProps) {
                         {(() => {
                             const TemplateComponent = AllTemplates[template.id as keyof typeof AllTemplates];
                             if (TemplateComponent) {
-                                return <TemplateComponent userName={userName} userImage={userImage} nameFontSize={nameFontSize} />;
+                                return <TemplateComponent userName={userName} userImage={userImage} nameFontSize={nameFontSize} description={template.description} />;
                             }
                             // Fallback for unknown templates
                             return (
