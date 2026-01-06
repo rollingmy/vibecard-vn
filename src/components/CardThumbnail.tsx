@@ -1,10 +1,12 @@
 import React from 'react';
 import { FlexTheme } from './templates/FlexTheme';
 import { LoveTheme } from './templates/LoveTheme';
+import { OfficeLifeTemplates } from './templates/OfficeTheme';
 
 const AllTemplates = {
     ...FlexTheme,
-    ...LoveTheme
+    ...LoveTheme,
+    ...OfficeLifeTemplates
 };
 
 interface Template {
@@ -41,7 +43,17 @@ const DEFAULT_NAMES: Record<string, string> = {
     'friendzone-forever': "ANH TRAI MƯA",
     'match-tinder': "TOP PICK",
     'le-hoi-chia-tay': "NGƯỜI RA ĐI",
-    'crush-quoc-dan': "IDOL MỚI NỔI"
+    'crush-quoc-dan': "IDOL MỚI NỔI",
+    'chien-than-deadline': "CHIẾN THẦN",
+    'ke-huy-diet-bao-cao': "KẺ HỦY DIỆT",
+    'senior-mom': "SENIOR MÕM",
+    'intern-ngay-tho': "BÉ INTERN",
+    'drama-queen-cong-so': "DRAMA QUEEN",
+    'luong-thang-5-trieu': "NGHÈO BỀN VỮNG",
+    'otp-cong-so': "CRUSH CÔNG SỞ",
+    'truong-phong-he-du': "HỆ DÙ CHE",
+    'tho-code-dao': "DEV FULL-STACK",
+    'cau-thuy-tinh': "TÂM HỒN MỎNG MANH"
 };
 
 export default function CardThumbnail({ template }: CardThumbnailProps) {
