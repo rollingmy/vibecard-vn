@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 import { FlexTheme } from "./templates/FlexTheme";
 import { LoveTheme } from "./templates/LoveTheme";
 import { OfficeLifeTemplates } from "./templates/OfficeTheme";
+import { GamingTheme } from "./templates/GamingTheme";
+import { GenZTheme } from "./templates/GenZTheme";
 
 // Dynamic import for ImageCropper to optimize initial load
 const ImageCropper = dynamic(() => import("./ImageCropper"), {
@@ -17,7 +19,9 @@ const ImageCropper = dynamic(() => import("./ImageCropper"), {
 const AllTemplates = {
     ...FlexTheme,
     ...LoveTheme,
-    ...OfficeLifeTemplates
+    ...OfficeLifeTemplates,
+    ...GamingTheme,
+    ...GenZTheme
 };
 
 export interface TemplateData {
@@ -64,7 +68,29 @@ const DEFAULT_NAMES: Record<string, string> = {
     'otp-cong-so': "CRUSH CÔNG SỞ",
     'truong-phong-he-du': "HỆ DÙ CHE",
     'tho-code-dao': "DEV FULL-STACK",
-    'cau-thuy-tinh': "TÂM HỒN MỎNG MANH"
+    'cau-thuy-tinh': "TÂM HỒN MỎNG MANH",
+    // Gaming Theme
+    'yasuo-gank-tem': "ĐẤNG YASUO",
+    'pro-player-pubg': "POCHINKI KING",
+    'hacker-lor': "ANONYMOUS",
+    'game-over-screen': "TRY AGAIN?",
+    'nintendo-switch': "PLAYER 1",
+    'keyboard-warrior': "ANH HÙNG BÀN PHÍM",
+    'loi-404-not-found': "MẤT KẾT NỐI",
+    'ai-robot-x': "GUNDAM PILOT",
+    'mining-coin-rig': "TRÂU CÀY COIN",
+    'the-bai-ma-thuat-upgrade': "BLUE EYES DRAGON",
+    // GenZ Theme
+    'keo-ly-mai-dinh': "MÃI ĐỈNH",
+    'cham-zn': "CHẤM HẾT",
+    'ton-com-cha-me': "TỐN CƠM",
+    'a-lo-ha': "ALOO",
+    'xu-ca-na': "XU CÀ NA",
+    'mai-det-ti-ni': "MÃI ĐẸT TI NI",
+    'u-la-troi': "SỐC NGANG",
+    'khum': "TỪ CHỐI HIỂU",
+    'lem-mon': "LEM MÒN",
+    'flexing-time': "RICH KID"
 };
 
 export default function CardEditor({ template }: CardEditorProps) {
