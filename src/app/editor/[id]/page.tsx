@@ -4,8 +4,48 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
+import { Metadata } from "next";
+
 // Next.js 15 App Router dynamic params are Promises
 type Params = Promise<{ id: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+    const { id } = await params;
+    const template = templates.find((t) => t.id === id);
+
+    if (!template) {
+        return {
+            title: "Mẫu thẻ không tồn tại | VibeCard VN",
+            description: "Không tìm thấy mẫu thẻ bạn yêu cầu trên VibeCard VN.",
+        };
+    }
+
+    // 2. Logic Title
+    let title = `Tạo ảnh ${template.name} cực chất - ${template.description} | VibeCard VN`;
+    if (id === 'flex-den-hoi-tho-cuoi') {
+        title = "Tạo ảnh chế Số dư nghìn tỷ - VibeCard VN";
+    }
+
+    // 3. Logic Description
+    const description = `Công cụ tạo ảnh chế ${template.name} online miễn phí. Tùy chỉnh tên, ảnh đại diện và tải về ảnh chất lượng cao 4K để đăng Story Facebook, Instagram ngay!`;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            type: 'website',
+            locale: 'vi_VN',
+            siteName: 'VibeCard VN',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+        },
+    };
+}
 
 export default async function EditorPage({ params }: { params: Params }) {
     const { id } = await params;
