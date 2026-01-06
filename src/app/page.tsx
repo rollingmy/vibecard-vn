@@ -7,15 +7,7 @@ import Hero from "@/components/Hero";
 import CardThumbnail from "@/components/CardThumbnail";
 import Footer from "@/components/Footer";
 import { useState } from "react";
-
-const CATEGORIES = [
-  { id: 'all', label: 'TẤT CẢ ✨' },
-  { id: 'flex', label: 'HỆ FLEX 😎' },
-  { id: 'love', label: 'TÌNH YÊU 💘' },
-  { id: 'work', label: 'CÔNG SỞ 🏢' },
-  { id: 'gaming', label: 'GAMING 🎮' },
-  { id: 'genz', label: 'GEN Z ⚡' },
-];
+import { CATEGORIES } from "@/constants/categories";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
