@@ -15,7 +15,12 @@ export default function EditorPage() {
                 <h1 className="font-bold uppercase tracking-wider">Trình Tạo Thẻ - VibeCard Demo</h1>
             </div>
 
-            <CardEditor />
+            <CardEditor template={{
+                id: 'chien-than-san-sale',
+                name: 'Chiến Thần Săn Sale',
+                color: '#FFD700',
+                description: 'Vợt deal nhanh như người yêu cũ trở mặt'
+            }} />
         </div>
     );
 }

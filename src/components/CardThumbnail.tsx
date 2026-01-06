@@ -1,5 +1,11 @@
 import React from 'react';
-import { TemplateStyles } from './templates/registry';
+import { FlexTheme } from './templates/FlexTheme';
+import { LoveTheme } from './templates/LoveTheme';
+
+const AllTemplates = {
+    ...FlexTheme,
+    ...LoveTheme
+};
 
 interface Template {
     id: string;
@@ -39,7 +45,7 @@ const DEFAULT_NAMES: Record<string, string> = {
 };
 
 export default function CardThumbnail({ template }: CardThumbnailProps) {
-    const TemplateRenderer = TemplateStyles[template.id];
+    const TemplateRenderer = AllTemplates[template.id as keyof typeof AllTemplates];
 
     if (!TemplateRenderer) {
         return (
@@ -65,7 +71,6 @@ export default function CardThumbnail({ template }: CardThumbnailProps) {
                 userName={defaultName}
                 userImage=""
                 nameFontSize={nameFontSize}
-                template={template}
             />
         </svg>
     );

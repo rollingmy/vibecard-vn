@@ -2,9 +2,16 @@
 
 import React from "react";
 import templates from "@/data/templates.json";
-import { getTemplateRender } from "@/components/templates/registry";
+import { FlexTheme } from "@/components/templates/FlexTheme";
+import { LoveTheme } from "@/components/templates/LoveTheme";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+
+const AllTemplates = {
+    ...FlexTheme,
+    ...LoveTheme
+};
+
 
 export default function TemplateLabPage() {
     return (
@@ -19,7 +26,9 @@ export default function TemplateLabPage() {
 
             <div className="space-y-16">
                 {templates.map((template) => {
-                    const RenderTemplate = getTemplateRender(template.id);
+                    const RenderTemplate = AllTemplates[template.id as keyof typeof AllTemplates];
+
+                    if (!RenderTemplate) return null;
 
                     // Define Test Cases
                     const testCases = [
@@ -29,7 +38,7 @@ export default function TemplateLabPage() {
                                 userName: "A",
                                 userImage: "https://i.pravatar.cc/150?u=a", // Square-ish
                                 nameFontSize: 40, // Force large font for short text
-                                template: template
+
                             }
                         },
                         {
@@ -38,7 +47,7 @@ export default function TemplateLabPage() {
                                 userName: "Nguyễn Trần Huyền Trân Công Chúa",
                                 userImage: "https://i.pravatar.cc/150?u=long",
                                 nameFontSize: 14, // Force small font for length
-                                template: template
+
                             }
                         },
                         {
@@ -47,7 +56,7 @@ export default function TemplateLabPage() {
                                 userName: "Vibe Checker",
                                 userImage: "https://placehold.co/100x300/png", // Very tall image
                                 nameFontSize: 24,
-                                template: template
+
                             }
                         }
                     ];
