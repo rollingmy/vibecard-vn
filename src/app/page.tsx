@@ -12,9 +12,9 @@ import { CATEGORIES } from "@/constants/categories";
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredTemplates = activeCategory === 'all'
-    ? templates
-    : templates.filter((t: any) => t.category === activeCategory);
+  const filteredTemplates = templates
+    .filter((t: any) => !t.hidden)
+    .filter((t: any) => activeCategory === 'all' ? true : t.category === activeCategory);
 
   return (
     <div className="min-h-screen flex flex-col font-sans">

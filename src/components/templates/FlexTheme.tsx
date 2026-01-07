@@ -132,59 +132,90 @@ export const FlexTheme = {
     'dai-gia-ngam': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
-                <filter id="grain">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-                </filter>
-                <clipPath id="avatar-clip-oval">
-                    <ellipse cx="100" cy="150" rx="60" ry="80" />
+                <linearGradient id="luxury-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#bf953f" />
+                    <stop offset="25%" stopColor="#fcf6ba" />
+                    <stop offset="50%" stopColor="#b38728" />
+                    <stop offset="75%" stopColor="#fbf5b7" />
+                    <stop offset="100%" stopColor="#aa771c" />
+                </linearGradient>
+                <pattern id="damask-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M20,0 Q30,10 40,0 Q30,-10 20,0 M20,40 Q30,50 40,40 Q30,30 20,40 M0,20 Q10,30 20,20 Q10,10 0,20"
+                        fill="none" stroke="#8B4513" strokeWidth="1" opacity="0.1" />
+                </pattern>
+
+                <clipPath id="avatar-clip-frame">
+                    <rect x="50" y="80" width="200" height="240" rx="5" />
                 </clipPath>
+                {/* Glass reflection gradient */}
+                <linearGradient id="glass-reflection" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+                    <stop offset="50%" stopColor="white" stopOpacity="0" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                </linearGradient>
             </defs>
 
-            {/* Gold Background */}
-            <rect width="300" height="400" fill="#B8860B" />
-            <rect width="300" height="400" fill="#DAA520" opacity="0.8" />
-            {/* Grain Texture Overlay */}
-            <rect width="300" height="400" filter="url(#grain)" opacity="0.2" style={{ mixBlendMode: "multiply" }} />
+            {/* 1. NỀN & HỌA TIẾT (Luxury Pattern) */}
+            <rect width="300" height="400" fill="url(#luxury-gold-grad)" />
+            <rect width="300" height="400" fill="url(#damask-pattern)" />
 
-            {/* Ornamental Borders */}
-            <rect x="15" y="15" width="270" height="370" fill="none" stroke="white" strokeWidth="2" />
-            <rect x="25" y="25" width="250" height="350" fill="none" stroke="white" strokeWidth="1" strokeDasharray="2 2" />
+            {/* 4. PHONG CÁCH CHUNG - Thick Black Border */}
+            <rect x="5" y="5" width="290" height="390" fill="none" stroke="black" strokeWidth="8" />
+            <rect x="10" y="10" width="280" height="380" fill="none" stroke="#B8860B" strokeWidth="2" />
 
-            {/* Top Decor */}
-            <path d="M150,40 L170,60 L130,60 Z" fill="white" />
+            {/* 2. KHUNG AVATAR (The Executive Frame) */}
+            {/* Ornamental Corners */}
+            <g stroke="#5c4033" strokeWidth="2" fill="none">
+                <path d="M45,75 L65,75 M45,75 L45,95" strokeWidth="4" />
+                <path d="M255,75 L235,75 M255,75 L255,95" strokeWidth="4" />
+                <path d="M45,325 L65,325 M45,325 L45,305" strokeWidth="4" />
+                <path d="M255,325 L235,325 M255,325 L255,305" strokeWidth="4" />
+            </g>
 
-            {/* Avatar Frame - Left Aligned Oval */}
-            <ellipse cx="100" cy="150" rx="65" ry="85" fill="none" stroke="white" strokeWidth="4" />
-            <ellipse cx="100" cy="150" rx="60" ry="80" stroke="black" strokeWidth="1" fill="#444" />
+            <rect x="50" y="80" width="200" height="240" fill="#1a1a1a" stroke="#8B4513" strokeWidth="4" />
 
             {userImage ? (
                 <image
-                    x="40" y="70" width="120" height="160"
+                    x="50" y="80" width="200" height="240"
                     href={userImage}
-                    clipPath="url(#avatar-clip-oval)"
+                    clipPath="url(#avatar-clip-frame)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="100" y="160" textAnchor="middle" fontSize="40">👑</text>
+                <text x="150" y="200" textAnchor="middle" fontSize="60">🦁</text>
             )}
 
-            {/* Vertical Split Line */}
-            <line x1="180" y1="80" x2="180" y2="220" stroke="white" strokeWidth="1" />
+            {/* Glass Overlay Effect */}
+            <rect x="50" y="80" width="200" height="240" fill="url(#glass-reflection)" opacity="0.6" pointerEvents="none" />
 
-            {/* Info Right */}
-            <g transform="translate(195, 100)">
-                <text x="0" y="0" fontFamily="serif" fontSize="10" fill="white" fontStyle="italic">Position</text>
-                <text x="0" y="15" fontFamily="serif" fontSize="14" fill="black" fontWeight="bold">CHAIRMAN</text>
-
-                <text x="0" y="50" fontFamily="serif" fontSize="10" fill="white" fontStyle="italic">Status</text>
-                <text x="0" y="65" fontFamily="serif" fontSize="14" fill="black" fontWeight="bold">HIDDEN</text>
+            {/* Top Stats */}
+            <g transform="translate(150, 50)">
+                <text x="0" y="0" textAnchor="middle" fontFamily="serif" fontSize="18" fontWeight="bold" fill="black">THE CHAIRMAN</text>
+                <line x1="-50" y1="10" x2="50" y2="10" stroke="black" strokeWidth="1" />
             </g>
 
+
             {/* Name at Bottom - Serif Classic */}
-            <text x="150" y="300" textAnchor="middle" fontFamily="times new roman, serif" fontStyle="italic" fontSize="14" fill="white">Mr./Mrs.</text>
-            <text x="150" y="340" textAnchor="middle" fontFamily="times new roman, serif" fontWeight="bold" fontSize={Math.min(nameFontSize, 26)} fill="black" letterSpacing="1">
-                {userName ? userName.toUpperCase() : "CHỦ TỊCH GIẢ KHỔ"}
-            </text>
+            <g transform="translate(150, 360)">
+                <text x="0" y="-15" textAnchor="middle" fontFamily="serif" fontSize="12" fill="#333" fontStyle="italic">Identity:</text>
+                {/* 4. TYPOGRAPHY - Glowing HIDDEN */}
+                <text x="0" y="25" textAnchor="middle" fontFamily="serif" fontSize="32" fontWeight="bold" fill="black" opacity="0.1">HIDDEN</text>
+                <text x="0" y="25" textAnchor="middle" fontFamily="serif" fontSize="32" fontWeight="bold" fill="transparent" stroke="black" strokeWidth="1" strokeDasharray="2 2" opacity="0.3">HIDDEN</text>
+
+                <text x="0" y="5" textAnchor="middle" fontFamily="serif" fontWeight="900" fontSize={Math.min(nameFontSize, 26)} fill="black" letterSpacing="1"
+                    style={{ textShadow: "1px 1px 0px white" }}>
+                    {userName ? userName.toUpperCase() : "CHỦ TỊCH GIẢ KHỔ"}
+                </text>
+            </g>
+
+            {/* 3. CHI TIẾT "TUYỆT MẬT" */}
+            <g transform="translate(230, 290) rotate(-20)">
+                <rect x="-30" y="-15" width="60" height="30" fill="none" stroke="#8B0000" strokeWidth="3" rx="4" />
+                <text x="0" y="5" textAnchor="middle" fill="#8B0000" fontSize="10" fontWeight="900" fontFamily="sans-serif">TOP SECRET</text>
+            </g>
+
+            {/* Serial Number */}
+            <text x="150" y="390" textAnchor="middle" fontFamily="monospace" fontSize="10" fill="black" opacity="0.7">ID: 0000-0001-ELITE</text>
         </>
     ),
 
@@ -396,7 +427,7 @@ export const FlexTheme = {
 
             {/* Bottom Info & Barcode */}
             <g transform="translate(150, 360)">
-                <text x="0" y="0" textAnchor="middle" fontSize="10" fill="black" fontStyle="italic">Số vào sổ cấp GCN: CH-{Math.floor(Math.random() * 99999)}</text>
+                <text x="0" y="0" textAnchor="middle" fontSize="10" fill="black" fontStyle="italic">Số vào sổ cấp GCN: CH-56789</text>
                 {/* Barcode */}
                 <g transform="translate(-40, 10)">
                     <rect x="0" y="0" width="2" height="20" fill="black" />
@@ -685,44 +716,78 @@ export const FlexTheme = {
         <>
             <defs>
                 <clipPath id="avatar-clip-coin">
-                    <circle cx="150" cy="150" r="60" />
+                    <circle cx="150" cy="150" r="70" />
                 </clipPath>
+                <linearGradient id="gold-text-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#FFD700" />
+                    <stop offset="50%" stopColor="#B8860B" />
+                    <stop offset="100%" stopColor="#FFFFE0" />
+                </linearGradient>
+                <radialGradient id="holy-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="0%" stopColor="#FFD700" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                </radialGradient>
             </defs>
 
             {/* Terminal Black BG */}
             <rect width="300" height="400" fill="#050505" />
 
+            {/* 2. ĐẠI PHẪU BIỂU ĐỒ (The Pump Background) */}
             {/* Chart Grid */}
-            <path d="M0,100 L300,100 M0,200 L300,200 M0,300 L300,300" stroke="#333" strokeWidth="1" strokeDasharray="2 2" />
-            <path d="M100,0 L100,400 M200,0 L200,400" stroke="#333" strokeWidth="1" strokeDasharray="2 2" />
+            <path d="M0,100 L300,100 M0,200 L300,200 M0,300 L300,300" stroke="#222" strokeWidth="1" strokeDasharray="2 2" />
+            <path d="M100,0 L100,400 M200,0 L200,400" stroke="#222" strokeWidth="1" strokeDasharray="2 2" />
 
-            {/* Candlesticks Neon Green - Thicker */}
-            <path d="M20,350 L20,300 M50,320 L50,250 M80,280 L80,180 M110,200 L110,100 M250,150 L250,50" stroke="#00FF00" strokeWidth="2" />
-            <rect x="15" y="310" width="10" height="30" fill="#00FF00" />
-            <rect x="45" y="270" width="10" height="40" fill="#00FF00" />
-            <rect x="75" y="200" width="10" height="60" fill="#00FF00" />
-            <rect x="105" y="120" width="10" height="60" fill="#00FF00" />
-            <rect x="245" y="60" width="10" height="80" fill="#00FF00" />
+            {/* Dense Green Candles (Pump) */}
+            <g opacity="0.6">
+                <rect x="10" y="350" width="8" height="40" fill="#00FF00" />
+                <line x1="14" y1="390" x2="14" y2="340" stroke="#00FF00" strokeWidth="1" />
 
-            <polyline points="260,100 280,20 295,40" fill="none" stroke="#00FF00" strokeWidth="2" />
+                <rect x="30" y="320" width="8" height="50" fill="#00FF00" />
+                <line x1="34" y1="370" x2="34" y2="310" stroke="#00FF00" strokeWidth="1" />
+
+                <rect x="50" y="280" width="8" height="60" fill="#00FF00" />
+                <rect x="70" y="250" width="8" height="40" fill="#00FF00" />
+                <rect x="90" y="200" width="8" height="80" fill="#00FF00" />
+                <rect x="110" y="180" width="8" height="30" fill="#FF0000" /> {/* Slight dip */}
+                <rect x="130" y="150" width="8" height="60" fill="#00FF00" />
+                <rect x="150" y="100" width="8" height="80" fill="#00FF00" />
+                <rect x="170" y="80" width="8" height="40" fill="#00FF00" />
+                <rect x="190" y="50" width="8" height="70" fill="#00FF00" />
+                <rect x="210" y="40" width="8" height="50" fill="#00FF00" />
+                <rect x="230" y="20" width="8" height="60" fill="#00FF00" />
+                <rect x="250" y="60" width="8" height="30" fill="#FF0000" /> {/* Profit taking */}
+                <rect x="270" y="10" width="8" height="90" fill="#00FF00" />
+                <rect x="290" y="0" width="8" height="40" fill="#00FF00" />
+            </g>
+
+            {/* Neon MA Lines */}
+            <path d="M0,380 Q100,300 150,200 T300,50" fill="none" stroke="cyan" strokeWidth="2" opacity="0.8" />
+            <path d="M0,350 Q120,320 200,150 T300,20" fill="none" stroke="magenta" strokeWidth="2" opacity="0.8" />
 
             {/* Overlay Gradient for Focus */}
             <radialGradient id="center-glow">
                 <stop offset="0%" stopColor="#000" stopOpacity="0" />
-                <stop offset="100%" stopColor="#000" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#000" stopOpacity="0.7" />
             </radialGradient>
             <rect width="300" height="400" fill="url(#center-glow)" />
+
+            {/* 3. HIỆU ỨNG "KING" CHO AVATAR */}
+            {/* Radiant Glow Behind */}
+            <circle cx="150" cy="150" r="100" fill="url(#holy-glow)" opacity="0.6" />
 
             {/* Coin Avatar - Golden Bitcoin Style */}
             <circle cx="150" cy="150" r="75" fill="#F7931A" stroke="white" strokeWidth="4" />
             <circle cx="150" cy="150" r="68" fill="none" stroke="#B36800" strokeWidth="2" strokeDasharray="4 4" />
 
-            <text x="150" y="70" textAnchor="middle" fill="#00FF00" fontSize="24" fontWeight="900" style={{ textShadow: "0 0 10px #00FF00" }}>BTC/USDT</text>
-            <text x="150" y="90" textAnchor="middle" fill="#00FF00" fontSize="12" fontWeight="bold">+9,999%</text>
+            {/* 1. NÂNG CẤP TIÊU ĐỀ */}
+            <text x="150" y="60" textAnchor="middle" fill="url(#gold-text-grad)" fontSize="26" fontWeight="900"
+                style={{ textShadow: "0 2px 0px #000, 0 0 10px #FFD700" }}>KING OF BITCOIN</text>
+            <text x="150" y="80" textAnchor="middle" fill="#00FF00" fontSize="14" fontWeight="bold"
+                style={{ textShadow: "0 0 10px #00FF00" }}>BTC/USDT +99,999%</text>
 
             {userImage ? (
                 <image
-                    x="90" y="90" width="120" height="120"
+                    x="80" y="80" width="140" height="140"
                     href={userImage}
                     clipPath="url(#avatar-clip-coin)"
                     preserveAspectRatio="xMidYMid slice"
@@ -731,18 +796,31 @@ export const FlexTheme = {
                 <text x="150" y="165" textAnchor="middle" fontSize="60">🚀</text>
             )}
 
+            {/* Gold Crown */}
+            <text x="150" y="90" textAnchor="middle" fontSize="40" transform="rotate(-10 150 90)" style={{ filter: "drop-shadow(2px 2px 0px black)" }}>👑</text>
+
             {/* Name */}
             <text x="150" y="250" textAnchor="middle" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize + 2, 24)} style={{ textTransform: "uppercase", textShadow: "2px 2px 0px #000" }}>
                 {userName || "HODLER CHÂN CHÍNH"}
             </text>
 
-            <rect x="70" y="270" width="160" height="45" fill="#F7931A" stroke="white" strokeWidth="3" rx="22" />
-            <text x="150" y="298" textAnchor="middle" fill="white" fontWeight="900" fontSize="16" style={{ textShadow: "1px 1px 0px black" }}>HOLD TO DIE</text>
+            {/* 4. CHI TIẾT "NHÀ GIÀU" - Falling Coins */}
+            <text x="30" y="340" fontSize="20" opacity="0.8">💰</text>
+            <text x="260" y="320" fontSize="20" opacity="0.8">🟡</text>
+            <text x="80" y="380" fontSize="16" opacity="0.8">🪙</text>
+            <text x="220" y="380" fontSize="16" opacity="0.8">💰</text>
+
+            <g transform="translate(60, 270)">
+                {/* Neubrutalism Button */}
+                <rect x="0" y="0" width="180" height="45" fill="#F7931A" stroke="white" strokeWidth="3" rx="5"
+                    style={{ filter: "drop-shadow(4px 4px 0px black)" }} />
+                <text x="90" y="30" textAnchor="middle" fill="white" fontWeight="900" fontSize="16" style={{ textShadow: "1px 1px 0px black" }}>TO THE MOON 🚀</text>
+            </g>
 
             {/* PNL Box */}
-            <rect x="15" y="360" width="270" height="35" fill="#111" stroke="#333" strokeWidth="1" rx="5" />
-            <text x="25" y="382" fill="gray" fontSize="10" fontWeight="bold">PNL (Today)</text>
-            <text x="280" y="382" textAnchor="end" fill="#00FF00" fontWeight="900" fontSize="14" style={{ textShadow: "0 0 5px #00FF00" }}>+$1,000,000</text>
+            <rect x="15" y="350" width="270" height="30" fill="#111" stroke="#333" strokeWidth="1" rx="5" opacity="0.8" />
+            <text x="25" y="370" fill="gray" fontSize="10" fontWeight="bold">PNL (Today)</text>
+            <text x="280" y="370" textAnchor="end" fill="#00FF00" fontWeight="900" fontSize="14" style={{ textShadow: "0 0 5px #00FF00" }}>+$1,000,000</text>
         </>
     ),
 

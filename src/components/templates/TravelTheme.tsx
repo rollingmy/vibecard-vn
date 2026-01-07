@@ -65,54 +65,90 @@ const FoodTemplate: React.FC<TemplateProps> = ({ userName, userImage, descriptio
     );
 };
 
-// 2. Coffee Holic
+// 2. Coffee Holic (Premium Cafe Member)
 const CoffeeTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "COFFEE HOLIC";
     const safeDesc = description || "Không cafe đời không nể";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#F5F5DC" /> {/* Beige */}
-
-            {/* Coffee Stain Ring */}
-            <circle cx="200" cy="250" r="140" fill="none" stroke="#8B4513" strokeWidth="20" opacity="0.3" strokeDasharray="200 100" />
-            <circle cx="210" cy="240" r="130" fill="none" stroke="#A0522D" strokeWidth="15" opacity="0.2" />
-
-            {/* Phin Filter Graphic */}
-            <path d="M150,50 L250,50 L230,120 H170 Z" fill="#C0C0C0" stroke="#666" strokeWidth="2" />
-            <rect x="140" y="50" width="120" height="10" fill="#C0C0C0" />
-            <line x1="200" y1="120" x2="200" y2="180" stroke="#3E2723" strokeWidth="4" strokeDasharray="5 5" /> {/* Dropping coffee */}
-
-            {/* Cup (Avatar) */}
-            <path d="M120,200 H280 Q280,350 200,350 Q120,350 120,200 Z" fill="#fff" stroke="#8B4513" strokeWidth="4" />
-            <path d="M280,220 Q320,220 320,260 Q320,300 275,290" fill="none" stroke="#fff" strokeWidth="8" /> {/* Handle */}
-
             <defs>
-                <clipPath id="coffeeClip">
-                    <path d="M124,204 H276 Q276,346 200,346 Q124,346 124,204 Z" />
+                {/* Latte Art Clip */}
+                <clipPath id="latteArtClip">
+                    <path d="M120,200 H280 Q280,350 200,350 Q120,350 120,200 Z" />
                 </clipPath>
             </defs>
+
+            <rect width="400" height="600" fill="#F5F5DC" /> {/* Beige Background */}
+
+            {/* 3. HIỆU ỨNG THỊ GIÁC & BACKGROUND */}
+            {/* Coffee Stains */}
+            <circle cx="300" cy="100" r="80" fill="none" stroke="#6F4E37" strokeWidth="15" opacity="0.1" strokeDasharray="100 50" transform="rotate(20 300 100)" />
+            <circle cx="50" cy="500" r="100" fill="none" stroke="#6F4E37" strokeWidth="20" opacity="0.1" />
+
+            {/* Floating Coffee Beans */}
+            <g fill="#3E2723" opacity="0.9">
+                <ellipse cx="60" cy="150" rx="15" ry="10" transform="rotate(45 60 150)" />
+                <path d="M50,150 Q60,155 70,150" stroke="#000" strokeWidth="1" fill="none" transform="rotate(45 60 150)" />
+
+                <ellipse cx="350" cy="200" rx="18" ry="12" transform="rotate(-30 350 200)" />
+                <path d="M335,200 Q350,205 365,200" stroke="#000" strokeWidth="1" fill="none" transform="rotate(-30 350 200)" />
+
+                <ellipse cx="320" cy="500" rx="14" ry="10" transform="rotate(80 320 500)" />
+                <path d="M320,490 Q325,500 320,510" stroke="#000" strokeWidth="1" fill="none" transform="" />
+            </g>
+
+            {/* Jitter Lines (Zigzag) */}
+            <path d="M100,180 L110,200 L100,220 L110,240 M290,180 L300,200 L290,220 L300,240" stroke="#000" strokeWidth="2" fill="none" opacity="0.3" />
+
+            {/* 1. NÂNG CẤP TÁCH CÀ PHÊ (The Main Vessel) */}
+            {/* Hard Shadow */}
+            <path d="M128,208 H288 Q288,358 208,358 Q128,358 128,208 Z" fill="black" opacity="0.2" />
+            <path d="M288,228 Q328,228 328,268 Q328,308 283,298" fill="none" stroke="black" strokeWidth="8" opacity="0.2" />
+
+            {/* Cup Body */}
+            <path d="M120,200 H280 Q280,350 200,350 Q120,350 120,200 Z" fill="#fff" stroke="#000" strokeWidth="4" />
+            {/* Handle */}
+            <path d="M280,220 Q320,220 320,260 Q320,300 275,290" fill="none" stroke="#fff" strokeWidth="8" />
+            <path d="M280,220 Q320,220 320,260 Q320,300 275,290" fill="none" stroke="#000" strokeWidth="4" />
+
+            {/* Coffee Liquid & Latte Art */}
+            <ellipse cx="200" cy="200" rx="80" ry="20" fill="#6F4E37" stroke="#000" strokeWidth="2" />
+            {/* Latte Art (Heart) */}
+            <path d="M200,210 Q190,200 200,195 Q210,200 200,210" fill="#fff" opacity="0.9" />
+            <path d="M200,210 Q180,190 200,185 Q220,190 200,210" fill="none" stroke="#fff" strokeWidth="1" opacity="0.5" />
+
+            {/* Avatar Masked in Cup */}
             {userImage ? (
-                <image href={userImage} x="120" y="150" width="160" height="250" preserveAspectRatio="xMidYMid slice" clipPath="url(#coffeeClip)" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
+                <image href={userImage} x="120" y="180" width="160" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#latteArtClip)" opacity="0.85" style={{ mixBlendMode: 'multiply' }} />
             ) : (
-                <path d="M124,204 H276 Q276,346 200,346 Q124,346 124,204 Z" fill="#6F4E37" />
+                <text x="200" y="300" textAnchor="middle" fontSize="40" opacity="0.5">☕</text>
             )}
 
-            {/* Steam */}
-            <path d="M180,180 Q160,150 180,120" fill="none" stroke="#ccc" strokeWidth="4" opacity="0.6" />
-            <path d="M220,180 Q200,150 220,120" fill="none" stroke="#ccc" strokeWidth="4" opacity="0.6" />
+            {/* Steam Animation (Simple) */}
+            <path d="M180,160 Q170,140 180,120 T180,90" fill="none" stroke="#ccc" strokeWidth="4" strokeLinecap="round" opacity="0.6" />
+            <path d="M220,170 Q210,150 220,130 T220,100" fill="none" stroke="#ccc" strokeWidth="4" strokeLinecap="round" opacity="0.6" />
 
-            {/* Beans */}
-            <ellipse cx="50" cy="500" rx="15" ry="10" fill="#3E2723" transform="rotate(30)" />
-            <path d="M40,500 Q50,505 60,500" stroke="#000" strokeWidth="1" fill="none" />
-            <ellipse cx="350" cy="450" rx="15" ry="10" fill="#3E2723" transform="rotate(-45)" />
+            {/* 2. CHI TIẾT "CON NGHIỆN" - Caffeine Level Bar */}
+            <g transform="translate(100, 380)">
+                <text x="0" y="-10" fontSize="12" fontWeight="bold" fontFamily="monospace">CAFFEINE LEVEL: 99%</text>
+                <rect x="0" y="0" width="200" height="20" fill="white" stroke="black" strokeWidth="2" rx="5" />
+                <rect x="5" y="5" width="180" height="10" fill="#ef4444" rx="3">
+                    <animate attributeName="width" values="180;190;180" dur="0.5s" repeatCount="indefinite" />
+                </rect>
+            </g>
 
-            <text x="200" y="450" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 32)} fontWeight="bold" fill="#3E2723" fontFamily="Courier">
+            {/* 4. TYPOGRAPHY & ĐỒNG BỘ */}
+            {/* Title */}
+            <text x="200" y="450" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 36)} fontWeight="bold" fill="#3E2723" fontFamily="Courier New, monospace" style={{ textShadow: "2px 2px 0px #000" }}>
                 {safeName.toUpperCase()}
             </text>
-            <text x="200" y="480" textAnchor="middle" fontSize="14" fill="#6F4E37" fontStyle="italic">
+            <text x="200" y="480" textAnchor="middle" fontSize="14" fill="#6F4E37" fontStyle="italic" fontFamily="Courier New, monospace" fontWeight="bold">
                 {safeDesc}
             </text>
+
+            {/* Neubrutalism Border */}
+            <rect x="10" y="10" width="380" height="580" fill="none" stroke="black" strokeWidth="5" />
         </svg>
     );
 };

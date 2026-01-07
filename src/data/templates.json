@@ -196,6 +196,14 @@
         "category": "work"
     },
     {
+        "id": "dev-day",
+        "name": "Dev Đây",
+        "color": "#00FF00",
+        "description": "Code xuyên màn đêm, bug xuyên màn hình",
+        "category": "work",
+        "hidden": true
+    },
+    {
         "id": "tho-code-dao",
         "name": "Thợ Code Dạo",
         "color": "#00FF00",

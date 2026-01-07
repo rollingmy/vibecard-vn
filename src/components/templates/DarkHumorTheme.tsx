@@ -60,40 +60,77 @@ const OverthinkingTemplate: React.FC<TemplateProps> = ({ userName, userImage, de
     );
 }
 
-// 2. Deadline Reaper
+// 2. Deadline Reaper (Horror Poster)
 const ReaperTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
-    const safeName = userName || "DEADLINE ĐẾN";
-    const safeDesc = description || "Tick tock...";
+    const safeName = userName || "DEADLINE";
+    const safeDesc = description || "Gõ cửa từng nhà...";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#111" />
+            <defs>
+                {/* Fog Gradient */}
+                <linearGradient id="fogGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="transparent" />
+                    <stop offset="60%" stopColor="#222" opacity="0.8" />
+                    <stop offset="100%" stopColor="#111" />
+                </linearGradient>
+                {/* Metallic Gradient for Scythe */}
+                <linearGradient id="bladeGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#fff" />
+                    <stop offset="50%" stopColor="#999" />
+                    <stop offset="100%" stopColor="#333" />
+                </linearGradient>
+            </defs>
 
-            {/* Scythe */}
-            <path d="M300,100 Q200,0 100,100 L120,120 Q200,50 280,120 Z" fill="#C0C0C0" stroke="#000" strokeWidth="1" />
-            <path d="M280,110 L200,500" stroke="#8B4513" strokeWidth="8" />
+            <rect width="400" height="600" fill="#0c0c0c" />
 
-            {/* Avatar in Hood Shadow */}
-            <path d="M100,150 Q200,0 300,150 V300 H100 Z" fill="#000" stroke="#333" strokeWidth="2" />
-            {userImage && <image href={userImage} x="130" y="150" width="140" height="140" preserveAspectRatio="xMidYMid slice" opacity="0.8" />}
-
-            {/* Hourglass */}
-            <g transform="translate(320, 450)">
-                <path d="M10,0 L30,0 L30,40 L10,40 Z" fill="#DAA520" />
-                <path d="M10,0 L0,10 L20,30 L40,10 L30,0" fill="none" stroke="#DAA520" strokeWidth="2" />
-                {/* Simplified hourglass */}
-                <path d="M10,0 H30 L20,20 L30,40 H10 L20,20 Z" fill="none" stroke="#DAA520" strokeWidth="2" />
-                <circle cx="20" cy="30" r="5" fill="#DAA520" /> {/* Sand */}
+            {/* Background Numbers */}
+            <g opacity="0.1" fontFamily="monospace" fontSize="80" fontWeight="bold" fill="#333">
+                <text x="200" y="200" textAnchor="middle">00</text>
+                <text x="200" y="300" textAnchor="middle">00</text>
+                <text x="200" y="400" textAnchor="middle">01</text>
             </g>
 
-            <text x="200" y="400" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 30)} fontWeight="bold" fill="#FF0000" fontFamily="serif">
+            {/* The Scythe - Wrapping around */}
+            {/* Handle */}
+            <path d="M320,580 C320,400 350,200 250,50" fill="none" stroke="#2c1e14" strokeWidth="12" strokeLinecap="round" />
+            {/* Blade */}
+            <path d="M250,55 Q130,30 80,150 Q75,180 90,160 Q120,80 250,65 Z" fill="url(#bladeGrad)" stroke="#555" strokeWidth="2" />
+
+            {/* Avatar Frame (Neubrutalism Horror) */}
+            <rect x="55" y="145" width="290" height="290" fill="black" opacity="0.6" /> {/* Hard Shadow */}
+            <rect x="50" y="140" width="290" height="290" fill="#111" stroke="#333" strokeWidth="6" />
+            {userImage ? (
+                <image href={userImage} x="50" y="140" width="290" height="290" preserveAspectRatio="xMidYMid slice" style={{ filter: 'grayscale(1) contrast(1.5) brightness(0.8)' }} />
+            ) : (
+                <text x="200" y="320" textAnchor="middle" fontSize="60" fill="#444">💀</text>
+            )}
+
+            {/* Fog Layer */}
+            <rect x="0" y="350" width="400" height="250" fill="url(#fogGrad)" />
+
+            {/* Hourglass Icon */}
+            <g transform="translate(180, 490)">
+                {/* Glass */}
+                <path d="M5,0 L35,0 L20,20 L35,40 L5,40 L20,20 Z" fill="none" stroke="#fff" strokeWidth="2" opacity="0.5" />
+                {/* Sand in Top (Emptying) */}
+                <path d="M10,5 L30,5 L20,18 Z" fill="#ff0000" />
+                {/* Sand in Bottom (Filling) */}
+                <path d="M10,35 L30,35 L20,22 Z" fill="#ff0000" />
+                {/* Stream */}
+                <line x1="20" y1="18" x2="20" y2="22" stroke="#ff0000" strokeWidth="1" />
+            </g>
+
+            {/* Typography */}
+            <text x="200" y="460" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 42)} fontWeight="900" fill="#ff0000" fontFamily="Impact, sans-serif" style={{ textShadow: "0 0 10px #ff0000, 2px 2px 0px #000" }}>
                 {safeName.toUpperCase()}
             </text>
-            <text x="200" y="550" textAnchor="middle" fontSize="18" fill="#fff" fontFamily="serif">
+
+            <text x="200" y="550" textAnchor="middle" fontSize="16" fill="#ccc" fontStyle="italic" fontFamily="serif">
                 {safeDesc}
             </text>
 
-            <text x="200" y="580" textAnchor="middle" fontSize="12" fill="#666">
+            <text x="200" y="580" textAnchor="middle" fontSize="14" fill="#d00" fontWeight="bold" letterSpacing="2">
                 TIME IS RUNNING OUT...
             </text>
         </svg>
@@ -271,75 +308,169 @@ const ClownTemplate: React.FC<TemplateProps> = ({ userName, userImage, descripti
     );
 }
 
-// 7. Zombie Cong So
+// 7. Zombie Cong So (The Survivor)
 const ZombieTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "ZOMBIE";
     const safeDesc = description || "Brains...";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#556B2F" /> {/* Olive Drab */}
+            <defs>
+                {/* Green Glow Filter */}
+                <filter id="green-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <clipPath id="avatar-clip-cracked">
+                    <path d="M70,100 L330,100 L320,150 L330,360 L70,360 L80,200 Z" />
+                </clipPath>
+            </defs>
+
+            {/* 1. NỀN & HỌA TIẾT (Olive Drab + Neubrutalism Shadow) */}
+            <rect x="10" y="10" width="390" height="590" fill="black" />
+            <rect width="395" height="595" fill="#556B2F" stroke="black" strokeWidth="3" />
 
             {/* Skin Texture/Stitches */}
             <path d="M50,50 L80,80 M60,70 L70,60 M120,10 L140,50 M125,40 L135,20" stroke="#000" strokeWidth="2" />
 
-            {/* Avatar Frame - Torn edges */}
-            <path d="M80,100 L320,100 L310,150 L320,340 L80,340 L90,200 Z" fill="#2F4F4F" stroke="#000" strokeWidth="2" />
-            {userImage && <image href={userImage} x="85" y="105" width="230" height="230" preserveAspectRatio="xMidYMid slice" filter="grayscale(1) sepia(0.5) hue-rotate(90deg)" />}
+            {/* 2. THÊM CHI TIẾT "TÀN TẠ" (Coffee Splatters) */}
+            <path d="M300,50 Q320,30 340,50 T380,60" fill="none" stroke="#3e2723" strokeWidth="15" strokeLinecap="round" opacity="0.6" />
+            <circle cx="320" cy="80" r="10" fill="#3e2723" opacity="0.6" />
+            <path d="M20,500 Q50,480 80,520" fill="none" stroke="#3e2723" strokeWidth="10" strokeLinecap="round" opacity="0.6" />
 
-            {/* Eyes Bags Icon */}
-            <g transform="translate(150, 360)">
-                <ellipse cx="50" cy="50" rx="40" ry="20" fill="none" stroke="#000" strokeWidth="2" />
-                <circle cx="50" cy="50" r="5" fill="#000" />
-                <path d="M20,60 Q50,90 80,60" stroke="#333" strokeWidth="3" fill="none" />
-            </g>
+            {/* 3. NÂNG CẤP KHUNG AVATAR (Larger & Cracked) */}
+            {/* Cracked Frame Shadow */}
+            <path d="M75,105 L335,105 L325,155 L335,365 L75,365 L85,205 Z" fill="black" opacity="0.5" />
+            {/* Frame Body */}
+            <path d="M70,100 L330,100 L320,150 L330,360 L70,360 L80,200 Z" fill="#2F4F4F" stroke="#000" strokeWidth="5" strokeLinejoin="bevel" />
 
-            <text x="200" y="480" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 30)} fontWeight="bold" fill="#000" fontFamily="Chalkduster, fantasy">
+            {/* Cracked corners */}
+            <path d="M70,100 L90,120" stroke="black" strokeWidth="2" />
+            <path d="M330,360 L310,340" stroke="black" strokeWidth="2" />
+
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="70" y="100" width="260" height="260"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#avatar-clip-cracked)"
+                    // Greenish tint: sepia for dead look, hue-rotate for green skin
+                    style={{ filter: "sepia(0.5) hue-rotate(70deg) saturate(0.8) contrast(1.2)" }}
+                />
+            ) : (
+                <text x="200" y="250" textAnchor="middle" fontSize="80">🧟</text>
+            )}
+
+            {/* Icons: Broken Card */}
+            <rect x="300" y="400" width="60" height="40" fill="#fff" stroke="black" strokeWidth="2" transform="rotate(15)" />
+            <path d="M330,400 L340,440" stroke="black" strokeWidth="1" />
+            <circle cx="330" cy="415" r="10" fill="#ccc" />
+
+            {/* 4. TYPOGRAPHY & HIỆU ỨNG */}
+            {/* Glowing ZOMBIE Text */}
+            <text x="200" y="460" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 40)} fontWeight="bold" fill="#00FF00" fontFamily="Chalkduster, fantasy" filter="url(#green-glow)">
                 {safeName}
             </text>
-            <text x="200" y="520" textAnchor="middle" fontSize="16" fill="#F0E68C">
+
+            <text x="200" y="500" textAnchor="middle" fontSize="18" fill="#F0E68C" fontWeight="bold">
                 BRAINS... I MEAN, COFFEE...
             </text>
-            <text x="200" y="560" textAnchor="middle" fontSize="14" fill="#F0E68C" fontStyle="italic">
+            <text x="200" y="540" textAnchor="middle" fontSize="16" fill="#F0E68C" fontStyle="italic">
                 {safeDesc}
             </text>
+
+            {/* Red Stamp: OVERWORKED */}
+            <g transform="translate(200, 300) rotate(-20)">
+                <rect x="-90" y="-25" width="180" height="50" rx="4" fill="none" stroke="#8B0000" strokeWidth="5" opacity="0.8" />
+                <text x="0" y="10" textAnchor="middle" fontSize="28" fontWeight="bold" fill="#8B0000" fontFamily="Impact, sans-serif" opacity="0.8" letterSpacing="2">OVERWORKED</text>
+            </g>
         </svg>
     );
 }
 
-// 8. R.I.P Luong
+// 8. R.I.P Luong (Tombstone)
 const RipTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
-    const safeName = userName || "R.I.P LƯƠNG";
+    const safeName = userName || "NGUYEN VAN A";
     const safeDesc = description || "Gone too soon";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#696969" />
-
-            {/* Tombstone */}
-            <path d="M50,600 V200 Q200,50 350,200 V600 Z" fill="#A9A9A9" stroke="#000" strokeWidth="4" />
-
-            {/* Avatar on stone */}
             <defs>
-                <clipPath id="stoneOval">
-                    <ellipse cx="200" cy="250" rx="80" ry="100" />
+                {/* Stone Texture Filter */}
+                <filter id="stoneNoise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="saturate" values="0" />
+                    <feComponentTransfer>
+                        <feFuncR type="linear" slope="0.5" intercept="0.25" />
+                        <feFuncG type="linear" slope="0.5" intercept="0.25" />
+                        <feFuncB type="linear" slope="0.5" intercept="0.25" />
+                    </feComponentTransfer>
+                </filter>
+                <clipPath id="stoneArch">
+                    <path d="M100,220 A80,80 0 0,1 300,220 V380 H100 Z" />
                 </clipPath>
             </defs>
-            <ellipse cx="200" cy="250" rx="85" ry="105" fill="#696969" />
-            {userImage && <image href={userImage} x="120" y="150" width="160" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#stoneOval)" filter="grayscale(1)" />}
 
-            <text x="200" y="400" textAnchor="middle" fontSize="40" fontWeight="bold" fill="#000" fontFamily="serif">R.I.P</text>
-            <text x="200" y="440" textAnchor="middle" fontSize="20" fill="#333" fontFamily="serif">LƯƠNG THÁNG NÀY</text>
+            {/* 1. NỀN & HỌA TIẾT (Stone Texture) */}
+            <rect width="400" height="600" fill="#4a4a4a" />
+            <rect width="400" height="600" filter="url(#stoneNoise)" opacity="0.4" />
 
-            <text x="200" y="480" textAnchor="middle" fontSize={getSafeFontSize(safeName, 280, 24)} fontWeight="bold" fill="#000" fontFamily="serif">
-                {safeName}
+            {/* Inner Border Engraving */}
+            <rect x="20" y="20" width="360" height="560" fill="none" stroke="#2a2a2a" strokeWidth="4" />
+            <path d="M30,30 L370,30 L370,570 L30,570 Z" fill="none" stroke="#666" strokeWidth="2" />
+
+            {/* 2. CHI TIẾT "TANG LỄ" (Black Ribbons) */}
+            <path d="M0,0 L100,0 L0,100 Z" fill="black" />
+            <path d="M400,0 L300,0 L400,100 Z" fill="black" />
+
+            {/* 3. TINH CHỈNH AVATAR (Tombstone Shape & Grayscale) */}
+            {/* Shadow */}
+            <path d="M105,225 A80,80 0 0,1 305,225 V385 H105 Z" fill="black" opacity="0.5" />
+            {/* Frame */}
+            <path d="M100,220 A80,80 0 0,1 300,220 V380 H100 Z" fill="#333" stroke="black" strokeWidth="4" />
+
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="100" y="140" width="200" height="240"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#stoneArch)"
+                    filter="grayscale(1) contrast(1.2)"
+                />
+            ) : (
+                <text x="200" y="320" textAnchor="middle" fontSize="60" fill="#666">⚰️</text>
+            )}
+
+            {/* 4. TYPOGRAPHY (Engraved Look) */}
+            {/* Embossed R.I.P */}
+            <text x="202" y="152" textAnchor="middle" fontSize="60" fontWeight="bold" fill="#fff" fontFamily="serif" opacity="0.2">R.I.P</text>
+            <text x="200" y="150" textAnchor="middle" fontSize="60" fontWeight="bold" fill="#1a1a1a" fontFamily="serif" style={{ textShadow: "1px 1px 0px rgba(255,255,255,0.2)" }}>R.I.P</text>
+
+            {/* Candles / Flowers Iconography */}
+            <text x="50" y="470" fontSize="40">🕯️</text>
+            <text x="310" y="470" fontSize="40">🕯️</text>
+
+            {/* Name */}
+            <text x="200" y="450" textAnchor="middle" fontSize={getSafeFontSize(safeName, 300, 32)} fontWeight="900" fill="#111" fontFamily="serif" letterSpacing="2">
+                {safeName.toUpperCase()}
             </text>
-            <text x="200" y="520" textAnchor="middle" fontSize="14" fill="#000" fontStyle="italic">
-                "Vừa đến đã đi"
+
+            {/* Quotes */}
+            <text x="200" y="480" textAnchor="middle" fontSize="16" fill="#ccc" fontStyle="italic" fontFamily="serif">
+                "Vừa về đã đi..."
             </text>
-            <text x="200" y="550" textAnchor="middle" fontSize="14" fill="#000">
+            <text x="200" y="510" textAnchor="middle" fontSize="14" fill="#ccc" fontStyle="italic" fontFamily="serif">
                 {safeDesc}
             </text>
+
+            {/* 2. CHI TIẾT "TANG LỄ" - Seal */}
+            <g transform="translate(200, 560) rotate(-10)">
+                <rect x="-80" y="-20" width="160" height="40" fill="none" stroke="#8B0000" strokeWidth="3" rx="5" opacity="0.7" />
+                <text x="0" y="8" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#8B0000" fontFamily="Courier New, monospace" opacity="0.7">OUT OF MONEY</text>
+            </g>
         </svg>
     );
 }
