@@ -275,43 +275,12 @@ const ThayBoiTemplate: React.FC<TemplateProps> = ({ userName, userImage, descrip
     );
 };
 
-// 7. Bua Yeu
-const BuaYeuTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
-    const safeName = userName || "BÙA YÊU";
-    const safeDesc = description || "Dán vào là dính";
-
-    return (
-        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#800000" /> {/* Dark Red BG */}
-
-            {/* The Charm (Paper) */}
-            <rect x="50" y="50" width="300" height="500" fill="#FFD700" stroke="#000" strokeWidth="2" />
-
-            {/* Traditional Patterns */}
-            <rect x="60" y="60" width="280" height="480" fill="none" stroke="#FF0000" strokeWidth="4" />
-            <path d="M50,50 L100,100 M350,50 L300,100 M50,550 L100,500 M350,550 L300,500" stroke="#FF0000" strokeWidth="2" />
-
-            {/* Avatar Centered */}
-            <rect x="100" y="150" width="200" height="200" fill="#fff" stroke="#FF0000" strokeWidth="2" />
-            {userImage && <image href={userImage} x="105" y="155" width="190" height="190" preserveAspectRatio="xMidYMid slice" />}
-
-            {/* Vertical Text */}
-            <text x="200" y="120" textAnchor="middle" fontSize="30" fill="#FF0000" fontWeight="bold" fontFamily="serif">CẤP CẤP NHƯ LUẬT LỆNH</text>
-
-            <text x="200" y="400" textAnchor="middle" fontSize={30} fill="#FF0000" fontWeight="bold" fontFamily="serif" writingMode="tb">
-                {safeName.toUpperCase().split(' ').join('')}
-            </text>
-
-            <text x="200" y="520" textAnchor="middle" fontSize="14" fill="#FF0000">
-                {safeDesc}
-            </text>
-        </svg>
-    );
-};
+// 7. Bua Yeu MOVED TO LOVETHEME
 
 // 8. Full Moon Party
 const FullMoonTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "HỘI TRĂNG TRÒN";
+    // bua-yeu moved to LoveTheme
     const safeDesc = description || "Auuuuu....";
 
     return (
@@ -431,7 +400,7 @@ export const ZodiacTemplates = {
     'earth-sign-dat': EarthTemplate,
     'air-sign-khi': AirTemplate,
     'thay-boi-xem-voi': ThayBoiTemplate,
-    'bua-yeu': BuaYeuTemplate,
+    // 'bua-yeu': BuaYeuTemplate, // Removed
     'full-moon-party': FullMoonTemplate,
     'than-so-hoc': NumerologyTemplate,
     'ying-yang': YingYangTemplate,

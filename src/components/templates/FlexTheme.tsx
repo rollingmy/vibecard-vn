@@ -198,6 +198,13 @@ export const FlexTheme = {
                     <stop offset="0%" stopColor="#000080" />
                     <stop offset="100%" stopColor="#0000CD" />
                 </linearGradient>
+                <linearGradient id="gold-border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#bf953f" />
+                    <stop offset="25%" stopColor="#fcf6ba" />
+                    <stop offset="50%" stopColor="#b38728" />
+                    <stop offset="75%" stopColor="#fbf5b7" />
+                    <stop offset="100%" stopColor="#aa771c" />
+                </linearGradient>
             </defs>
 
             {/* Business Blue Background with Thick Black Border */}
@@ -208,17 +215,32 @@ export const FlexTheme = {
             <path d="M0,400 L150,150 L300,400" fill="none" stroke="white" strokeWidth="2" opacity="0.3" />
             <path d="M50,400 L150,230 L250,400" fill="none" stroke="white" strokeWidth="2" opacity="0.3" />
 
-            {/* Arrows Up - High Contrast */}
-            <path d="M150,350 L150,280 M150,280 L130,300 M150,280 L170,300" stroke="#00FF00" strokeWidth="6" strokeLinecap="round" />
-            <path d="M150,350 L150,280 M150,280 L130,300 M150,280 L170,300" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            {/* 1. HIỆU ỨNG TIỀN TỆ (Money Rain) */}
+            <g opacity="0.8">
+                <text x="20" y="60" fontSize="24">💸</text>
+                <text x="260" y="80" fontSize="24">💎</text>
+                <text x="40" y="300" fontSize="20">💲</text>
+                <text x="250" y="280" fontSize="20">💲</text>
+                <text x="10" y="150" fontSize="16">💎</text>
+                <text x="270" y="160" fontSize="16">💸</text>
+            </g>
 
-            <text x="150" y="380" textAnchor="middle" fill="#00FF00" fontWeight="900" fontSize="14" stroke="black" strokeWidth="0.5">PASSIVE INCOME</text>
+            {/* Arrows Up - High Contrast */}
+            <path d="M150,340 L150,280 M150,280 L130,300 M150,280 L170,300" stroke="#00FF00" strokeWidth="6" strokeLinecap="round" />
+            <path d="M150,340 L150,280 M150,280 L130,300 M150,280 L170,300" stroke="white" strokeWidth="2" strokeLinecap="round" />
+
+            {/* 2. NÂNG CẤP "PASSIVE INCOME" */}
+            <text x="150" y="365" textAnchor="middle" fill="#00FF00" fontWeight="900" fontSize="20" stroke="black" strokeWidth="0.5" style={{ textShadow: "0 0 10px #00FF00" }}>PASSIVE INCOME</text>
 
             {/* Top Crown */}
             <text x="150" y="50" textAnchor="middle" fontSize="40">👑</text>
 
-            {/* Avatar at Peak with Glow */}
-            <circle cx="150" cy="110" r="58" fill="#FFD700" stroke="black" strokeWidth="3" />
+            {/* 4. CHI TIẾT AVATAR (Gold Gradient Border) */}
+            {/* Glow effect under avatar */}
+            <circle cx="150" cy="110" r="54" fill="none" stroke="#FFD700" strokeWidth="2" opacity="0.5" filter="blur(4px)" />
+            {/* Main Avatar Border */}
+            <circle cx="150" cy="110" r="54" fill="#FFD700" stroke="url(#gold-border-grad)" strokeWidth="4" />
+
             {userImage ? (
                 <image
                     x="100" y="60" width="100" height="100"
@@ -249,6 +271,12 @@ export const FlexTheme = {
 
             <line x1="130" y1="160" x2="80" y2="275" stroke="white" strokeWidth="2" strokeDasharray="5 5" />
             <line x1="170" y1="160" x2="220" y2="275" stroke="white" strokeWidth="2" strokeDasharray="5 5" />
+
+            {/* 3. THÊM CHỈ SỐ "LÀM GIÀU" */}
+            <rect x="0" y="380" width="300" height="20" fill="#FFD700" stroke="black" strokeWidth="1" />
+            <text x="150" y="394" textAnchor="middle" fontSize="12" fontWeight="900" fill="black">
+                TỰ DO TÀI CHÍNH: 100% 🚀
+            </text>
         </>
     ),
 
@@ -306,52 +334,91 @@ export const FlexTheme = {
                 <clipPath id="avatar-clip-rect">
                     <rect x="75" y="140" width="150" height="180" />
                 </clipPath>
-                <pattern id="guilloche" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M0,20 Q20,0 40,20 T80,20" fill="none" stroke="#FF69B4" strokeWidth="0.5" opacity="0.5" />
+                {/* Enhanced Guilloche Pattern */}
+                <pattern id="guilloche-complex" width="60" height="60" patternUnits="userSpaceOnUse">
+                    <path d="M0,30 Q15,0 30,30 T60,30" fill="none" stroke="#FF1493" strokeWidth="0.5" opacity="0.4" />
+                    <path d="M0,30 Q15,60 30,30 T60,30" fill="none" stroke="#FF1493" strokeWidth="0.5" opacity="0.4" />
+                    <circle cx="30" cy="30" r="10" fill="none" stroke="#FF1493" strokeWidth="0.5" opacity="0.3" />
                 </pattern>
             </defs>
 
-            {/* Red/Pink Background */}
+            {/* Red/Pink Background - Higher Contrast */}
             <rect width="300" height="400" fill="#FFC0CB" />
-            <rect width="300" height="400" fill="#FF69B4" opacity="0.3" />
-            <rect width="300" height="400" fill="url(#guilloche)" />
+            <rect width="300" height="400" fill="url(#guilloche-complex)" />
 
-            {/* Border Frame */}
-            <rect x="20" y="20" width="260" height="360" fill="none" stroke="#8B0000" strokeWidth="4" />
-            <rect x="25" y="25" width="250" height="350" fill="none" stroke="#8B0000" strokeWidth="1" />
+            {/* 3. CHI TIẾT "SỔ HỒNG" - Border Frame */}
+            <rect x="15" y="15" width="270" height="370" fill="none" stroke="#8B0000" strokeWidth="3" />
+            <rect x="10" y="10" width="280" height="380" fill="none" stroke="#8B0000" strokeWidth="1" strokeDasharray="3 3" />
 
-            {/* Header */}
-            <g transform="translate(150, 60)">
-                <text y="0" textAnchor="middle" fontWeight="bold" fontSize="16" fill="#8B0000">GIẤY CHỨNG NHẬN</text>
-                <text y="20" textAnchor="middle" fontWeight="bold" fontSize="12" fill="#8B0000">QUYỀN SỬ DỤNG ĐẤT (VÀ NGƯỜI YÊU)</text>
-                <line x1="-80" y1="30" x2="80" y2="30" stroke="#8B0000" strokeWidth="1" />
+            {/* Header - Official Style */}
+            <g transform="translate(150, 50)">
+                {/* Emblem / Quoc Huy Placeholder */}
+                <circle cx="0" cy="0" r="18" fill="none" stroke="#8B0000" strokeWidth="1" />
+                <path d="M-10,0 L10,0 M0,-10 L0,10" stroke="#8B0000" strokeWidth="1" />
+
+                <text y="35" textAnchor="middle" fontWeight="bold" fontSize="18" fill="#8B0000" fontFamily="serif">GIẤY CHỨNG NHẬN</text>
+                <text y="55" textAnchor="middle" fontWeight="bold" fontSize="11" fill="#8B0000" fontFamily="serif">QUYỀN SỬ DỤNG ĐẤT (VÀ NGƯỜI YÊU)</text>
+                <line x1="-100" y1="65" x2="100" y2="65" stroke="#8B0000" strokeWidth="1" />
             </g>
 
-            {/* Info */}
-            <text x="40" y="120" fontSize="12" fill="black">I. Tên chủ sở hữu:</text>
-            <text x="150" y="350" textAnchor="middle" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} fill="#8B0000" style={{ textTransform: "uppercase" }}>
+            {/* 4. typography & MÀU SẮC alignment */}
+            <text x="30" y="130" fontSize="12" fill="black" fontFamily="serif">I. Tên chủ sở hữu:</text>
+
+            <text x="135" y="130" textAnchor="start" fontWeight="900" fontSize={Math.min(nameFontSize + 2, 22)} fill="#8B0000" style={{ textTransform: "uppercase" }} fontFamily="serif">
                 {userName || "ÔNG TRÙM ĐẤT"}
             </text>
+            {/* Fix alignment to ensure name is clearly associated */}
+            <line x1="135" y1="135" x2="280" y2="135" stroke="black" strokeWidth="1" strokeDasharray="2 2" opacity="0.5" />
+
 
             {/* Avatar Box (Photo) */}
-            <rect x="75" y="140" width="150" height="180" fill="white" stroke="black" strokeWidth="1" />
+            <rect x="75" y="150" width="150" height="180" fill="white" stroke="#8B0000" strokeWidth="1" />
             {userImage ? (
                 <image
-                    x="75" y="140" width="150" height="180"
+                    x="75" y="150" width="150" height="180"
                     href={userImage}
                     clipPath="url(#avatar-clip-rect)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="150" y="240" textAnchor="middle" fontSize="40">🏠</text>
+                <text x="150" y="250" textAnchor="middle" fontSize="40">🏠</text>
             )}
 
-            {/* Red Seal Overlay */}
-            <image
-                x="180" y="280" width="100" height="100"
-                href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZWQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC44Ii8+PHRleHQgeD0iNTAiIHk9IjU1IiBmaWxsPSJyZWQiIG9wYWNpdHk9IjAuOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRyYW5zZm9ybT0icm90YXRlKC0xNSA1MCA1MCkiPkNow61uaCBDaOG7cTwvdGV4dD48L3N2Zz4=" // Simple base64 red seal SVG
-                opacity="0.9"
-            />
+            {/* 2. THÊM CON DẤU ĐỎ (The Official Stamp) */}
+            <g transform="translate(200, 310) rotate(-15)" opacity="0.9">
+                <circle cx="0" cy="0" r="35" fill="none" stroke="#dc2626" strokeWidth="3" />
+                <circle cx="0" cy="0" r="32" fill="none" stroke="#dc2626" strokeWidth="1" />
+                <text x="0" y="5" textAnchor="middle" fill="#dc2626" fontSize="10" fontWeight="bold">CHÍNH CHỦ</text>
+                <text x="0" y="-15" textAnchor="middle" fill="#dc2626" fontSize="8" fontWeight="bold">SỞ TÀI NGUYÊN</text>
+                <text x="0" y="20" textAnchor="middle" fill="#dc2626" fontSize="8" fontWeight="bold">ĐÃ CẤP SỔ</text>
+                <path d="M-10,0 L10,0" stroke="#dc2626" strokeWidth="1" />
+            </g>
+
+            {/* Bottom Info & Barcode */}
+            <g transform="translate(150, 360)">
+                <text x="0" y="0" textAnchor="middle" fontSize="10" fill="black" fontStyle="italic">Số vào sổ cấp GCN: CH-{Math.floor(Math.random() * 99999)}</text>
+                {/* Barcode */}
+                <g transform="translate(-40, 10)">
+                    <rect x="0" y="0" width="2" height="20" fill="black" />
+                    <rect x="4" y="0" width="1" height="20" fill="black" />
+                    <rect x="6" y="0" width="3" height="20" fill="black" />
+                    <rect x="12" y="0" width="2" height="20" fill="black" />
+                    <rect x="16" y="0" width="4" height="20" fill="black" />
+                    <rect x="22" y="0" width="1" height="20" fill="black" />
+                    <rect x="26" y="0" width="3" height="20" fill="black" />
+                    <rect x="32" y="0" width="1" height="20" fill="black" />
+                    <rect x="35" y="0" width="2" height="20" fill="black" />
+                    <rect x="40" y="0" width="4" height="20" fill="black" />
+                    <rect x="46" y="0" width="2" height="20" fill="black" />
+                    <rect x="50" y="0" width="3" height="20" fill="black" />
+                    <rect x="55" y="0" width="1" height="20" fill="black" />
+                    <rect x="58" y="0" width="4" height="20" fill="black" />
+                    <rect x="64" y="0" width="2" height="20" fill="black" />
+                    <rect x="68" y="0" width="3" height="20" fill="black" />
+                    <rect x="74" y="0" width="1" height="20" fill="black" />
+                    <rect x="78" y="0" width="2" height="20" fill="black" />
+                </g>
+            </g>
         </>
     ),
 
@@ -431,29 +498,34 @@ export const FlexTheme = {
                     <stop offset="50%" stopColor="#E8E8E8" />
                     <stop offset="100%" stopColor="#A9A9A9" />
                 </linearGradient>
-                <clipPath id="avatar-clip-chip">
-                    <rect x="180" y="240" width="100" height="100" rx="10" />
+                <clipPath id="avatar-clip-full-right">
+                    <rect x="150" y="0" width="150" height="400" />
                 </clipPath>
             </defs>
 
             {/* Matter Black Background */}
             <rect width="300" height="400" fill="#111111" />
-            {/* Note: url(#diagonal-stripe-2) was used in original, assumed to be global or needed here. 
-          If it's missing, we might need to define it. Since I cannot see global defs in CardEditor, 
-          I will assume it is removed or I should provide a fallback/def. 
-          Actually, I don't see diagonal-stripe-2 defined in the previous file snippet I read. 
-          I will define it here to be safe or remove opacity. */}
-            {/* Defining a simple pattern just in case */}
-            <defs>
-                <pattern id="diagonal-stripe-2" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                    <rect width="5" height="10" fill="white" />
-                </pattern>
-            </defs>
-            <rect width="300" height="400" fill="url(#diagonal-stripe-2)" opacity="0.05" />
+
+            {/* 1. HERO PHOTO (Watermark style) - Right half */}
+            {userImage ? (
+                <image
+                    x="150" y="0" width="150" height="400"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-full-right)"
+                    preserveAspectRatio="xMidYMid slice"
+                    opacity="0.4"
+                    style={{ filter: "grayscale(100%) contrast(1.2)" }}
+                />
+            ) : (
+                <text x="225" y="200" textAnchor="middle" fontSize="100" fill="#333" opacity="0.5">🦅</text>
+            )}
+
+            {/* 4. PHONG CÁCH CHUNG - Silver Border */}
+            <rect x="5" y="5" width="290" height="390" fill="none" stroke="#E8E8E8" strokeWidth="2" />
 
             {/* Silver Header */}
-            <text x="20" y="40" fontFamily="sans-serif" fontSize="14" fill="url(#silver-grad)" fontStyle="italic" fontWeight="bold">AMERICAN FLEX</text>
-            <text x="260" y="40" fontFamily="monospace" fontSize="12" fill="white" textAnchor="end">PLATINUM</text>
+            <text x="20" y="40" fontFamily="sans-serif" fontSize="14" fill="url(#silver-grad)" fontStyle="italic" fontWeight="bold" style={{ textShadow: "0 0 5px #FFD700" }}>AMERICAN FLEX</text>
+            <text x="260" y="40" fontFamily="monospace" fontSize="12" fill="white" textAnchor="end" style={{ textShadow: "0 0 5px #FFD700" }}>PLATINUM</text>
 
             {/* Chip */}
             <rect x="30" y="80" width="50" height="40" rx="5" fill="#FFD700" stroke="#B8860B" strokeWidth="1" />
@@ -463,33 +535,31 @@ export const FlexTheme = {
             <path d="M260,100 Q270,90 280,100 M265,105 Q270,100 275,105" stroke="white" strokeWidth="2" fill="none" />
 
 
-            {/* Name Big Silver */}
+            {/* Name Big Silver Embossed */}
             <text x="20" y="180" fontSize="10" fill="gray">MEMBER SINCE</text>
             <text x="20" y="200" fontSize="14" fill="white">2077</text>
 
-            <text x="30" y="340" textAnchor="start" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} fill="url(#silver-grad)" letterSpacing="1" style={{ textShadow: "1px 1px 2px black" }}>
-                {userName ? userName.toUpperCase() : "MR. VIBE"}
+            {/* 2. CẤU TRÚC LẠI VĂN BẢN - Embossed Name */}
+            <text x="30" y="320" textAnchor="start" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} fill="url(#silver-grad)" letterSpacing="2" fontFamily="monospace"
+                style={{ textShadow: "1px 1px 0px #000, -1px -1px 0px #555, 2px 2px 4px black" }}>
+                {userName ? userName.toUpperCase() : "THIEU GIA NGAM"}
             </text>
 
             {/* Embossed Numbers */}
-            <text x="150" y="380" textAnchor="middle" fontFamily="monospace" fontSize="20" fill="url(#silver-grad)" letterSpacing="2" style={{ textShadow: "1px 1px 2px black" }}>
+            <text x="150" y="360" textAnchor="middle" fontFamily="monospace" fontSize="20" fill="url(#silver-grad)" letterSpacing="2" style={{ textShadow: "1px 1px 2px black" }}>
                 0000 0000 0000 FLEX
             </text>
 
-            {/* Avatar Box as Hologram */}
-            <rect x="180" y="240" width="100" height="100" rx="10" fill="#333" stroke="gray" strokeWidth="1" />
-            {userImage ? (
-                <image
-                    x="180" y="240" width="100" height="100"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-chip)"
-                    preserveAspectRatio="xMidYMid slice"
-                    opacity="0.9"
-                />
-            ) : (
-                <text x="230" y="300" textAnchor="middle" fontSize="40" fill="gray">🦅</text>
-            )}
-            <text x="230" y="235" textAnchor="middle" fill="gray" fontSize="8">AUTHORIZED SIGNATURE</text>
+            {/* 3. CHI TIẾT "NHÀ GIÀU" */}
+            <text x="280" y="140" textAnchor="end" fontSize="10" fill="white" fontWeight="bold" fontStyle="italic" opacity="0.8">LIMITLESS CREDIT</text>
+
+            {/* Top 1% Global Seal */}
+            <g transform="translate(40, 240)" opacity="0.3">
+                <circle cx="0" cy="0" r="25" fill="none" stroke="white" strokeWidth="1" />
+                <text x="0" y="4" textAnchor="middle" fontSize="6" fill="white" fontFamily="serif">TOP 1% GLOBAL</text>
+            </g>
+
+            <text x="230" y="385" textAnchor="middle" fill="gray" fontSize="8" letterSpacing="1">AUTHORIZED SIGNATURE</text>
         </>
     ),
 
@@ -497,68 +567,116 @@ export const FlexTheme = {
         <>
             <defs>
                 <clipPath id="avatar-clip-circle">
-                    <circle cx="150" cy="150" r="70" />
+                    <circle cx="150" cy="140" r="80" />
                 </clipPath>
                 <linearGradient id="carbon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1a1a1a" />
-                    <stop offset="100%" stopColor="#333" />
+                    <stop offset="0%" stopColor="#0f0f0f" />
+                    <stop offset="50%" stopColor="#1a1a1a" />
+                    <stop offset="100%" stopColor="#0a0a0a" />
+                </linearGradient>
+                <pattern id="carbon-patt" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <rect width="4" height="4" fill="#222" />
+                    <rect x="4" y="4" width="4" height="4" fill="#222" />
+                </pattern>
+
+                {/* 2. QUY HOẠCH LẠI GARAGE: Headlight beams */}
+                <linearGradient id="headlight-beam" x1="0.5" y1="1" x2="0.5" y2="0">
+                    <stop offset="0%" stopColor="white" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
                 </linearGradient>
             </defs>
 
-            {/* Carbon Fiber BG */}
+            {/* 5. NỀN (The Road) - Asphalt & Lane Markings */}
             <rect width="300" height="400" fill="url(#carbon-grad)" />
-            <pattern id="carbon-patt" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                <rect width="5" height="5" fill="black" opacity="0.5" />
-                <rect x="5" y="5" width="5" height="5" fill="black" opacity="0.5" />
-            </pattern>
-            <rect width="300" height="400" fill="url(#carbon-patt)" />
+            <rect width="300" height="400" fill="url(#carbon-patt)" opacity="0.3" />
+
+            {/* Lane markings vanishing */}
+            <path d="M150,250 L50,400 M150,250 L250,400" stroke="#333" strokeWidth="2" strokeDasharray="10 5" opacity="0.5" />
+            <path d="M0,350 L300,350" stroke="#333" strokeWidth="1" strokeDasharray="5 5" opacity="0.2" />
 
             {/* Thick Dark Frame */}
-            <rect x="10" y="10" width="280" height="380" fill="none" stroke="#444" strokeWidth="5" rx="10" />
+            <rect x="5" y="5" width="290" height="390" fill="none" stroke="#333" strokeWidth="10" rx="15" />
+            <rect x="10" y="10" width="280" height="380" fill="none" stroke="crimson" strokeWidth="2" rx="10" />
 
-            {/* Speedometer Graphics */}
-            <path d="M50,250 A100,100 0 0,1 250,250" fill="none" stroke="crimson" strokeWidth="8" strokeDasharray="20 10" strokeLinecap="round" />
-            <text x="150" y="100" textAnchor="middle" fill="crimson" fontSize="14" fontWeight="900" stroke="black" strokeWidth="0.5">RPM x1000</text>
+            {/* 1. NÂNG CẤP ĐỒNG HỒ TỐC ĐỘ (The Speedometer Frame) */}
+            <g transform="translate(150, 140)">
+                {/* Ticks */}
+                <path d="M-90,0 A90,90 0 1,1 90,0" fill="none" stroke="#444" strokeWidth="15" strokeLinecap="round" />
+                <path d="M-90,0 A90,90 0 1,1 90,0" fill="none" stroke="crimson" strokeWidth="3" strokeDasharray="2 5" strokeLinecap="round" opacity="0.8" />
 
-            {/* Steering Wheel Avatar */}
-            <circle cx="150" cy="150" r="85" fill="none" stroke="#222" strokeWidth="15" /> {/* Wheel Rim */}
-            <circle cx="150" cy="150" r="85" fill="none" stroke="#555" strokeWidth="2" strokeDasharray="2 2" /> {/* Stitching */}
+                {/* Numbers */}
+                <text x="-105" y="10" textAnchor="middle" fill="cyan" fontSize="14" fontWeight="bold" style={{ textShadow: "0 0 5px cyan" }}>0</text>
+                <text x="-60" y="-80" textAnchor="middle" fill="cyan" fontSize="14" fontWeight="bold" style={{ textShadow: "0 0 5px cyan" }}>100</text>
+                <text x="60" y="-80" textAnchor="middle" fill="cyan" fontSize="14" fontWeight="bold" style={{ textShadow: "0 0 5px cyan" }}>200</text>
+                <text x="105" y="10" textAnchor="middle" fill="red" fontSize="14" fontWeight="bold" style={{ textShadow: "0 0 5px red" }}>300</text>
 
-            {/* Wheel Spokes */}
-            <path d="M150,235 L150,190 M65,150 L110,150 M235,150 L190,150" stroke="#333" strokeWidth="12" strokeLinecap="round" />
+                {/* Needle */}
+                <path d="M0,0 L80,40" stroke="red" strokeWidth="4" strokeLinecap="round" transform="rotate(30)" />
+                <circle cx="0" cy="0" r="5" fill="#333" stroke="white" strokeWidth="1" />
+            </g>
 
+            {/* Avatar */}
+            <circle cx="150" cy="140" r="85" fill="none" stroke="#222" strokeWidth="5" />
             {userImage ? (
                 <image
-                    x="80" y="80" width="140" height="140"
+                    x="70" y="60" width="160" height="160"
                     href={userImage}
                     clipPath="url(#avatar-clip-circle)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="150" y="165" textAnchor="middle" fontSize="50">🏎️</text>
+                <text x="150" y="155" textAnchor="middle" fontSize="60">🏎️</text>
             )}
 
-            {/* Central Horn/Logo */}
-            <circle cx="150" cy="150" r="20" fill="black" stroke="#FFD700" strokeWidth="2" />
-            <text x="150" y="155" textAnchor="middle" fontSize="16" fill="#FFD700" fontWeight="bold">V</text>
+            {/* Glowing Logo 'V' */}
+            <circle cx="150" cy="225" r="25" fill="#111" stroke="#FFD700" strokeWidth="2" />
+            <text x="150" y="235" textAnchor="middle" fontSize="24" fill="#FFD700" fontWeight="900" style={{ textShadow: "0 0 10px #FFD700" }}>V</text>
 
-            {/* Car Keys Icons - Stacked */}
-            <g transform="translate(150, 270)" textAnchor="middle">
-                <text x="-60" y="0" fontSize="30" transform="rotate(-15)">🏎️</text>
-                <text x="0" y="10" fontSize="30">🔑</text>
-                <text x="60" y="0" fontSize="30" transform="rotate(15)">🚗</text>
+
+            {/* 2. QUY HOẠCH LẠI GARAGE - Car Silhouettes */}
+            <g transform="translate(0, 260)">
+                {/* Headlights shining up */}
+                <path d="M50,40 L30,-50 L70,-50 Z" fill="url(#headlight-beam)" opacity="0.3" />
+                <path d="M150,40 L130,-50 L170,-50 Z" fill="url(#headlight-beam)" opacity="0.4" />
+                <path d="M250,40 L230,-50 L270,-50 Z" fill="url(#headlight-beam)" opacity="0.3" />
+
+                {/* Silhouette 1 */}
+                <path d="M30,40 Q50,20 70,40 L80,40 L80,50 L20,50 L20,40 Z" fill="#333" />
+                {/* Silhouette 2 (Center - Hero) */}
+                <path d="M120,40 Q150,10 180,40 L195,40 L195,50 L105,50 L105,40 Z" fill="#555" />
+                {/* Silhouette 3 */}
+                <path d="M230,40 Q250,20 270,40 L280,40 L280,50 L220,50 L220,40 Z" fill="#333" />
             </g>
 
-            {/* License Plate Name */}
-            <rect x="50" y="320" width="200" height="60" fill="white" stroke="black" strokeWidth="3" rx="4" />
-            <rect x="55" y="325" width="190" height="50" fill="#FFD700" stroke="black" strokeWidth="1" rx="2" />
+            {/* 3. BIỂN SỐ & TÊN (The License Plate) */}
+            <g transform="translate(50, 310)">
+                {/* Plate Body */}
+                <rect x="0" y="0" width="200" height="55" fill="#FFD700" stroke="black" strokeWidth="4" rx="5"
+                    style={{ filter: "drop-shadow(4px 4px 0px black)" }} />
+                {/* Inner Border */}
+                <rect x="5" y="5" width="190" height="45" fill="none" stroke="black" strokeWidth="1" rx="2" />
 
-            <circle cx="65" cy="350" r="3" fill="black" />
-            <circle cx="235" cy="350" r="3" fill="black" />
+                {/* Screws */}
+                <circle cx="15" cy="15" r="3" fill="black" />
+                <circle cx="185" cy="15" r="3" fill="black" />
+                <circle cx="15" cy="40" r="3" fill="black" />
+                <circle cx="185" cy="40" r="3" fill="black" />
 
-            <text x="150" y="335" textAnchor="middle" fontSize="10" fill="black" fontWeight="bold">VIETNAM</text>
-            <text x="150" y="368" textAnchor="middle" fontFamily="monospace" fontWeight="900" fontSize={Math.min(nameFontSize, 26)} fill="black" style={{ textTransform: "uppercase" }}>
-                {userName || "SUPERCAR"}
+                {/* Country Strip */}
+                <rect x="5" y="5" width="30" height="45" fill="#003399" opacity="0.8" />
+                <text x="20" y="20" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">VN</text>
+                <text x="20" y="40" textAnchor="middle" fontSize="16">⭐</text>
+
+                {/* Name - Embossed Effect */}
+                <text x="115" y="38" textAnchor="middle" fontFamily="monospace" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} fill="black"
+                    style={{ textTransform: "uppercase", letterSpacing: "2px" }}>
+                    {userName || "SUPERCAR"}
+                </text>
+            </g>
+
+            {/* 4. THÊM CAPTION "CHÁY PHỐ" */}
+            <text x="150" y="385" textAnchor="middle" fontSize="10" fill="#ccc" fontStyle="italic">
+                "Gara chật quá, phải để bớt ngoài vỉa hè"
             </text>
         </>
     ),

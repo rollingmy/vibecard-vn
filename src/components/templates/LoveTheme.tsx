@@ -445,20 +445,23 @@ export const LoveTheme = {
                 <clipPath id="avatar-clip-rounded-rect">
                     <rect x="25" y="60" width="250" height="280" rx="10" />
                 </clipPath>
-                <linearGradient id="tinder-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#fd297b" />
-                    <stop offset="100%" stopColor="#ff655b" />
-                </linearGradient>
             </defs>
 
-            {/* White App Background */}
-            <rect width="300" height="400" fill="white" />
+            {/* Neon Pink/Red Border Frame */}
+            <rect width="300" height="400" fill="#fffcf5" />
+            <rect x="5" y="5" width="290" height="390" fill="none" stroke="#ff4757" strokeWidth="6" />
 
             {/* Main Photo Card */}
-            <rect x="25" y="60" width="250" height="280" rx="10" fill="#eee" />
+            <rect x="25" y="60" width="250" height="280" rx="10" fill="#eee" stroke="#000" strokeWidth="4" />
+
+            {/* Super Like Star (Top Right) */}
+            <g transform="translate(230, 45) rotate(15)">
+                <path d="M20,0 L25,15 L40,15 L28,25 L32,40 L20,30 L8,40 L12,25 L0,15 L15,15 Z" fill="#2ed573" stroke="#000" strokeWidth="2" />
+            </g>
+
             {userImage ? (
                 <image
-                    x="25" y="60" width="250" height="280"
+                    x="27" y="62" width="246" height="276"
                     href={userImage}
                     clipPath="url(#avatar-clip-rounded-rect)"
                     preserveAspectRatio="xMidYMid slice"
@@ -467,83 +470,137 @@ export const LoveTheme = {
                 <text x="150" y="200" textAnchor="middle" fontSize="50">🔥</text>
             )}
 
-            {/* Gradient Overlay at bottom of photo */}
-            <rect x="25" y="240" width="250" height="100" rx="10" fill="black" opacity="0.4" clipPath="url(#avatar-clip-rounded-rect)" />
+            {/* Gradient Overlay at bottom of photo - Darker for readability */}
+            <defs>
+                <linearGradient id="darkFade" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0.5" stopColor="transparent" />
+                    <stop offset="1" stopColor="#000" stopOpacity="0.9" />
+                </linearGradient>
+            </defs>
+            <rect x="27" y="62" width="246" height="276" rx="8" fill="url(#darkFade)" pointerEvents="none" />
 
             {/* Name & Age Overlay */}
-            <text x="40" y="310" fill="white" fontWeight="bold" fontSize={Math.min(nameFontSize, 24)}>{userName || "TOP PICK"}</text>
-            <text x="210" y="310" fill="white" fontSize="20" fontWeight="normal">, 18</text>
-            <text x="40" y="330" fill="white" fontSize="10" opacity="0.9">📍 Cuối đường...</text>
+            <text x="40" y="300" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 28)} style={{ textShadow: "2px 2px 0px #000" }}>
+                {userName || "TÌM ĐI"}
+            </text>
+            <text x="40" y="325" fill="white" fontSize="12" fontWeight="bold" opacity="1">
+                📍 Cách đây 1km • 🕒 Active
+            </text>
 
-            {/* Controls */}
-            <circle cx="90" cy="370" r="25" fill="white" stroke="#ff6b6b" strokeWidth="2" />
-            {/* Shadow removed/not supported standardly in SVG without filter */}
-            <text x="90" y="378" textAnchor="middle" fontSize="20" fill="#ff6b6b">✖</text>
+            {/* Controls - Neubrutalism Buttons */}
+            <g transform="translate(0, 30)">
+                {/* Nope Button */}
+                <circle cx="80" cy="330" r="25" fill="white" stroke="#000" strokeWidth="4" />
+                <circle cx="84" cy="334" r="25" fill="#000" opacity="0.2" /> {/* Hard Shadow */}
+                <circle cx="80" cy="330" r="25" fill="white" stroke="#000" strokeWidth="3" />
+                <text x="80" y="338" textAnchor="middle" fontSize="24" fill="#ff4757" fontWeight="900" style={{ textShadow: "1px 1px 0 #000" }}>✖</text>
 
-            <circle cx="150" cy="365" r="18" fill="white" stroke="#36d8ff" strokeWidth="2" />
-            <text x="150" y="371" textAnchor="middle" fontSize="16" fill="#36d8ff">⭐</text>
+                {/* Super Like Button */}
+                <circle cx="150" cy="330" r="20" fill="white" stroke="#000" strokeWidth="3" />
+                <text x="150" y="336" textAnchor="middle" fontSize="18" fill="#3742fa">⭐</text>
 
-            <circle cx="210" cy="370" r="25" fill="white" stroke="#4ecc94" strokeWidth="2" />
-            <text x="210" y="378" textAnchor="middle" fontSize="20" fill="#4ecc94">❤</text>
+                {/* Like Button */}
+                <circle cx="220" cy="330" r="25" fill="#white" />
+                <circle cx="224" cy="334" r="25" fill="#000" opacity="0.2" /> {/* Hard Shadow */}
+                <circle cx="220" cy="330" r="25" fill="white" stroke="#000" strokeWidth="3" />
+                <text x="220" y="338" textAnchor="middle" fontSize="24" fill="#2ed573" fontWeight="900" style={{ textShadow: "1px 1px 0 #000" }}>❤</text>
+            </g>
 
             {/* Header Logo */}
-            <text x="150" y="35" textAnchor="middle" fontSize="20" fill="url(#tinder-grad)" fontWeight="bold">🔥 tinder</text>
+            <rect x="100" y="20" width="100" height="30" fill="#fff" stroke="#000" strokeWidth="3" rx="15" />
+            <text x="150" y="42" textAnchor="middle" fontSize="14" fill="#ff4757" fontWeight="900" letterSpacing="1">TINDER</text>
         </>
     ),
 
     'le-hoi-chia-tay': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            {/* 1. NỀN & KHUNG (Ticket Shape) */}
             <defs>
-                <clipPath id="avatar-clip-ticket-stub">
-                    <rect x="200" y="80" width="80" height="240" />
+                <clipPath id="ticket-clip">
+                    <rect width="400" height="600" />
+                </clipPath>
+            </defs>
+            <rect width="400" height="600" fill="#450a0a" />
+
+            {/* Perforated Edges (Top & Bottom) */}
+            <g fill="#e5e5e5"> {/* Match background if not transparent, or white to look like holes */}
+                {Array.from({ length: 20 }).map((_, i) => (
+                    <circle key={`top-${i}`} cx={10 + i * 20} cy={0} r={6} />
+                ))}
+                {Array.from({ length: 20 }).map((_, i) => (
+                    <circle key={`bot-${i}`} cx={10 + i * 20} cy={600} r={6} />
+                ))}
+            </g>
+
+            {/* Stub Separator (Dashed Line) */}
+            <line x1="0" y1="480" x2="400" y2="480" stroke="#facc15" strokeWidth="3" strokeDasharray="10 10" />
+
+            {/* 2. KHUNG AVATAR (Main Feature - 60% area) */}
+            <rect x="40" y="80" width="320" height="320" rx="20" fill="#222" stroke="white" strokeWidth="6" />
+
+            <defs>
+                <clipPath id="ticket-avatar-clip">
+                    <rect x="44" y="84" width="312" height="312" rx="16" />
                 </clipPath>
             </defs>
 
-            {/* Dark Background */}
-            <rect width="300" height="400" fill="#111" />
+            {userImage ? (
+                <image
+                    x="44" y="84" width="312" height="312"
+                    href={userImage}
+                    clipPath="url(#ticket-avatar-clip)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="200" y="260" textAnchor="middle" fontSize="80">👋</text>
+            )}
 
-            {/* Confetti */}
-            <circle cx="50" cy="50" r="3" fill="#333" />
-            <circle cx="120" cy="30" r="4" fill="#555" />
-            <rect x="30" y="100" width="5" height="10" fill="#444" transform="rotate(20)" />
-            <rect x="250" y="350" width="6" height="6" fill="#666" transform="rotate(45)" />
+            {/* CANCELED Stamp */}
+            <g transform="translate(200, 240) rotate(-15)">
+                <rect x="-100" y="-30" width="200" height="60" rx="10" fill="none" stroke="#dc2626" strokeWidth="8" opacity="0.8" />
+                <rect x="-90" y="-22" width="180" height="44" fill="none" stroke="#dc2626" strokeWidth="2" opacity="0.8" />
+                <text x="0" y="15" textAnchor="middle" fontSize="40" fontWeight="900" fill="#dc2626" opacity="0.9" style={{ letterSpacing: '5px' }}>CANCELED</text>
+            </g>
 
-            {/* Ticket Shape */}
-            <path d="M20,60 L280,60 L280,340 L20,340 Z" fill="#222" stroke="white" strokeWidth="2" />
-            {/* Perforation Line */}
-            <line x1="200" y1="60" x2="200" y2="340" stroke="white" strokeWidth="2" strokeDasharray="5 5" />
+            {/* 3. CHI TIẾT VÉ (Farewell Info) */}
+            {/* Title */}
+            <text x="200" y="55" textAnchor="middle" fontSize="32" fontWeight="900" fill="#facc15" style={{ textShadow: "2px 2px 0px #000" }}>
+                FAREWELL PARTY
+            </text>
 
-            {/* Left Side: Info */}
-            <text x="110" y="100" textAnchor="middle" fill="white" fontFamily="monospace" fontSize="20" fontWeight="bold">FAREWELL</text>
-            <text x="110" y="120" textAnchor="middle" fill="white" fontFamily="monospace" fontSize="20" fontWeight="bold">PARTY</text>
-
-            <line x1="40" y1="140" x2="180" y2="140" stroke="white" strokeWidth="1" />
-
-            <text x="40" y="170" fill="#aaa" fontSize="10">GUEST OF HONOR:</text>
-            <text x="40" y="195" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 20)} style={{ textTransform: "uppercase" }}>
+            {/* Guest of Honor */}
+            <text x="200" y="430" textAnchor="middle" fontSize="14" fill="#d4d4d4" fontFamily="monospace">GUEST OF HONOR</text>
+            <text x="200" y="460" textAnchor="middle" fontSize={Math.min(nameFontSize, 32)} fontWeight="bold" fill="white" fontFamily="Courier New, monospace" style={{ textTransform: 'uppercase' }}>
                 {userName || "NGƯỜI RA ĐI"}
             </text>
 
-            <text x="40" y="230" fill="#aaa" fontSize="10">REASON:</text>
-            <text x="40" y="250" fill="white" fontWeight="bold" fontSize="12">"IT'S NOT YOU, IT'S ME"</text>
+            {/* 4. PHẦN CUỐNG VÉ (Stub) */}
+            {/* Reason Box */}
+            <g transform="translate(30, 500)">
+                <rect width="240" height="80" rx="5" fill="#262626" stroke="#525252" strokeWidth="2" />
+                <text x="120" y="25" textAnchor="middle" fontSize="12" fill="#a3a3a3">REASON FOR DEPARTURE</text>
+                <text x="120" y="55" textAnchor="middle" fontSize="16" fontStyle="italic" fill="white">"It's not you, it's me"</text>
+            </g>
 
-            <text x="40" y="290" fill="#aaa" fontSize="10">DATE:</text>
-            <text x="40" y="310" fill="white" fontWeight="bold" fontFamily="monospace">UNKNOWN</text>
+            {/* Vertical Text & Barcode */}
+            <g transform="translate(340, 590) rotate(-90)">
+                <text x="0" y="0" fontSize="14" fontWeight="bold" fill="#facc15" letterSpacing="2">ADMIT ONE - NO REFUNDS</text>
+            </g>
 
-            {/* Right Side: Stub & Avatar */}
-            {userImage ? (
-                <image
-                    x="200" y="60" width="80" height="280"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-ticket-stub)"
-                    preserveAspectRatio="xMidYMid slice"
-                    opacity="0.8"
-                />
-            ) : (
-                <text x="240" y="200" textAnchor="middle" fontSize="30">👋</text>
-            )}
-            <text x="240" y="320" textAnchor="middle" fill="white" fontSize="16" transform="rotate(-90 240 320)" fontWeight="bold">ADMIT ONE</text>
-        </>
+            {/* Fake Barcode */}
+            <g transform="translate(290, 510)">
+                <rect x="0" y="0" width="4" height="60" fill="white" />
+                <rect x="8" y="0" width="2" height="60" fill="white" />
+                <rect x="14" y="0" width="6" height="60" fill="white" />
+                <rect x="24" y="0" width="2" height="60" fill="white" />
+                <rect x="30" y="0" width="4" height="60" fill="white" />
+                <rect x="38" y="0" width="8" height="60" fill="white" />
+                <rect x="50" y="0" width="2" height="60" fill="white" />
+                <rect x="56" y="0" width="4" height="60" fill="white" />
+                <rect x="64" y="0" width="6" height="60" fill="white" />
+                <text x="35" y="75" textAnchor="middle" fontSize="10" fill="white" fontFamily="monospace">#839210</text>
+            </g>
+        </svg>
     ),
 
     'crush-quoc-dan': ({ userName, userImage, nameFontSize }: TemplateProps) => (
@@ -552,10 +609,11 @@ export const LoveTheme = {
                 <clipPath id="avatar-clip-full-poster">
                     <rect x="0" y="0" width="300" height="400" />
                 </clipPath>
-                <radialGradient id="burst-grad" cx="50%" cy="50%" r="60%">
-                    <stop offset="60%" stopColor="transparent" />
-                    <stop offset="100%" stopColor="rgba(255, 105, 180, 0.5)" />
-                </radialGradient>
+                <linearGradient id="bottom-fade-blur" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="transparent" />
+                    <stop offset="0.6" stopColor="rgba(0,0,0,0.4)" />
+                    <stop offset="1" stopColor="rgba(0,0,0,0.9)" />
+                </linearGradient>
             </defs>
 
             {/* Poster Background */}
@@ -573,32 +631,184 @@ export const LoveTheme = {
                 <text x="150" y="200" textAnchor="middle" fontSize="80">✨</text>
             )}
 
-            {/* Gradient Overlay Bottom */}
-            <rect x="0" y="250" width="300" height="150" fill="url(#burst-grad)" style={{ mixBlendMode: 'multiply' }} />
-            <linearGradient id="bottom-fade" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="transparent" />
-                <stop offset="1" stopColor="#FF1493" />
-            </linearGradient>
-            <rect x="0" y="250" width="300" height="150" fill="url(#bottom-fade)" opacity="0.8" />
+            {/* Gradient Overlay Bottom - Thicker & Blurry for text readability */}
+            <rect x="0" y="220" width="300" height="180" fill="url(#bottom-fade-blur)" />
 
+            {/* 1. HIỆU ỨNG ÁNH SÁNG (Vibe Star) */}
+            {/* Lens Flare Top Left */}
+            <g transform="translate(0,0)" opacity="0.8">
+                <circle cx="0" cy="0" r="80" fill="url(#burst-grad)" opacity="0.6" />
+                <line x1="0" y1="0" x2="100" y2="100" stroke="#fff" strokeWidth="2" opacity="0.5" />
+            </g>
+            {/* Sparkles */}
+            <text x="30" y="50" fontSize="20" fill="#fff" opacity="0.8">✨</text>
+            <text x="260" y="80" fontSize="24" fill="#FFD700" opacity="0.9">✨</text>
+            <text x="250" y="320" fontSize="16" fill="#fff" opacity="0.6">✦</text>
+            <text x="50" y="300" fontSize="16" fill="#fff" opacity="0.6">✦</text>
 
-            {/* Burst Lines Effect */}
-            <g opacity="0.6">
-                <line x1="150" y1="200" x2="150" y2="0" stroke="white" strokeWidth="2" />
-                <line x1="150" y1="200" x2="300" y2="200" stroke="white" strokeWidth="2" />
-                <line x1="150" y1="200" x2="0" y2="200" stroke="white" strokeWidth="2" />
-                <line x1="150" y1="200" x2="250" y2="50" stroke="white" strokeWidth="1" />
-                <line x1="150" y1="200" x2="50" y2="50" stroke="white" strokeWidth="1" />
+            {/* Glowing Crosshair Lines */}
+            <g style={{ mixBlendMode: 'screen' }}>
+                <line x1="150" y1="200" x2="150" y2="0" stroke="pink" strokeWidth="3" opacity="0.4" filter="blur(2px)" />
+                <line x1="150" y1="200" x2="300" y2="200" stroke="pink" strokeWidth="3" opacity="0.4" filter="blur(2px)" />
+                <line x1="150" y1="200" x2="0" y2="200" stroke="pink" strokeWidth="3" opacity="0.4" filter="blur(2px)" />
+
+                {/* Sharp lines */}
+                <line x1="150" y1="200" x2="150" y2="0" stroke="white" strokeWidth="1" opacity="0.6" />
+                <line x1="150" y1="200" x2="300" y2="200" stroke="white" strokeWidth="1" opacity="0.6" />
+                <line x1="150" y1="200" x2="0" y2="200" stroke="white" strokeWidth="1" opacity="0.6" />
             </g>
 
-            {/* Text Overlay */}
-            <text x="150" y="300" textAnchor="middle" fill="#FFD700" fontSize="14" fontWeight="bold" letterSpacing="5" style={{ textShadow: "1px 1px 2px black" }}>DEBUT 2026</text>
+            {/* 3. CHI TIẾT "HÀNG HIỆU" */}
+            {/* Tag: Trending */}
+            <g transform="translate(20, 20)">
+                <rect width="100" height="24" rx="12" fill="#ef4444" />
+                <text x="50" y="17" textAnchor="middle" fontSize="10" fontWeight="bold" fill="white" letterSpacing="1">TRENDING #1</text>
+            </g>
 
-            <text x="150" y="340" textAnchor="middle" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 36)} style={{ textShadow: "2px 2px 0px #FF1493, 4px 4px 0px black" }} letterSpacing="-1">
+            {/* 2. CẤU TRÚC CHỮ (Typography) */}
+            <text x="150" y="300" textAnchor="middle" fill="#facc15" fontSize="14" fontWeight="bold" letterSpacing="4" style={{ textShadow: "1px 1px 2px black" }}>DEBUT 2026</text>
+
+            <text x="150" y="340" textAnchor="middle" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 36)} style={{ textShadow: "0 0 10px #ec4899, 2px 2px 0px black" }} letterSpacing="-1">
                 {userName ? userName.toUpperCase() : "IDOL MỚI NỔI"}
             </text>
 
-            <text x="150" y="370" textAnchor="middle" fill="white" fontSize="10" fontStyle="italic">★ ★ ★ ★ ★</text>
+            {/* Caption */}
+            <text x="150" y="365" textAnchor="middle" fill="#e5e7eb" fontSize="12" fontWeight="normal" fontFamily="serif" fontStyle="italic">
+                "Người người theo đuổi, nhà nhà mong chờ"
+            </text>
+
+            {/* Stars with Stroke */}
+            <g transform="translate(110, 375)">
+                <text x="0" y="0" fontSize="16" fill="#FFD700" stroke="black" strokeWidth="0.5">★</text>
+                <text x="20" y="0" fontSize="16" fill="#FFD700" stroke="black" strokeWidth="0.5">★</text>
+                <text x="40" y="0" fontSize="16" fill="#FFD700" stroke="black" strokeWidth="0.5">★</text>
+                <text x="60" y="0" fontSize="16" fill="#FFD700" stroke="black" strokeWidth="0.5">★</text>
+                <text x="80" y="0" fontSize="16" fill="#FFD700" stroke="black" strokeWidth="0.5">★</text>
+            </g>
         </>
+    ),
+
+    'bua-yeu': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            {/* 1. NỀN BÙA CHÚ (Mystic Background) */}
+            <rect width="400" height="600" fill="#b45309" /> {/* Old Do paper color */}
+
+            {/* Cloud Pattern / Triện văn */}
+            <pattern id="cloudPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M20,50 Q40,30 60,50 T100,50" fill="none" stroke="#78350f" strokeWidth="1" opacity="0.3" />
+                <text x="50" y="50" fontSize="20" fill="#78350f" opacity="0.2" fontFamily="serif">愛</text>
+            </pattern>
+            <rect width="400" height="600" fill="url(#cloudPattern)" />
+
+            {/* Ancient Border (Tứ Linh style frame) */}
+            <rect x="10" y="10" width="380" height="580" fill="none" stroke="#dc2626" strokeWidth="4" />
+            <rect x="15" y="15" width="370" height="570" fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="10,5" />
+
+            {/* Corner Knots */}
+            <g transform="translate(10,10)">
+                <path d="M0,40 L0,0 L40,0" fill="none" stroke="#f59e0b" strokeWidth="4" />
+                <circle cx="5" cy="5" r="2" fill="#dc2626" />
+            </g>
+            <g transform="translate(390,10) rotate(90)">
+                <path d="M0,40 L0,0 L40,0" fill="none" stroke="#f59e0b" strokeWidth="4" />
+            </g>
+            <g transform="translate(390,590) rotate(180)">
+                <path d="M0,40 L0,0 L40,0" fill="none" stroke="#f59e0b" strokeWidth="4" />
+            </g>
+            <g transform="translate(10,590) rotate(270)">
+                <path d="M0,40 L0,0 L40,0" fill="none" stroke="#f59e0b" strokeWidth="4" />
+            </g>
+
+            {/* 2. KHUNG ẢNH "TÂM ĐIỂM" (The Magic Circle) */}
+            <g transform="translate(200, 250)">
+                {/* Outer Glow */}
+                <circle cx="0" cy="0" r="145" fill="#fce7f3" opacity="0.3" filter="blur(10px)" />
+
+                {/* Magic Ring */}
+                <circle cx="0" cy="0" r="140" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                <circle cx="0" cy="0" r="130" fill="none" stroke="#dc2626" strokeWidth="1" />
+
+                {/* Runes on Ring */}
+                <path id="runePath" d="M-135,0 A135,135 0 1,1 135,0 A135,135 0 1,1 -135,0" fill="none" />
+                <text fontSize="14" fill="#f59e0b" fontWeight="bold" letterSpacing="5">
+                    <textPath href="#runePath" startOffset="50%" textAnchor="middle">
+                        OM MANI PADME HUM • VẠN SỰ TÙY DUYÊN • TÂM LINH TƯƠNG THÔNG
+                    </textPath>
+                </text>
+
+                {/* Avatar */}
+                <defs>
+                    <clipPath id="magicCircleClip">
+                        <circle cx="0" cy="0" r="120" />
+                    </clipPath>
+                    <radialGradient id="pinkGlow">
+                        <stop offset="0%" stopColor="#f472b6" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                    </radialGradient>
+                </defs>
+
+                {/* Glow behind avatar */}
+                <circle cx="0" cy="0" r="120" fill="url(#pinkGlow)" />
+
+                {userImage ? (
+                    <image
+                        x="-120" y="-120" width="240" height="240"
+                        href={userImage}
+                        clipPath="url(#magicCircleClip)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                ) : (
+                    <text x="0" y="20" textAnchor="middle" fontSize="80">☯️</text>
+                )}
+            </g>
+
+            {/* 3. KHƯƠNG CHỨA TÊN (The Name Scroll) */}
+            <g transform="translate(200, 420)">
+                {/* Scroll Shape */}
+                <path d="M-120,0 Q-140,20 -120,40 H120 Q140,20 120,0 H-120 Z" fill="#991b1b" stroke="#f59e0b" strokeWidth="2" />
+                <path d="M-130,10 L-110,10 M-130,30 L-110,30" stroke="#f59e0b" strokeWidth="2" /> {/* Scroll ends */}
+                <path d="M130,10 L110,10 M130,30 L110,30" stroke="#f59e0b" strokeWidth="2" />
+
+                {/* Name */}
+                <foreignObject x="-110" y="5" width="220" height="30">
+                    <div className="w-full h-full flex items-center justify-center text-white"
+                        style={{ fontFamily: 'serif', fontWeight: 'bold', fontSize: '18px', textShadow: '1px 1px 0 #000' }}>
+                        {userName || "THÍ CHỦ CÔ ĐƠN"}
+                    </div>
+                </foreignObject>
+            </g>
+
+            {/* 4. CÁC DÒNG CHÚ NGỮ (The Spells) */}
+            {/* Top Spell */}
+            <text x="200" y="60" textAnchor="middle" fontSize="32" fontWeight="bold" fill="#dc2626"
+                style={{ fontFamily: 'serif', textShadow: '0 0 5px #f59e0b' }}>
+                CẤP CẤP NHƯ LUẬT LỆNH
+            </text>
+
+            {/* Bottom Spell */}
+            <text x="200" y="540" textAnchor="middle" fontSize="48" fontWeight="bold" fill="#7f1d1d"
+                style={{ fontFamily: 'serif', letterSpacing: '2px' }}>
+                BÙA YÊU
+            </text>
+            <text x="200" y="570" textAnchor="middle" fontSize="14" fontStyle="italic" fill="#57534e">
+                "Vạn dặm tương tư - Một đời gắn kết"
+            </text>
+
+            {/* 5. CHI TIẾT "MA PHÁP" PHỤ */}
+            {/* Particles */}
+            <circle cx="50" cy="100" r="2" fill="#f59e0b" opacity="0.8">
+                <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="350" cy="150" r="3" fill="#ec4899" opacity="0.6">
+                <animate attributeName="cy" values="150;140;150" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="80" cy="500" r="2" fill="#f59e0b" opacity="0.8" />
+            <circle cx="320" cy="480" r="2" fill="#ec4899" opacity="0.6" />
+
+            {/* Decorative Knots/Charms */}
+            <text x="50" y="250" fontSize="20" fill="#dc2626" transform="rotate(-15)">📿</text>
+            <text x="350" y="250" fontSize="20" fill="#dc2626" transform="rotate(15)">📿</text>
+
+        </svg>
     ),
 };
