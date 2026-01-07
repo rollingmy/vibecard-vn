@@ -550,4 +550,65 @@ export const OfficeLifeTemplates = {
             <text x="150" y="380" textAnchor="middle" fill="#9e9e9e" fontSize="10">DO NOT SHAKE</text>
         </>
     ),
+
+    // ===================================
+    // 62. DIGITAL NOMAD (Work)
+    // ===================================
+    'digital-nomad': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-laptop">
+                    <path d="M75,100 L225,100 L225,230 L75,230 Z" />
+                </clipPath>
+            </defs>
+
+            {/* Beach/Cafe Blur Background */}
+            <linearGradient id="beach-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#4fc3f7" /> {/* Sky */}
+                <stop offset="50%" stopColor="#fff9c4" /> {/* Sand */}
+            </linearGradient>
+            <rect width="300" height="400" fill="url(#beach-gradient)" />
+
+            {/* Palm Tree Shadow */}
+            <path d="M300,0 L150,0 Q180,100 300,150 Z" fill="black" opacity="0.1" />
+
+            {/* Cafe Table */}
+            <path d="M-20,400 L320,400 L280,300 L20,300 Z" fill="#795548" stroke="#5d4037" strokeWidth="2" />
+
+            {/* Laptop Object */}
+            <path d="M50,250 L250,250 L250,90 L50,90 Z" fill="#cfd8dc" stroke="#546e7a" strokeWidth="2" rx="10" /> {/* Screen Back */}
+            <path d="M60,100 L240,100 L240,240 L60,240 Z" fill="#111" /> {/* Screen Black */}
+
+            {/* Base of laptop */}
+            <path d="M40,250 L260,250 L280,270 L20,270 Z" fill="#b0bec5" stroke="#546e7a" strokeWidth="1" />
+            <path d="M120,260 L180,260" stroke="#78909c" strokeWidth="2" /> {/* Trackpad */}
+
+            {/* Avatar ON SCREEN */}
+            {userImage ? (
+                <image
+                    x="60" y="100" width="180" height="140"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-laptop)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="180" textAnchor="middle" fontSize="50">💻</text>
+            )}
+
+            {/* Coffee Cup */}
+            <circle cx="250" cy="320" r="15" fill="white" stroke="#ccc" strokeWidth="1" />
+            <ellipse cx="250" cy="320" rx="12" ry="12" fill="#6d4c41" /> {/* Coffee */}
+            <path d="M265,320 Q275,320 270,330" fill="none" stroke="white" strokeWidth="2" /> {/* Handle */}
+
+            {/* Location Tag */}
+            <rect x="80" y="40" width="140" height="30" rx="15" fill="white" opacity="0.8" />
+            <text x="150" y="60" textAnchor="middle" fontSize="12" fill="#0277bd" fontWeight="bold">📍 Bali, Indonesia</text>
+
+            <text x="150" y="360" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#3e2723" fontFamily="sans-serif">
+                {userName || "DIGITAL NOMAD"}
+            </text>
+
+            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#5d4037" fontStyle="italic">"My office is everywhere"</text>
+        </>
+    ),
 };

@@ -489,4 +489,281 @@ export const GenZTheme = {
             </text>
         </>
     ),
+
+    // ===================================
+    // 53. BAN DOI AI (AI Partner)
+    // ===================================
+    'ban-doi-ai': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-heart-pixel">
+                    <path d="M150,220 C100,180 50,150 50,100 C50,50 100,50 150,100 C200,50 250,50 250,100 C250,150 200,180 150,220 Z" />
+                </clipPath>
+            </defs>
+
+            {/* Cyber Pink BG */}
+            <rect width="300" height="400" fill="#f8bbd0" />
+            <pattern id="dot-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#ec407a" />
+            </pattern>
+            <rect width="300" height="400" fill="url(#dot-pattern)" opacity="0.2" />
+
+            {/* Holographic Heart UI */}
+            <path d="M150,230 C90,180 40,150 40,90 C40,30 100,30 150,90 C200,30 260,30 260,90 C260,150 210,180 150,230 Z"
+                fill="none" stroke="#e91e63" strokeWidth="2" strokeDasharray="5 5" />
+            <path d="M150,240 C80,180 30,150 30,80 C30,10 100,10 150,80 C200,10 270,10 270,80 C270,150 220,180 150,240 Z"
+                fill="none" stroke="#880e4f" strokeWidth="1" opacity="0.5" />
+
+            {/* Avatar */}
+            {userImage ? (
+                <image
+                    x="50" y="50" width="200" height="200"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-heart-pixel)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="150" textAnchor="middle" fontSize="60">🤖</text>
+            )}
+
+            {/* Status Box */}
+            <rect x="50" y="260" width="200" height="80" fill="white" stroke="#e91e63" strokeWidth="2" rx="10" />
+            <text x="150" y="280" textAnchor="middle" fontSize="12" fill="#880e4f" fontWeight="bold">MATCH RATE: 99.9%</text>
+
+            <rect x="70" y="290" width="160" height="10" fill="#fce4ec" rx="5" />
+            <rect x="70" y="290" width="158" height="10" fill="#e91e63" rx="5" />
+
+            {/* Name */}
+            <text x="150" y="325" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="900" fill="#d81b60">
+                {userName || "VIRTUAL LOVER"}
+            </text>
+            <text x="150" y="340" textAnchor="middle" fontSize="10" fill="#ad1457" fontStyle="italic">"Anh là thực tế ảo của em"</text>
+
+            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#880e4f">NO BUGS, ONLY HUGS</text>
+        </>
+    ),
+
+    // ===================================
+    // 55. NGUOI TOI CO (Caveman)
+    // ===================================
+    'nguoi-toi-co': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-stone">
+                    <path d="M70,100 L230,100 L220,250 L80,250 Z" />
+                </clipPath>
+            </defs>
+
+            {/* Stone Wall BG */}
+            <rect width="300" height="400" fill="#795548" />
+            <pattern id="stone-pattern" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M0,0 L50,0 L50,50 L0,50 Z" fill="none" stroke="#5d4037" strokeWidth="2" />
+                <path d="M10,10 L30,20 L10,30" fill="none" stroke="#4e342e" strokeWidth="1" />
+            </pattern>
+            <rect width="300" height="400" fill="url(#stone-pattern)" opacity="0.3" />
+
+            {/* Cave Entrance Frame */}
+            <path d="M50,80 Q150,20 250,80 L240,270 Q150,300 60,270 Z" fill="#3e2723" />
+
+            {/* Avatar */}
+            {userImage ? (
+                <image
+                    x="60" y="90" width="180" height="180"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-stone)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="200" textAnchor="middle" fontSize="60">🍖</text>
+            )}
+
+            {/* Torch */}
+            <text x="40" y="150" fontSize="30">🔥</text>
+            <text x="230" y="150" fontSize="30">🔥</text>
+
+            {/* Stone Tablet Name */}
+            <path d="M40,300 L260,300 L250,380 L50,380 Z" fill="#9e9e9e" stroke="#616161" strokeWidth="3" />
+            <text x="150" y="320" textAnchor="middle" fontSize="10" fill="#424242" fontWeight="bold" fontFamily="monospace">UNKNOWN SPECIES</text>
+
+            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#212121" style={{ textShadow: "1px 1px 0px white" }}>
+                {userName || "NGƯỜI TỐI CỔ"}
+            </text>
+        </>
+    ),
+
+    // ===================================
+    // 58. CHAT GPT MOM (AI Chat)
+    // ===================================
+    'chat-gpt-mom': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-circle-ai">
+                    <circle cx="40" cy="40" r="20" />
+                </clipPath>
+            </defs>
+
+            {/* Dark UI Background */}
+            <rect width="300" height="400" fill="#343541" />
+
+            {/* Chat Interface */}
+            {/* User Message */}
+            <rect x="20" y="60" width="260" height="60" rx="5" fill="#343541" />
+            <rect x="30" y="70" width="30" height="30" rx="2" fill="#555" /> {/* User Icon */}
+            <text x="75" y="80" fill="white" fontSize="10" fontFamily="sans-serif">User</text>
+            <text x="75" y="100" fill="#d1d5db" fontSize="12">Làm sao để giàu nhanh?</text>
+
+            {/* AI Response Block */}
+            <rect x="10" y="140" width="280" height="200" fill="#444654" rx="5" />
+            <circle cx="40" cy="170" r="15" fill="#10a37f" /> {/* AI Icon */}
+            <path d="M35,170 L40,165 L45,170 M35,170 L40,175 L45,170" stroke="white" strokeWidth="2" fill="none" />
+
+            <text x="70" y="175" fill="white" fontSize="12" fontWeight="bold">AI Assistant</text>
+
+            <text x="40" y="210" fill="#d1d5db" fontSize="11">Dưới đây là câu trả lời của tôi:</text>
+
+            {/* Answer Content - Avatar + Name */}
+            <rect x="40" y="230" width="220" height="80" rx="5" fill="#202123" stroke="#555" strokeWidth="1" />
+
+            {userImage ? (
+                <image
+                    x="50" y="240" width="60" height="60"
+                    href={userImage}
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="80" y="280" textAnchor="middle" fontSize="30">🧠</text>
+            )}
+
+            <text x="120" y="260" fontSize="10" fill="#10a37f" fontWeight="bold">THE ANSWER IS:</text>
+            <text x="120" y="285" fontSize={Math.min(nameFontSize, 18)} fill="white" fontWeight="bold">
+                {userName || "ASK YOUR MOM"}
+            </text>
+
+            {/* Input Bar */}
+            <rect x="20" y="360" width="220" height="30" rx="5" fill="#40414f" stroke="#555" strokeWidth="1" />
+            <text x="30" y="380" fill="#8e8ea0" fontSize="10">Regenerate response...</text>
+            <rect x="250" y="360" width="30" height="30" rx="5" fill="#19c37d" />
+            <text x="260" y="380" fill="white" fontSize="14">➤</text>
+        </>
+    ),
+
+    // ===================================
+    // 59. NEURAL LINK CHIP (Brain Chip)
+    // ===================================
+    'neural-link-chip': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-hex">
+                    <path d="M150,110 L200,135 L200,185 L150,210 L100,185 L100,135 Z" />
+                </clipPath>
+            </defs>
+
+            {/* Black Bio-Tech BG */}
+            <rect width="300" height="400" fill="#000" />
+
+            {/* Neural Network Connections */}
+            <path d="M150,210 L150,300 M200,185 L260,250 M100,185 L40,250" stroke="#00e5ff" strokeWidth="1" opacity="0.5" />
+            <circle cx="40" cy="250" r="3" fill="#00e5ff" />
+            <circle cx="260" cy="250" r="3" fill="#00e5ff" />
+            <circle cx="150" cy="300" r="3" fill="#00e5ff" />
+
+            {/* Chip Structure */}
+            <path d="M150,100 L210,130 L210,190 L150,220 L90,190 L90,130 Z" fill="#1a1a1a" stroke="#00e5ff" strokeWidth="2" />
+            <path d="M150,110 L200,135 L200,185 L150,210 L100,185 L100,135 Z" fill="#000" />
+
+            {/* Avatar */}
+            {userImage ? (
+                <image
+                    x="90" y="110" width="120" height="120"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-hex)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="170" textAnchor="middle" fontSize="40">🧠</text>
+            )}
+
+            {/* Data Streams */}
+            <text x="20" y="100" fill="#00e5ff" fontSize="10" fontFamily="monospace" opacity="0.7">SYNC: 100%</text>
+            <text x="220" y="100" fill="#00e5ff" fontSize="10" fontFamily="monospace" opacity="0.7">CPU: 99%</text>
+
+            {/* Bottom Info */}
+            <path d="M50,320 L250,320 L240,380 L60,380 Z" fill="#0d1117" stroke="#00e5ff" strokeWidth="1" />
+            <text x="150" y="340" textAnchor="middle" fill="#00e5ff" fontSize="10" letterSpacing="2">IMPLANT SUCCESSFUL</text>
+
+            <text x="150" y="365" textAnchor="middle" fontSize={Math.min(nameFontSize, 22)} fontWeight="900" fill="white" style={{ textShadow: "0 0 10px #00e5ff" }}>
+                {userName || "CYBORG V1"}
+            </text>
+        </>
+    ),
+
+    // ===================================
+    // 61. TIME MACHINE TICKET (Ticket)
+    // ===================================
+    'time-machine-ticket': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-ticket">
+                    <circle cx="230" cy="180" r="40" />
+                </clipPath>
+            </defs>
+
+            {/* Vortex Background */}
+            <rect width="300" height="400" fill="#4B0082" />
+            <circle cx="150" cy="200" r="180" fill="none" stroke="cyan" strokeWidth="1" opacity="0.2" />
+            <circle cx="150" cy="200" r="140" fill="none" stroke="magenta" strokeWidth="1" opacity="0.2" />
+            <circle cx="150" cy="200" r="100" fill="none" stroke="yellow" strokeWidth="1" opacity="0.2" />
+
+            {/* Ticket Shape */}
+            <g transform="translate(15, 120)">
+                <path d="M0,0 L270,0 L270,160 L0,160 Z" fill="#FFF8DC" stroke="black" strokeWidth="2" />
+                {/* Cutouts */}
+                <circle cx="0" cy="80" r="10" fill="#4B0082" />
+                <circle cx="270" cy="80" r="10" fill="#4B0082" />
+
+                {/* Dashed Line */}
+                <line x1="190" y1="10" x2="190" y2="150" stroke="black" strokeWidth="2" strokeDasharray="5 5" />
+
+                {/* Content Left */}
+                <text x="20" y="30" fontSize="16" fontWeight="900" fill="black">TIME TRAVEL</text>
+                <text x="20" y="50" fontSize="10" fontFamily="monospace">BOARDING PASS</text>
+
+                <text x="20" y="80" fontSize="10" fill="#555">PASSENGER:</text>
+                <text x="20" y="100" fontSize={Math.min(nameFontSize, 18)} fontWeight="bold" fill="black">
+                    {userName || "TIME TRAVELER"}
+                </text>
+
+                <text x="20" y="130" fontSize="10" fill="#555">DESTINATION:</text>
+                <text x="90" y="130" fontSize="12" fontWeight="bold">NOSTALGIA CITY</text>
+
+                {/* Content Right */}
+                <text x="200" y="30" fontSize="10" fontWeight="bold">DATE</text>
+                <text x="200" y="45" fontSize="12" fontFamily="monospace">????</text>
+
+                <text x="200" y="130" fontSize="10" fontWeight="bold">CLASS</text>
+                <text x="235" y="130" fontSize="12">VIP</text>
+
+                {/* Avatar Overlay on Ticket Right */}
+                <circle cx="215" cy="60" r="30" fill="#ddd" stroke="black" strokeWidth="1" />
+                {/* We map coordinates relative to ticket g group. Global coordinates: 15+215=230, 120+60=180 */}
+            </g>
+
+            {userImage ? (
+                <image
+                    x="190" y="152" width="100" height="100"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-ticket)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="230" y="190" textAnchor="middle" fontSize="30">⏳</text>
+            )}
+
+            {/* Holes Punch */}
+            <circle cx="40" cy="140" r="3" fill="black" opacity="0.3" />
+            <circle cx="40" cy="260" r="3" fill="black" opacity="0.3" />
+
+            <text x="150" y="350" textAnchor="middle" fill="white" fontSize="12">CHUYẾN TÀU TUỔI THƠ</text>
+        </>
+    ),
 };

@@ -439,51 +439,109 @@ export const GamingTheme = {
     ),
 
     // ===================================
-    // 40. THE BAI MA THUAT (Upgrade / Yugioh)
+    // 56. CYBERPUNK CITY (Neon)
     // ===================================
-    'the-bai-ma-thuat-upgrade': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    'cyberpunk-city': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
-                <clipPath id="avatar-clip-card-square">
-                    <rect x="45" y="85" width="210" height="150" />
+                <clipPath id="avatar-clip-hex-cyber">
+                    <polygon points="150,90 220,130 220,210 150,250 80,210 80,130" />
                 </clipPath>
             </defs>
 
-            {/* Card Frame Orange/Brown */}
-            <rect width="300" height="400" fill="#c17c46" />
-            <rect x="15" y="15" width="270" height="370" fill="none" stroke="#5d4037" strokeWidth="3" />
+            {/* Dark City BG */}
+            <rect width="300" height="400" fill="#0d001a" />
 
-            {/* Header Box */}
-            <rect x="25" y="25" width="250" height="35" fill="white" stroke="black" strokeWidth="1" />
-            <text x="35" y="48" fontSize="18" fontWeight="bold" fill="black">{userName || "BLUE EYES DRAGON"}</text>
-            <circle cx="255" cy="42" r="10" fill="#f44336" /> {/* Attribute */}
+            {/* Neon Buildings */}
+            <rect x="20" y="200" width="40" height="200" fill="#240046" stroke="#d500f9" strokeWidth="1" />
+            <rect x="240" y="180" width="50" height="220" fill="#240046" stroke="#00e5ff" strokeWidth="1" />
+            <rect x="70" y="250" width="60" height="150" fill="#3c096c" />
+            <rect x="180" y="220" width="50" height="180" fill="#3c096c" />
 
-            {/* Stars Level */}
-            <text x="150" y="75" textAnchor="middle" fontSize="14" fill="#ffd700" stroke="black" strokeWidth="0.5">⭐⭐⭐⭐⭐⭐⭐⭐</text>
+            {/* Grid Floor */}
+            <path d="M0,350 L300,350 M0,350 L150,300 L300,350" stroke="#f50057" strokeWidth="1" opacity="0.5" />
 
-            {/* Avatar Image Area */}
-            <rect x="45" y="85" width="210" height="150" fill="#ddd" stroke="black" strokeWidth="4" />
+            {/* Hologram Circle */}
+            <circle cx="150" cy="170" r="90" fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="10 5" opacity="0.8" />
+            <circle cx="150" cy="170" r="80" fill="none" stroke="#d500f9" strokeWidth="1" />
+
+            {/* Avatar */}
             {userImage ? (
                 <image
-                    x="45" y="85" width="210" height="150"
+                    x="80" y="90" width="140" height="160"
                     href={userImage}
-                    clipPath="url(#avatar-clip-card-square)"
+                    clipPath="url(#avatar-clip-hex-cyber)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="150" y="170" textAnchor="middle" fontSize="60">🐉</text>
+                <text x="150" y="180" textAnchor="middle" fontSize="50">🌃</text>
             )}
 
-            {/* Description Box */}
-            <rect x="25" y="250" width="250" height="120" fill="#f8e5b6" stroke="black" strokeWidth="2" />
-            <text x="35" y="270" fontSize="12" fontWeight="bold">[Dragon / Effect]</text>
-            <line x1="35" y1="275" x2="265" y2="275" stroke="black" strokeWidth="1" />
+            {/* Glitch Text */}
+            <text x="150" y="60" textAnchor="middle" fontSize="24" fontWeight="900" fill="#00e5ff" fontFamily="monospace" style={{ textShadow: "2px 0px #f50057" }}>NIGHT CITY</text>
 
-            <text x="35" y="295" fontSize="10" fill="black">This legendary creature cannot be</text>
-            <text x="35" y="310" fontSize="10" fill="black">defeated by any deadline.</text>
+            <rect x="40" y="320" width="220" height="50" fill="black" stroke="#d500f9" strokeWidth="2" transform="skewX(-10)" />
+            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#fff" fontFamily="sans-serif" transform="skewX(-10)">
+                {userName || "NETRUNNER"}
+            </text>
 
-            <line x1="35" y1="350" x2="265" y2="350" stroke="black" strokeWidth="1" />
-            <text x="270" y="365" textAnchor="end" fontSize="12" fontWeight="bold">ATK/3000 DEF/2500</text>
+            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#00e5ff">WAKE UP SAMURAI</text>
+        </>
+    ),
+
+    // ===================================
+    // 57. METAVERSE AVATAR (VR)
+    // ===================================
+    'metaverse-avatar': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-goggles">
+                    <rect x="75" y="100" width="150" height="150" rx="20" />
+                </clipPath>
+                <linearGradient id="vr-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#7b1fa2" />
+                    <stop offset="100%" stopColor="#4a148c" />
+                </linearGradient>
+            </defs>
+
+            {/* VR Space BG */}
+            <rect width="300" height="400" fill="url(#vr-grad)" />
+
+            {/* Floating UI Panels */}
+            <rect x="20" y="50" width="60" height="80" rx="5" fill="white" opacity="0.1" stroke="white" strokeWidth="1" />
+            <rect x="220" y="100" width="70" height="100" rx="5" fill="white" opacity="0.1" stroke="white" strokeWidth="1" />
+
+            {/* Connection Lines */}
+            <line x1="150" y1="175" x2="80" y2="90" stroke="white" strokeWidth="1" opacity="0.5" strokeDasharray="4 4" />
+            <line x1="150" y1="175" x2="220" y2="150" stroke="white" strokeWidth="1" opacity="0.5" strokeDasharray="4 4" />
+
+            {/* Avatar Frame - VR Headset Style */}
+            <rect x="70" y="95" width="160" height="160" rx="20" fill="rgba(255,255,255,0.1)" stroke="#ea80fc" strokeWidth="2" />
+
+            {/* Avatar */}
+            {userImage ? (
+                <image
+                    x="75" y="100" width="150" height="150"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-goggles)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="180" textAnchor="middle" fontSize="60">👓</text>
+            )}
+
+            {/* VR Goggles Overlay */}
+            <rect x="60" y="140" width="180" height="60" rx="10" fill="black" opacity="0.8" />
+            <text x="150" y="175" textAnchor="middle" fill="#00e676" fontFamily="monospace" fontSize="14" fontWeight="bold">CONNECTED</text>
+
+            <text x="150" y="300" textAnchor="middle" fontSize="10" fill="#ea80fc" letterSpacing="2">PLAYER ONE READY</text>
+
+            <text x="150" y="340" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="white" style={{ textShadow: "0 0 10px #ea80fc" }}>
+                {userName || "VIRTUAL BEING"}
+            </text>
+
+            <rect x="100" y="360" width="100" height="5" fill="#333" rx="2" />
+            <rect x="100" y="360" width="70" height="5" fill="#00e676" rx="2" /> {/* Loading bar */}
         </>
     ),
 };

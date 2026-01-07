@@ -344,49 +344,98 @@ const RipTemplate: React.FC<TemplateProps> = ({ userName, userImage, description
     );
 }
 
-// 9. To Nguoi Tieu Dung (Fragile)
+// 9. To Nguoi Tieu Dung (Premium Product Label)
 const ConsumerTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "NGƯỜI TIÊU DÙNG";
-    const safeDesc = description || "Handle with care";
+    const safeDesc = description || "Sản phẩm không kèm bảo hành, vui lòng không đổi trả";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#F5F5DC" /> {/* Cardboard color */}
+            {/* 1. NỀN (Background) - Cement/Beige Paper */}
+            <rect width="400" height="600" fill="#f5f5dc" />
+            {/* Grid Pattern */}
+            <defs>
+                <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a8a29e" strokeWidth="1" opacity="0.3" />
+                </pattern>
+                <clipPath id="productImgClip">
+                    <rect x="55" y="125" width="290" height="290" />
+                </clipPath>
+            </defs>
+            <rect width="400" height="600" fill="url(#gridPattern)" />
 
-            {/* Texture */}
-            <pattern id="cardboard" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="1" fill="#D2B48C" />
-            </pattern>
-            <rect width="400" height="600" fill="url(#cardboard)" />
+            {/* Jagged Edges (Receipt tear effect) */}
+            <path d="M0,0 L20,10 L40,0 L60,10 L80,0 L100,10 L120,0 L140,10 L160,0 L180,10 L200,0 L220,10 L240,0 L260,10 L280,0 L300,10 L320,0 L340,10 L360,0 L380,10 L400,0 V600 L380,590 L360,600 L340,590 L320,600 L300,590 L280,600 L260,590 L240,600 L220,590 L200,600 L180,590 L160,600 L140,590 L120,600 L100,590 L80,600 L60,590 L40,600 L20,590 L0,600 Z" fill="none" stroke="#d6d3d1" strokeWidth="2" />
 
-            {/* Frame */}
-            <rect x="50" y="100" width="300" height="300" fill="#fff" stroke="#000" strokeWidth="2" />
-            {userImage && <image href={userImage} x="60" y="110" width="280" height="280" preserveAspectRatio="xMidYMid slice" />}
+            {/* 2. KHUNG AVATAR (Product Image) */}
+            {/* Thick Black Frame */}
+            <rect x="50" y="120" width="300" height="300" fill="white" stroke="black" strokeWidth="10" />
 
-            {/* Sticker Fragile */}
-            <g transform="translate(250, 350) rotate(-15)">
-                <rect x="0" y="0" width="120" height="60" fill="#FF0000" />
-                <rect x="5" y="5" width="110" height="50" fill="none" stroke="#fff" strokeWidth="2" />
-                <path d="M25,15 L35,45 M35,15 L25,45" stroke="#fff" strokeWidth="3" /> {/* Broken glass */}
-                <text x="75" y="35" textAnchor="middle" fontSize="18" fill="#fff" fontWeight="bold">FRAGILE</text>
+            {/* User Image */}
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="55" y="125" width="290" height="290"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#productImgClip)"
+                />
+            ) : (
+                <rect x="55" y="125" width="290" height="290" fill="#e5e5e5" />
+            )}
+
+            {/* Overlay Watermark/Barcode */}
+            <g opacity="0.4" transform="translate(60, 130)">
+                <text x="10" y="30" fontSize="30" fontWeight="bold" fill="black" transform="rotate(-45)">INSPECTED</text>
+                <rect x="220" y="220" width="60" height="60" fill="none" stroke="black" strokeWidth="2" />
+                <path d="M225,220 V280 M230,220 V280 M240,220 V280 M255,220 V280 M265,220 V280 M275,220 V280" stroke="black" strokeWidth="2" />
             </g>
 
-            {/* Barcode */}
-            <g transform="translate(50, 520)">
-                <rect x="0" y="0" width="300" height="50" fill="#fff" />
-                <path d="M10,10 V40 M20,10 V40 M25,10 V40 M40,10 V40 M50,10 V40 M60,10 V40 M80,10 V40" stroke="#000" strokeWidth="2" />
-                <text x="150" y="45" textAnchor="middle" fontSize="12" fontFamily="monospace">{safeName.toUpperCase().split('').map(c => c.charCodeAt(0)).join('').substring(0, 12)}</text>
+            {/* 3. THÔNG TIN NGƯỜI TIÊU DÙNG (Product Details) */}
+            <g transform="translate(40, 460)">
+                {/* Product Name */}
+                <foreignObject x="0" y="0" width="320" height="40">
+                    <div className="w-full h-full flex items-center justify-start text-black font-black text-2xl uppercase font-sans leading-none" style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                        PRODUCT: {safeName}
+                    </div>
+                </foreignObject>
+
+                {/* Specs Table Look */}
+                <line x1="0" y1="45" x2="320" y2="45" stroke="black" strokeWidth="2" />
+
+                <text x="0" y="70" fontSize="12" fontFamily="monospace" fill="#333">• Độ bền: Thấp (Dễ tổn thương)</text>
+                <text x="0" y="90" fontSize="12" fontFamily="monospace" fill="#333">• Tâm hồn: Dễ vỡ</text>
+                <text x="0" y="110" fontSize="12" fontFamily="monospace" fill="#333">• Giá trị: Vô giá</text>
+
+                {/* QR Code Simulation */}
+                <rect x="260" y="60" width="50" height="50" fill="white" stroke="black" />
+                <path d="M265,65 H275 V75 H265 Z M290,65 H300 V75 H290 Z M265,90 H275 V100 H265 Z M280,80 H290 V90 H280" fill="black" />
             </g>
 
-            <text x="200" y="50" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#000" fontFamily="Impact, sans-serif">
-                HANDLE WITH CARE
+            {/* 4. TEM NHÃN & STICKER (Dark Humor) */}
+            {/* Handle With Care Sticker */}
+            <g transform="translate(20, 40) rotate(-5)">
+                <rect width="180" height="50" fill="#ef4444" rx="4" />
+                <rect x="5" y="5" width="170" height="40" fill="none" stroke="white" strokeWidth="2" rx="2" />
+                <text x="90" y="32" textAnchor="middle" fontSize="18" fontWeight="bold" fill="white" fontFamily="Arial Black">HANDLE WITH CARE</text>
+            </g>
+
+            {/* Authentic Stamp */}
+            <g transform="translate(280, 360) rotate(-20)" opacity="1">
+                <circle r="40" fill="none" stroke="#ff0000" strokeWidth="4" />
+                <circle r="36" fill="none" stroke="#ff0000" strokeWidth="1" />
+                <path d="M-30,0 H30" stroke="#ff0000" strokeWidth="1" />
+                <text x="0" y="5" textAnchor="middle" fontSize="10" fill="#ff0000" fontWeight="bold" style={{ textShadow: '0 0 2px rgba(255, 0, 0, 0.3)' }}>HÀNG CHÍNH HÃNG</text>
+                <text x="0" y="-15" textAnchor="middle" fontSize="8" fill="#ff0000" style={{ textShadow: '0 0 2px rgba(255, 0, 0, 0.3)' }}>100%</text>
+                <text x="0" y="20" textAnchor="middle" fontSize="8" fill="#ff0000" style={{ textShadow: '0 0 2px rgba(255, 0, 0, 0.3)' }}>REAL</text>
+            </g>
+
+            {/* Static Warning Label (Fixed) */}
+            <text x="200" y="585" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#7f1d1d" letterSpacing="0.5">
+                "SẢN PHẨM KHÔNG KÈM BẢO HÀNH, MIỄN ĐỔI TRẢ"
             </text>
-            <text x="200" y="450" textAnchor="middle" fontSize={getSafeFontSize(safeName, 300, 24)} fontWeight="bold" fill="#000">
-                {safeName}
-            </text>
-            <text x="200" y="480" textAnchor="middle" fontSize="14" fill="#333">
-                {safeDesc}
-            </text>
+
+            {/* User Description (Hidden or subtle) */}
+            {/* We hide the user description to ensure the warning is prominent as requested */}
         </svg>
     );
 }

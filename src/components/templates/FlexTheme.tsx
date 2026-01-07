@@ -735,4 +735,66 @@ export const FlexTheme = {
             <text x="180" y="375" fontSize="10" fontWeight="bold">ATK/ 9999  DEF/ 9999</text>
         </>
     ),
+
+    // ===================================
+    // 60. SPACE TRAVELER (Flex)
+    // ===================================
+    'space-traveler': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <clipPath id="avatar-clip-helmet-space">
+                    <circle cx="150" cy="150" r="70" />
+                </clipPath>
+            </defs>
+
+            {/* Galaxy BG */}
+            <rect width="300" height="400" fill="#000" />
+            <circle cx="250" cy="50" r="80" fill="purple" opacity="0.3" filter="url(#blur)" />
+            <circle cx="50" cy="350" r="100" fill="blue" opacity="0.3" filter="url(#blur)" />
+
+            {/* Stars */}
+            <circle cx="20" cy="20" r="1" fill="white" />
+            <circle cx="280" cy="30" r="1" fill="white" />
+            <circle cx="150" cy="50" r="1" fill="white" />
+            <circle cx="80" cy="300" r="1" fill="white" />
+            <circle cx="250" cy="250" r="1" fill="white" />
+
+            {/* Astronaut Helmet */}
+            <circle cx="150" cy="160" r="90" fill="#eee" stroke="#999" strokeWidth="2" />
+            <path d="M150,160 L150,250 M150,160 L70,200" stroke="#ccc" strokeWidth="1" opacity="0.5" />
+
+            {/* Visor Area */}
+            <circle cx="150" cy="150" r="75" fill="#111" stroke="#333" strokeWidth="4" />
+
+            {/* Avatar inside Visor */}
+            {userImage ? (
+                <image
+                    x="80" y="80" width="140" height="140"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-helmet-space)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="170" textAnchor="middle" fontSize="60">👩‍🚀</text>
+            )}
+
+            {/* Reflection on Visor */}
+            <path d="M110,100 Q150,80 190,100" fill="none" stroke="white" strokeWidth="3" opacity="0.3" />
+
+            {/* Suit Details */}
+            <path d="M60,240 Q150,280 240,240 L260,400 L40,400 Z" fill="#eee" stroke="#999" strokeWidth="1" />
+            <rect x="110" y="300" width="80" height="40" rx="5" fill="#ccc" stroke="#999" strokeWidth="1" />
+
+            {/* Mission Patch */}
+            <circle cx="200" cy="320" r="15" fill="orange" />
+            <rect x="120" y="310" width="20" height="5" fill="red" />
+            <rect x="120" y="320" width="20" height="5" fill="blue" />
+
+            <text x="150" y="60" textAnchor="middle" fontSize="12" fill="#fff" fontFamily="monospace" letterSpacing="4">APOLLO 13</text>
+
+            <text x="150" y="380" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="white" fontFamily="sans-serif">
+                {userName || "ASTRONAUT"}
+            </text>
+        </>
+    ),
 };

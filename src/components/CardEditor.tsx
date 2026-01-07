@@ -288,10 +288,11 @@ export default function CardEditor({ template }: CardEditorProps) {
                 <div
                     id="vibe-card-download"
                     ref={cardRef}
-                    className="relative w-full max-w-[320px] aspect-[3/4] shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"
+                    className="relative w-full max-w-[320px] shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"
+                    style={{ aspectRatio: (Object.keys(TravelTemplates).includes(template.id) || Object.keys(RetroTemplates).includes(template.id) || Object.keys(DarkHumorTemplates).includes(template.id)) ? '2/3' : '3/4' }}
                 >
                     <svg
-                        viewBox="0 0 300 400"
+                        viewBox={(Object.keys(TravelTemplates).includes(template.id) || Object.keys(RetroTemplates).includes(template.id) || Object.keys(DarkHumorTemplates).includes(template.id)) ? "0 0 400 600" : "0 0 300 400"}
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-full h-full"
                     >

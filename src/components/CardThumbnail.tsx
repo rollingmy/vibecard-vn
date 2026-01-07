@@ -152,7 +152,7 @@ export default function CardThumbnail({ template }: CardThumbnailProps) {
 
     return (
         <svg
-            viewBox="0 0 300 400"
+            viewBox={(Object.keys(TravelTemplates).includes(template.id) || Object.keys(RetroTemplates).includes(template.id) || Object.keys(DarkHumorTemplates).includes(template.id)) ? "0 0 400 600" : "0 0 300 400"}
             className="w-full h-full object-contain"
             preserveAspectRatio="xMidYMid meet"
         >

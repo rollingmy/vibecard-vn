@@ -117,195 +117,443 @@ const CoffeeTemplate: React.FC<TemplateProps> = ({ userName, userImage, descript
     );
 };
 
-// 3. Phuot Thu
+// 3. Phuot Thu (Giant Backpack Redesign)
 const TravelTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "PHƯỢT THỦ";
-    const safeDesc = description || "Xách balo lên và đi";
+    const safeDesc = description || "Đi để trở về (nếu không lạc đường)";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#F0E68C" /> {/* Khaki */}
+            {/* 1. NỀN (Adventure Background) */}
+            <rect width="400" height="600" fill="#f0fdf4" /> {/* Light Green mist */}
 
-            {/* Map lines background */}
-            <pattern id="mapPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M20,20 L80,80 M20,80 L80,20 M0,50 H100 M50,0 V100" stroke="#BDB76B" strokeWidth="1" fill="none" />
-                <circle cx="50" cy="50" r="2" fill="#BDB76B" />
+            {/* Topographic Pattern */}
+            <pattern id="topoMap" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M0,20 Q20,0 50,20 T100,20 M0,50 Q40,30 60,60 T100,50 M0,80 Q30,70 50,90 T100,80"
+                    fill="none" stroke="#dcfce7" strokeWidth="2" />
             </pattern>
-            <rect width="400" height="600" fill="url(#mapPattern)" opacity="0.5" />
+            <rect width="400" height="600" fill="url(#topoMap)" />
 
-            {/* Helmet Graphic */}
-            <path d="M100,100 A100,100 0 0,1 300,100 V250 H100 Z" fill="#556B2F" stroke="#000" strokeWidth="4" />
-            <rect x="120" y="150" width="160" height="80" rx="10" fill="#333" /> {/* Visor area */}
+            {/* Mountain Silhouettes */}
+            <path d="M0,600 L100,450 L200,600 Z" fill="#14532d" opacity="0.8" />
+            <path d="M150,600 L280,400 L400,600 Z" fill="#166534" opacity="0.9" />
+            <path d="M-50,600 L150,350 L350,600 Z" fill="#14532d" opacity="0.6" />
 
-            {/* Avatar in Helmet Visor */}
-            <defs>
-                <clipPath id="helmetClip">
-                    <rect x="120" y="150" width="160" height="80" rx="10" />
-                </clipPath>
-            </defs>
-            {userImage && <image href={userImage} x="120" y="100" width="160" height="160" preserveAspectRatio="xMidYMid slice" clipPath="url(#helmetClip)" />}
+            {/* 2. KHUNG AVATAR CHIẾC BALO KHỔNG LỒ */}
+            <g transform="translate(40, 100)">
+                {/* Backpack Frame Shape */}
+                <path d="M20,50 C20,20 50,0 160,0 C270,0 300,20 300,50 V320 C300,350 280,380 250,380 H70 C40,380 20,350 20,320 Z"
+                    fill="#333" stroke="#064e3b" strokeWidth="4" />
 
-            {/* Checkered Scarf (Khan ran) */}
-            <path d="M140,250 L120,350 L160,380 L180,250" fill="#000" opacity="0.8" />
-            <path d="M160,250 L140,350 L180,380 L200,250" fill="#fff" />
-            <path d="M240,250 L220,350 L260,380 L280,250" fill="#000" opacity="0.8" />
-            {/* Simplified scarf */}
+                {/* Main Compartment (Avatar Container) */}
+                <defs>
+                    <clipPath id="backpackClip">
+                        <path d="M30,55 C30,30 60,10 160,10 C260,10 290,30 290,55 V315 C290,340 270,370 250,370 H70 C50,370 30,340 30,315 Z" />
+                    </clipPath>
+                </defs>
 
-            {/* Stamp */}
-            <circle cx="320" cy="500" r="40" fill="none" stroke="#8B0000" strokeWidth="4" transform="rotate(-20)" />
-            <text x="320" y="505" textAnchor="middle" fontSize="12" fill="#8B0000" transform="rotate(-20)">VIETNAM</text>
+                {/* Avatar */}
+                <rect x="25" y="5" width="270" height="370" fill="#a7f3d0" rx="30" />
+                {userImage ? (
+                    <image
+                        href={userImage}
+                        x="20" y="0" width="280" height="380"
+                        preserveAspectRatio="xMidYMid slice"
+                        clipPath="url(#backpackClip)"
+                    />
+                ) : (
+                    <text x="160" y="200" textAnchor="middle" fontSize="60">🎒</text>
+                )}
 
-            <rect x="50" y="400" width="300" height="80" fill="#fff" stroke="#000" strokeWidth="2" rx="5" transform="rotate(-2)" />
-            <text x="200" y="440" textAnchor="middle" fontSize={getSafeFontSize(safeName, 280, 26)} fontWeight="bold" fill="#556B2F" transform="rotate(-2)">
-                {safeName.toUpperCase()}
+                {/* Backpack Details Overlays (Straps, Zippers) */}
+                {/* Top Flap Shadow */}
+                <path d="M20,80 Q160,100 300,80 V50 C300,20 270,0 160,0 C50,0 20,20 20,50 Z"
+                    fill="#065f46" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
+
+                {/* Straps/Buckles */}
+                <rect x="100" y="80" width="30" height="300" fill="#064e3b" opacity="0.4" rx="5" />
+                <rect x="190" y="80" width="30" height="300" fill="#064e3b" opacity="0.4" rx="5" />
+
+                {/* Horizontal Straps */}
+                <rect x="20" y="250" width="280" height="15" fill="#14532d" opacity="0.8" />
+                <rect x="140" y="245" width="40" height="25" rx="5" fill="#fbbf24" stroke="#000" strokeWidth="2" /> {/* Buckle */}
+
+                {/* Side Pockets (Mesh hint) */}
+                <path d="M0,200 L20,200 V350 H0 Z" fill="#047857" opacity="0.8" />
+                <path d="M320,200 L300,200 V350 H320 Z" fill="#047857" opacity="0.8" />
+            </g>
+
+            {/* 3. TẤM BIỂN CHỈ ĐƯỜNG (Name Tag) */}
+            <g transform="translate(50, 480)">
+                {/* Post */}
+                <rect x="140" y="-30" width="20" height="150" fill="#78350f" stroke="#451a03" strokeWidth="2" />
+
+                {/* Sign Board (Arrow shape) */}
+                <path d="M0,10 L280,10 L320,40 L280,70 L0,70 L20,40 Z"
+                    fill="#facc15" stroke="#854d0e" strokeWidth="4" />
+                {/* Screw holes */}
+                <circle cx="30" cy="40" r="4" fill="#854d0e" />
+                <circle cx="270" cy="40" r="4" fill="#854d0e" />
+
+                {/* Name Text */}
+                <foreignObject x="30" y="15" width="260" height="50">
+                    <div className="w-full h-full flex items-center justify-center text-black font-black text-2xl uppercase"
+                        style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '1px' }}>
+                        {safeName}
+                    </div>
+                </foreignObject>
+            </g>
+
+            {/* 4. QUOTE & CHI TIẾT PHỤ */}
+            {/* Quote below sign */}
+            <text x="200" y="575" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ecfccb"
+                style={{ textShadow: '1px 1px 2px #14532d' }}>
+                "{safeDesc}"
             </text>
-            <text x="200" y="465" textAnchor="middle" fontSize="14" fill="#000" transform="rotate(-2)">
-                {safeDesc}
-            </text>
+
+            {/* Compass (Top Right) */}
+            <g transform="translate(340, 60)">
+                <circle r="35" fill="#f1f5f9" stroke="#334155" strokeWidth="4" />
+                <path d="M0,-30 L5,0 L0,30 L-5,0 Z" fill="#ef4444" /> {/* Needle */}
+                <circle r="3" fill="#334155" />
+                <text x="0" y="-20" textAnchor="middle" fontSize="8" fontWeight="bold">N</text>
+                <text x="0" y="25" textAnchor="middle" fontSize="8" fontWeight="bold">S</text>
+            </g>
+
+            {/* Travel Stickers on Backpack */}
+            <g transform="translate(80, 160) rotate(-15)">
+                <rect width="60" height="30" fill="#f43f5e" rx="2" opacity="0.9" />
+                <text x="30" y="20" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">HANOI</text>
+            </g>
+            <g transform="translate(260, 350) rotate(10)">
+                <circle r="25" fill="#3b82f6" opacity="0.9" />
+                <text x="0" y="5" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">WORLD</text>
+            </g>
         </svg>
     );
 };
 
 // 4. Beach Vibe
-const BeachTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
+const BeachTemplate: React.FC<TemplateProps> = ({ userName, userImage }) => {
     const safeName = userName || "BEACH VIBE";
-    const safeDesc = description || "Vitamin Sea";
 
     return (
-        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <svg width="400" height="600" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <linearGradient id="beachGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stopColor="#87CEEB" />
-                    <stop offset="0.6" stopColor="#40E0D0" />
-                    <stop offset="1" stopColor="#F4A460" />
+                <pattern id="polka-dots-v2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="2" fill="#fdba74" />
+                </pattern>
+                <linearGradient id="sunset-grad-2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#7c3aed" />
+                    <stop offset="50%" stopColor="#db2777" />
+                    <stop offset="100%" stopColor="#ea580c" />
                 </linearGradient>
+                {/* Clips for new glasses position */}
+                <clipPath id="lens-left-v2">
+                    <rect x="46" y="126" width="138" height="118" rx="20" />
+                </clipPath>
+                <clipPath id="lens-right-v2">
+                    <rect x="216" y="126" width="138" height="118" rx="20" />
+                </clipPath>
             </defs>
-            <rect width="400" height="600" fill="url(#beachGrad)" />
 
-            {/* Sun */}
-            <circle cx="350" cy="80" r="40" fill="#FFD700" opacity="0.8" />
+            {/* 1. LỚP NỀN (Yellow + Polka Dots) */}
+            <rect x="0" y="0" width="400" height="600" fill="#fde047" />
+            <rect x="0" y="0" width="400" height="600" fill="url(#polka-dots-v2)" opacity="0.6" />
 
-            {/* Coconut Trees */}
-            <path d="M0,400 Q50,200 150,150" stroke="#8B4513" strokeWidth="15" fill="none" />
-            <path d="M400,400 Q350,200 250,150" stroke="#8B4513" strokeWidth="15" fill="none" />
-            {/* Leaves */}
-            <path d="M150,150 L100,100 M150,150 L120,200 M150,150 L200,120" stroke="#006400" strokeWidth="10" />
-            <path d="M250,150 L300,100 M250,150 L280,200 M250,150 L200,120" stroke="#006400" strokeWidth="10" />
-
-            {/* Avatar Frame - Sunglasses */}
-            <g transform="translate(50, 250)">
-                <path d="M0,0 Q70,-20 140,0 Q140,80 70,100 Q0,80 0,0 Z" fill="#333" />
-                <path d="M160,0 Q230,-20 300,0 Q300,80 230,100 Q160,80 160,0 Z" fill="#333" />
-                <path d="M140,10 H160" stroke="#333" strokeWidth="5" />
+            {/* NEW: Sticker Vitamin Sea (Top Left, Rotated) */}
+            <g transform="translate(20, 30) rotate(-10)">
+                <rect width="150" height="60" fill="white" stroke="black" strokeWidth="2" rx="5" />
+                <foreignObject x="0" y="0" width="150" height="60">
+                    <div className="w-full h-full flex items-center justify-center text-center p-1"
+                        style={{
+                            fontFamily: 'cursive, sans-serif',
+                            fontSize: '12px',
+                            lineHeight: '1.2',
+                            color: 'black',
+                            fontWeight: 'bold',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                        Vitamin Sea là liều thuốc chữa lành duy nhất
+                    </div>
+                </foreignObject>
             </g>
 
-            {/* Image reflection in glasses */}
-            <defs>
-                <clipPath id="glassL">
-                    <path d="M50,250 Q120,230 190,250 Q190,330 120,350 Q50,330 50,250 Z" />
-                </clipPath>
-                <clipPath id="glassR">
-                    <path d="M210,250 Q280,230 350,250 Q350,330 280,350 Q210,330 210,250 Z" />
-                </clipPath>
-            </defs>
-            {userImage && (
-                <>
-                    <image href={userImage} x="50" y="230" width="140" height="140" preserveAspectRatio="xMidYMid slice" clipPath="url(#glassL)" opacity="0.8" />
-                    <image href={userImage} x="210" y="230" width="140" height="140" preserveAspectRatio="xMidYMid slice" clipPath="url(#glassR)" opacity="0.8" />
-                </>
-            )}
+            {/* 2. KÍNH MÁT (y=120, x=40, width=320) */}
+            <g>
+                {/* Frame Left */}
+                <rect x="40" y="120" width="150" height="130" rx="25" fill="black" />
+                {/* Frame Right */}
+                <rect x="210" y="120" width="150" height="130" rx="25" fill="black" />
+                {/* Bridge */}
+                <rect x="190" y="140" width="20" height="15" fill="black" />
 
-            <text x="200" y="500" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 36)} fontWeight="bold" fill="#fff" style={{ textShadow: "2px 2px 4px #008080" }}>
-                {safeName}
-            </text>
-            <text x="200" y="540" textAnchor="middle" fontSize="18" fill="#fff" fontWeight="bold">
-                {safeDesc}
-            </text>
+                {/* Left Lens (User Image + Glint) */}
+                <rect x="46" y="126" width="138" height="118" rx="20" fill="#eee" />
+                {userImage ? (
+                    <image
+                        href={userImage}
+                        x="46" y="126" width="138" height="118"
+                        preserveAspectRatio="xMidYMid slice"
+                        clipPath="url(#lens-left-v2)"
+                    />
+                ) : (
+                    <text x="115" y="200" textAnchor="middle" fontSize="40">🌴</text>
+                )}
+                {/* Glint effect on Left Lens */}
+                <path d="M50,130 L100,130 L70,240 L50,200 Z" fill="white" opacity="0.15" clipPath="url(#lens-left-v2)" />
+                <path d="M110,130 L140,130 L120,180 Z" fill="white" opacity="0.15" clipPath="url(#lens-left-v2)" />
+
+                {/* Right Lens */}
+                <rect x="216" y="126" width="138" height="118" rx="20" fill="url(#sunset-grad-2)" />
+                <circle cx="285" cy="160" r="25" fill="#fcd34d" />
+            </g>
+
+            {/* 3. SÓNG BIỂN (y=500 to 600) */}
+            <path d="M0,500 L50,550 L100,500 L150,550 L200,500 L250,550 L300,500 L350,550 L400,500 V600 H0 Z" fill="#22d3ee" />
+            <path d="M0,550 L50,600 L100,550 L150,600 L200,550 L250,600 L300,550 L350,600 L400,550 V600 H0 Z" fill="#0ea5e9" opacity="0.7" />
+
+            {/* 4. VÁN LƯỚT SÓNG & TÊN (Expanded width: 360px, x=20, y=420) */}
+            <g>
+                {/* Surfboard Body */}
+                <rect x="20" y="420" width="360" height="70" rx="35" fill="#ea580c" stroke="black" strokeWidth="5" />
+
+                {/* Decorative Stripes */}
+                <rect x="60" y="420" width="10" height="70" fill="white" opacity="0.8" />
+                <rect x="330" y="420" width="10" height="70" fill="white" opacity="0.8" />
+
+                {/* Text Container */}
+                <foreignObject x="20" y="420" width="360" height="70">
+                    <div className="w-full h-full flex items-center justify-center text-white font-black text-2xl uppercase"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
+                            color: 'white',
+                            fontWeight: 900,
+                            fontSize: '24px',
+                            textTransform: 'uppercase',
+                            fontFamily: 'sans-serif',
+                            textShadow: '2px 2px 0px rgba(0,0,0,0.2)'
+                        }}>
+                        {safeName}
+                    </div>
+                </foreignObject>
+            </g>
         </svg>
     );
 };
 
-// 5. Camping Chill
+// 5. Camping Chill (Night Camping Redesign)
 const CampingTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "CAMPING CHILL";
-    const safeDesc = description || "Trốn thành phố";
+    const safeDesc = description || "Ra rừng ở cho muỗi đốt chơi";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#191970" /> {/* Night Sky */}
+            {/* 1. BỐ CỤC NỀN */}
+            {/* Night Sky */}
+            <rect width="400" height="600" fill="#0f172a" />
 
-            {/* Stars */}
-            <circle cx="50" cy="50" r="1" fill="#fff" />
-            <circle cx="150" cy="100" r="2" fill="#fff" />
-            <circle cx="300" cy="50" r="1" fill="#fff" />
-            <circle cx="350" cy="150" r="2" fill="#fff" />
+            {/* Stars (Randomly scattered) */}
+            <g fill="#fff">
+                <circle cx="20" cy="30" r="1" opacity="0.8" /> <circle cx="50" cy="80" r="1" opacity="0.6" />
+                <circle cx="80" cy="20" r="1" opacity="0.9" /> <circle cx="120" cy="60" r="1" opacity="0.7" />
+                <circle cx="150" cy="30" r="1" opacity="0.5" /> <circle cx="180" cy="90" r="1" opacity="0.8" />
+                <circle cx="220" cy="20" r="1" opacity="0.4" /> <circle cx="250" cy="70" r="1" opacity="0.9" />
+                <circle cx="290" cy="40" r="1" opacity="0.6" /> <circle cx="330" cy="20" r="1" opacity="0.8" />
+                <circle cx="360" cy="60" r="1" opacity="0.5" /> <circle cx="390" cy="90" r="1" opacity="0.7" />
+                {/* More stars lower down */}
+                <circle cx="30" cy="150" r="1" opacity="0.5" /> <circle cx="370" cy="180" r="1" opacity="0.6" />
+                <circle cx="100" cy="200" r="1" opacity="0.4" /> <circle cx="300" cy="220" r="1" opacity="0.5" />
+                <circle cx="10" cy="300" r="1" opacity="0.3" /> <circle cx="380" cy="280" r="1" opacity="0.4" />
+                <circle cx="60" cy="400" r="1" opacity="0.5" /> <circle cx="340" cy="380" r="1" opacity="0.6" />
+            </g>
 
             {/* Moon */}
-            <circle cx="350" cy="80" r="30" fill="#FFFFE0" opacity="0.9" />
+            <circle cx="320" cy="80" r="40" fill="#fef08a" opacity="0.9" />
 
-            {/* Mountains */}
-            <path d="M0,600 L150,400 L300,600 Z" fill="#2F4F4F" />
-            <path d="M200,600 L350,350 L500,600 Z" fill="#2F4F4F" />
-
-            {/* Tent */}
-            <path d="M100,600 L200,450 L300,600 Z" fill="#FF4500" />
-            <path d="M200,600 L200,450" stroke="#8B0000" strokeWidth="2" /> {/* Tent pole */}
-
-            {/* Avatar in Tent Door */}
-            <path d="M180,600 L200,500 L220,600 Z" fill="#000" opacity="0.5" />
+            {/* 2. CHIẾC LỀU KHỔNG LỒ (Hero Element) */}
             <defs>
-                <clipPath id="tentClip">
-                    <path d="M180,600 L200,500 L220,600 Z" />
+                {/* Clip path for avatar inside the tent triangle */}
+                <clipPath id="tentTriangleClip">
+                    {/* Slightly smaller triangle to fit inside the border */}
+                    <path d="M200,165 L55,512 L345,512 Z" />
                 </clipPath>
             </defs>
-            {userImage && <image href={userImage} x="100" y="450" width="200" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#tentClip)" />}
 
+            {/* Tent Main Shape */}
+            {/* Background of the tent (inside) */}
+            <path d="M200,150 L40,520 L360,520 Z" fill="#333" stroke="#000" strokeWidth="8" strokeLinejoin="round" />
+
+            {/* Avatar Image (Occupies 70%+) */}
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="40" y="150" width="320" height="370"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#tentTriangleClip)"
+                />
+            ) : (
+                <text x="200" y="400" textAnchor="middle" fontSize="60">⛺</text>
+            )}
+
+            {/* Tent Flaps/Overlays to make it look like a tent */}
+            <path d="M200,150 L40,520 L120,520 L200,150" fill="#f97316" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
+            <path d="M200,150 L360,520 L280,520 L200,150" fill="#ea580c" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
+
+
+            {/* 3. FOREGROUND (Bonfire & Bushes) */}
             {/* Bonfire */}
-            <circle cx="200" cy="580" r="20" fill="#FFA500" opacity="0.8" filter="blur(5px)" />
+            <g transform="translate(180, 500)">
+                <circle cx="20" cy="20" r="25" fill="#ef4444" opacity="0.6" filter="blur(8px)" />
+                <path d="M10,40 L20,10 L30,40 Z" fill="#facc15" />
+                <path d="M15,40 L25,15 L35,40 Z" fill="#ef4444" />
+                <path d="M5,40 L15,20 L25,40 Z" fill="#f97316" />
+                {/* Logs */}
+                <line x1="10" y1="40" x2="30" y2="40" stroke="#78350f" strokeWidth="4" />
+                <line x1="10" y1="40" x2="30" y2="35" stroke="#78350f" strokeWidth="4" transform="rotate(20, 20, 40)" />
+                <line x1="10" y1="40" x2="30" y2="35" stroke="#78350f" strokeWidth="4" transform="rotate(-20, 20, 40)" />
+            </g>
 
-            <text x="200" y="150" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 26)} fontWeight="bold" fill="#fff" fontFamily="monospace">
-                {safeName.toUpperCase()}
-            </text>
-            <text x="200" y="180" textAnchor="middle" fontSize="14" fill="#ccc">
-                {safeDesc}
-            </text>
+            {/* Bushes/Mountains */}
+            <path d="M0,600 L0,550 Q30,520 60,550 T120,600 Z" fill="#1e293b" />
+            <path d="M400,600 L400,550 Q370,520 340,550 T280,600 Z" fill="#1e293b" />
+
+
+            {/* 4. HIỂN THỊ TÊN & CAPTION */}
+            {/* Wooden Sign for Name */}
+            <g transform="translate(50, 520)">
+                {/* Sign Board */}
+                <rect x="0" y="0" width="300" height="50" rx="5" fill="#78350f" stroke="#451a03" strokeWidth="3" />
+                {/* Wood Grain Detail (Simple lines) */}
+                <path d="M20,10 L280,10 M40,40 L260,40" stroke="#92400e" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+                {/* Nails */}
+                <circle cx="10" cy="10" r="3" fill="#451a03" /> <circle cx="290" cy="10" r="3" fill="#451a03" />
+                <circle cx="10" cy="40" r="3" fill="#451a03" /> <circle cx="290" cy="40" r="3" fill="#451a03" />
+
+                {/* Name Text */}
+                <foreignObject x="10" y="5" width="280" height="40">
+                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-2xl"
+                        style={{ fontFamily: 'monospace', textShadow: '1px 1px 0 #000' }}>
+                        {safeName.toUpperCase()}
+                    </div>
+                </foreignObject>
+            </g>
+
+            {/* Caption Tag (Paper Slip style below sign) */}
+            <g transform="translate(100, 565)">
+                {/* Paper bg */}
+                <rect x="0" y="0" width="200" height="25" fill="#f1f5f9" rx="2" transform="rotate(-2)" />
+                {/* Caption Text */}
+                <foreignObject x="0" y="0" width="200" height="25" transform="rotate(-2)">
+                    <div className="w-full h-full flex items-center justify-center text-slate-600 italic text-xs font-serif">
+                        {safeDesc}
+                    </div>
+                </foreignObject>
+                {/* Pin */}
+                <circle cx="100" cy="0" r="3" fill="#ef4444" />
+            </g>
         </svg>
     );
 };
 
-// 6. Gym Rat
-const GymTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
+// 6. Gym Rat (Neubrutalism Redesign)
+const GymTemplate: React.FC<TemplateProps> = ({ userName, userImage }) => {
     const safeName = userName || "GYM RAT";
-    const safeDesc = description || "No Pain No Gain";
 
     return (
-        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#222" />
-
-            {/* Dumbbell BG */}
-            <rect x="50" y="50" width="300" height="10" fill="#555" rx="5" />
-            <rect x="20" y="20" width="30" height="70" fill="#333" stroke="#555" strokeWidth="2" />
-            <rect x="350" y="20" width="30" height="70" fill="#333" stroke="#555" strokeWidth="2" />
-
-            {/* Avatar Circle Check */}
-            <circle cx="200" cy="300" r="130" fill="none" stroke="#FF4500" strokeWidth="10" />
+        <svg width="400" height="600" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <clipPath id="gymClip">
-                    <circle cx="200" cy="300" r="120" />
+                <clipPath id="gymPlateClip">
+                    <circle cx="200" cy="260" r="120" />
                 </clipPath>
+                {/* Lightning Gradient */}
+                <linearGradient id="neonBolt" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#facc15" />
+                    <stop offset="100%" stopColor="#fbbf24" />
+                </linearGradient>
             </defs>
-            {userImage && <image href={userImage} x="80" y="180" width="240" height="240" preserveAspectRatio="xMidYMid slice" clipPath="url(#gymClip)" filter="contrast(1.2)" />}
 
-            {/* Muscle Arm Overlay */}
-            <path d="M50,450 Q100,400 150,450" stroke="#FF4500" strokeWidth="10" fill="none" strokeLinecap="round" />
-            <path d="M250,450 Q300,400 350,450" stroke="#FF4500" strokeWidth="10" fill="none" strokeLinecap="round" />
+            {/* 1. NỀN & HIỆU ỨNG (Bottom Layers) */}
+            <rect width="400" height="600" fill="#1c1917" />
 
-            <text x="200" y="500" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 36)} fontWeight="900" fill="#fff" style={{ fontStyle: 'italic' }}>
-                {safeName.toUpperCase()}
-            </text>
-            <text x="200" y="540" textAnchor="middle" fontSize="16" fill="#FF4500" fontWeight="bold">
-                {safeDesc}
-            </text>
+            {/* Lightning Bolts - Burst from center (approx 200, 260) */}
+            <g opacity="0.8">
+                <path d="M200,260 L50,150 L80,180 L20,100 L200,260" fill="#facc15" opacity="0.5" />
+                <path d="M200,260 L350,150 L320,180 L380,100 L200,260" fill="#facc15" opacity="0.5" />
+                <path d="M200,260 L100,500 L120,480 L80,550 L200,260" fill="#facc15" opacity="0.3" />
+                <path d="M200,260 L300,500 L280,480 L320,550 L200,260" fill="#facc15" opacity="0.3" />
+            </g>
+
+            {/* 2. KHUNG AVATAR ĐĨA TẠ (Central Hero) */}
+            {/* Main Plate */}
+            <circle cx="200" cy="260" r="140" fill="#4b5563" stroke="black" strokeWidth="10" />
+            {/* Inner Ring Detail */}
+            <circle cx="200" cy="260" r="125" fill="none" stroke="#374151" strokeWidth="2" />
+            {/* Cracks */}
+            <path d="M200,120 L195,140 M200,120 L210,135" stroke="black" strokeWidth="3" fill="none" />
+            <path d="M340,260 L320,255 M340,260 L325,270" stroke="black" strokeWidth="3" fill="none" />
+            <path d="M200,400 L205,380 M200,400 L190,385" stroke="black" strokeWidth="3" fill="none" />
+
+            {/* Avatar Image */}
+            <circle cx="200" cy="260" r="120" fill="#333" />
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="80" y="140" width="240" height="240"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#gymPlateClip)"
+                />
+            ) : (
+                <text x="200" y="280" textAnchor="middle" fontSize="60">💪</text>
+            )}
+
+            {/* Chains Hanging */}
+            <g stroke="#9ca3af" strokeWidth="6" fill="none">
+                {/* Left Chain */}
+                <path d="M50,0 V100" strokeDasharray="15 5" />
+                <circle cx="50" cy="110" r="10" stroke="#4b5563" strokeWidth="4" />
+                {/* Right Chain */}
+                <path d="M350,0 V120" strokeDasharray="15 5" />
+                <circle cx="350" cy="130" r="10" stroke="#4b5563" strokeWidth="4" />
+            </g>
+
+
+            {/* 3. KHUNG CHỨA TÊN (The Heavy Banner) */}
+            {/* Hard Shadow */}
+            <rect x="38" y="468" width="340" height="80" rx="4" fill="black" opacity="1" />
+            {/* Main Banner */}
+            <rect x="30" y="460" width="340" height="80" rx="4" fill="#facc15" stroke="black" strokeWidth="8" />
+
+            {/* 4. HIỂN THỊ TÊN USER */}
+            <foreignObject x="30" y="460" width="340" height="80">
+                <div className="w-full h-full flex items-center justify-center text-black font-black text-3xl uppercase italic"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%',
+                        color: 'black',
+                        fontWeight: 900,
+                        fontSize: '30px',
+                        fontStyle: 'italic',
+                        textTransform: 'uppercase',
+                        fontFamily: 'sans-serif'
+                    }}>
+                    {safeName}
+                </div>
+            </foreignObject>
+
+            {/* 5. CHI TIẾT PHỤ (Bottom Text) */}
+            <text x="50" y="580" textAnchor="start" fontSize="16" fontFamily="monospace" fontWeight="bold" fill="#facc15" letterSpacing="2">NO PAIN NO GAIN</text>
+
+            {/* 6. sticker caption (Sticker Style) - REMOVED */}
         </svg>
     );
 };

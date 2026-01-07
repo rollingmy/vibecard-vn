@@ -190,61 +190,94 @@ const Win95ErrorTemplate: React.FC<TemplateProps> = ({ userName, userImage, desc
     );
 }
 
-// 4. Bui Doi Cho Lon (Sepia Retro)
+// 4. Bui Doi Cho Lon (Retro HK Poster)
 const BuiDoiChoLonTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "GIANG HỒ MẠNG";
-    const safeDesc = description || "Quá khứ kia anh đâu muốn nhắc lại...";
+    const safeDesc = description || "KẺ NẮM TRÙM KHU PHỐ";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            {/* Filter for Sepia/Noise */}
-            <filter id="sepia">
-                <feColorMatrix type="matrix" values="0.393 0.769 0.189 0 0  0.349 0.686 0.168 0 0  0.272 0.534 0.131 0 0  0 0 0 1 0" />
-            </filter>
-            <filter id="noise">
-                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-                <feColorMatrix type="saturate" values="0" />
-                <feComponentTransfer>
-                    <feFuncA type="linear" slope="0.3" />
-                </feComponentTransfer>
-                <feComposite operator="in" in2="SourceGraphic" result="monoNoise" />
-                <feBlend in="SourceGraphic" in2="monoNoise" mode="multiply" />
-            </filter>
+            <defs>
+                <clipPath id="hkPosterClip">
+                    <rect x="40" y="120" width="320" height="300" rx="10" />
+                </clipPath>
+            </defs>
 
-            <g filter="url(#sepia)">
-                <rect width="400" height="600" fill="#EEE8AA" />
+            {/* 1. NỀN & KHÔNG KHÍ (Lớp dưới cùng) */}
+            {/* Dark Red BG */}
+            <rect width="400" height="600" fill="#7f1d1d" />
+            {/* Texture Stripes */}
+            <pattern id="hkTexture" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <line x1="0" y1="0" x2="20" y2="0" stroke="#ca8a04" strokeWidth="1" opacity="0.3" />
+                <line x1="0" y1="0" x2="0" y2="20" stroke="#ca8a04" strokeWidth="1" opacity="0.1" />
+            </pattern>
+            <rect width="400" height="600" fill="url(#hkTexture)" />
+            {/* Dragon Watermark (Abstract) */}
+            <path d="M300,500 Q350,450 380,500 T300,550 T250,500" fill="none" stroke="#000" strokeWidth="20" opacity="0.1" />
 
-                {/* Border Frame */}
-                <rect x="20" y="20" width="360" height="560" fill="none" stroke="#8B4513" strokeWidth="8" />
-                <rect x="30" y="30" width="340" height="540" fill="none" stroke="#8B4513" strokeWidth="2" />
+            {/* 2. KHUNG AVATAR (Tấm Ápphích Chính) */}
+            {/* Neon Frame - Messy stroke using paths */}
+            <path d="M40,120 L360,120 L360,420 L40,420 Z" fill="none" stroke="#facc15" strokeWidth="8" strokeLinejoin="round" />
+            {/* Double Stroke Effect for Neon */}
+            <path d="M35,115 L365,115 L365,425 L35,425 Z" fill="none" stroke="#facc15" strokeWidth="2" opacity="0.5" />
 
-                {/* Typography Signage Style */}
-                <text x="200" y="80" textAnchor="middle" fontSize="40" fill="#B22222" fontWeight="bold" fontFamily="serif" style={{ textShadow: "2px 2px 0px #F4A460" }}>
-                    SÀI GÒN
-                </text>
-                <text x="200" y="110" textAnchor="middle" fontSize="20" fill="#8B4513" fontWeight="bold" fontFamily="serif">
-                    1990 HỒI KÝ
-                </text>
+            {/* Avatar Image */}
+            <rect x="40" y="120" width="320" height="300" rx="10" fill="#333" />
+            {userImage ? (
+                <image
+                    href={userImage}
+                    x="40" y="120" width="320" height="300"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#hkPosterClip)"
+                />
+            ) : (
+                <text x="200" y="270" textAnchor="middle" fontSize="100" fill="#555">🕶️</text>
+            )}
+            {/* Sepia Overlay */}
+            <rect x="40" y="120" width="320" height="300" rx="10" fill="#ea580c" opacity="0.2" style={{ mixBlendMode: 'multiply' }} />
 
-                {/* Main Photo Frame */}
-                <rect x="50" y="140" width="300" height="300" fill="#fff" stroke="#8B4513" strokeWidth="4" />
-                {userImage ? (
-                    <image href={userImage} x="55" y="145" width="290" height="290" preserveAspectRatio="xMidYMid slice" />
-                ) : (
-                    <rect x="55" y="145" width="290" height="290" fill="#dcdcdc" />
-                )}
+            {/* 3. BẢNG HIỆU TÊN (Tựa Đề Phim) */}
+            {/* Black Board with Red Border */}
+            <rect x="20" y="450" width="360" height="100" fill="black" stroke="#ef4444" strokeWidth="6" />
 
-                {/* Name & Desc */}
-                <text x="200" y="490" textAnchor="middle" fontSize="32" fill="#B22222" fontWeight="bold" fontFamily="serif" style={{ textShadow: "1px 1px 0px #fff" }}>
-                    {safeName.toUpperCase()}
-                </text>
-                <text x="200" y="530" textAnchor="middle" fontSize="16" fill="#552200" fontStyle="italic" fontFamily="serif" width="300">
-                    "{safeDesc}"
-                </text>
+            {/* Text Content */}
+            <foreignObject x="20" y="450" width="360" height="100">
+                <div className="w-full h-full flex flex-col items-center justify-center p-2">
+                    <div style={{
+                        color: '#facc15',
+                        fontFamily: 'serif',
+                        fontWeight: 900,
+                        fontSize: '36px',
+                        textTransform: 'uppercase',
+                        lineHeight: 1,
+                        textShadow: '3px 3px 0 #ef4444',
+                        textAlign: 'center'
+                    }}>
+                        {safeName}
+                    </div>
+                    <div style={{
+                        color: 'white',
+                        fontFamily: 'monospace',
+                        fontSize: '14px',
+                        marginTop: '5px',
+                        letterSpacing: '2px',
+                        textAlign: 'center'
+                    }}>
+                        {safeDesc}
+                    </div>
+                </div>
+            </foreignObject>
+
+            {/* 4. CHI TIẾT CUỐI CÙNG */}
+            {/* Red Stamp */}
+            <g transform="translate(300, 50) rotate(-15)">
+                <circle r="40" fill="none" stroke="#ef4444" strokeWidth="4" />
+                <circle r="36" fill="none" stroke="#ef4444" strokeWidth="1" />
+                <text x="0" y="5" textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">CẤM CHỤP HÌNH</text>
             </g>
 
-            {/* Noise Overlay */}
-            <rect width="400" height="600" fill="#888" filter="url(#noise)" opacity="0.4" style={{ mixBlendMode: 'overlay' }} />
+            {/* Outer Border */}
+            <rect width="400" height="600" fill="none" stroke="black" strokeWidth="20" />
         </svg>
     );
 }
