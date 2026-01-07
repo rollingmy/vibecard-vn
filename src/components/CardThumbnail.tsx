@@ -6,6 +6,8 @@ import { GamingTheme } from './templates/GamingTheme';
 import { GenZTheme } from './templates/GenZTheme';
 import { RetroTemplates } from './templates/RetroTheme';
 import { DarkHumorTemplates } from './templates/DarkHumorTheme';
+import { ZodiacTemplates } from './templates/ZodiacTheme';
+import { TravelTemplates } from './templates/TravelTheme';
 
 const AllTemplates = {
     ...FlexTheme,
@@ -14,7 +16,9 @@ const AllTemplates = {
     ...GamingTheme,
     ...GenZTheme,
     ...RetroTemplates,
-    ...DarkHumorTemplates
+    ...DarkHumorTemplates,
+    ...ZodiacTemplates,
+    ...TravelTemplates
 };
 
 interface Template {
@@ -105,7 +109,28 @@ const DEFAULT_NAMES: Record<string, string> = {
     'zombie-cong-so': "ZOMBIE",
     'rip-luong': "R.I.P LƯƠNG",
     'to-nguoi-tieu-dung': "NGƯỜI TIÊU DÙNG",
-    'drama-is-coming': "DRAMA QUEEN"
+    'drama-is-coming': "DRAMA QUEEN",
+    // Zodiac Theme
+    'ba-dong-online': "BÀ ĐỒNG ONLINE",
+    'water-sign-thuy': "HỆ NƯỚC",
+    'fire-sign-lua': "HỆ LỬA",
+    'earth-sign-dat': "HỆ ĐẤT",
+    'air-sign-khi': "HỆ KHÍ",
+    'thay-boi-xem-voi': "THẦY BÓI",
+    'bua-yeu': "BÙA YÊU",
+    'full-moon-party': "HỘI TRĂNG TRÒN",
+    'than-so-hoc': "THẦN SỐ HỌC",
+    'ying-yang': "ÂM DƯƠNG",
+    // Travel Theme
+    'food-reviewer': "THÁNH ĂN",
+    'coffee-holic': "COFFEE HOLIC",
+    'phuot-thu': "PHƯỢT THỦ",
+    'beach-vibe': "BEACH VIBE",
+    'camping-chill': "CAMPING CHILL",
+    'gym-rat': "GYM RAT",
+    'cat-lover': "CON SEN",
+    'dog-lover': "NGƯỜI YÊU CHÓ",
+    'minimalist-white': "MINIMALIST"
 };
 
 export default function CardThumbnail({ template }: CardThumbnailProps) {
