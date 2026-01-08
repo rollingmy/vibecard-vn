@@ -10,57 +10,92 @@ const getSafeFontSize = (text: string, maxWidth: number, defaultSize: number) =>
     return estimatedWidth > maxWidth ? (maxWidth / text.length) / 0.6 : defaultSize;
 };
 
-// 1. Food Reviewer
+// 1. Food Reviewer (Gourmet Celebration Style)
 const FoodTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "THÁNH ĂN";
-    const safeDesc = description || "Review có tâm";
+    const safeDesc = description || "Ăn cả thế giới...";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#FFF5EE" />
-
-            {/* Tablecloth Pattern */}
             <defs>
-                <pattern id="checkTable" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <rect width="40" height="40" fill="#fff" />
-                    <rect x="0" y="0" width="20" height="20" fill="#FFB6C1" />
-                    <rect x="20" y="20" width="20" height="20" fill="#FFB6C1" />
+                {/* Cutlery 3D Bevel */}
+                <filter id="cutlery-3d">
+                    <feGaussianBlur stdDeviation="2" in="SourceAlpha" result="blur" />
+                    <feOffset dx="2" dy="2" in="blur" result="offsetBlur" />
+                    <feSpecularLighting in="blur" surfaceScale="2" specularConstant="1" specularExponent="10" lightingColor="white" result="specOut">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut" />
+                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
+                    <feMerge>
+                        <feMergeNode in="offsetBlur" />
+                        <feMergeNode in="litPaint" />
+                    </feMerge>
+                </filter>
+                {/* Plate Gloss */}
+                <filter id="plate-gloss">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+                </filter>
+                {/* Icon Glow */}
+                <filter id="icon-glow">
+                    <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#FF69B4" floodOpacity="0.6" />
+                </filter>
+                {/* Tablecloth Pattern */}
+                <pattern id="checkTable" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                    <rect width="60" height="60" fill="#FFF0F5" />
+                    <rect x="0" y="0" width="30" height="30" fill="#FFC0CB" opacity="0.5" />
+                    <rect x="30" y="30" width="30" height="30" fill="#FFC0CB" opacity="0.5" />
                 </pattern>
             </defs>
+
             <rect width="400" height="600" fill="url(#checkTable)" />
 
-            {/* Plate */}
-            <circle cx="200" cy="220" r="140" fill="#fff" stroke="#ccc" strokeWidth="2" />
-            <circle cx="200" cy="220" r="120" fill="#fff" stroke="#eee" strokeWidth="2" />
+            {/* Scattered Icons (Randomly Placed) */}
+            <g filter="url(#icon-glow)" fontSize="24">
+                <text x="30" y="50" transform="rotate(-15)">🍩</text>
+                <text x="350" y="80" transform="rotate(15)">🍗</text>
+                <text x="40" y="550" transform="rotate(10)">🍣</text>
+                <text x="360" y="520" transform="rotate(-10)">🍜</text>
+                <text x="320" y="40" transform="rotate(20)">🍤</text>
+                <text x="80" y="580" transform="rotate(-20)">🍰</text>
+            </g>
 
-            {/* Avatar as Food */}
+            {/* 3D Cutlery */}
+            <g filter="url(#cutlery-3d)">
+                {/* Spoon Left */}
+                <path d="M40,350 L40,150 Q40,100 60,100 Q80,100 80,150 L80,350 Q60,370 40,350" fill="#e0e0e0" stroke="#999" strokeWidth="1" />
+
+                {/* Chopsticks Right */}
+                <rect x="340" y="100" width="12" height="280" rx="2" fill="#d2b48c" stroke="#8b4513" strokeWidth="1" />
+                <rect x="360" y="100" width="12" height="280" rx="2" fill="#d2b48c" stroke="#8b4513" strokeWidth="1" />
+            </g>
+
+            {/* Glossy Plate Frame */}
+            <circle cx="200" cy="240" r="130" fill="#fff" stroke="#ffb6c1" strokeWidth="6" filter="url(#plate-gloss)" />
+            <circle cx="200" cy="240" r="122" fill="none" stroke="#ff69b4" strokeWidth="2" strokeDasharray="10 5" /> {/* Dashed inner ring */}
+
+            {/* Avatar */}
             <defs>
                 <clipPath id="plateClip">
-                    <circle cx="200" cy="220" r="110" />
+                    <circle cx="200" cy="240" r="115" />
                 </clipPath>
             </defs>
-            {userImage && <image href={userImage} x="90" y="110" width="220" height="220" preserveAspectRatio="xMidYMid slice" clipPath="url(#plateClip)" />}
+            {userImage && <image href={userImage} x="85" y="125" width="230" height="230" preserveAspectRatio="xMidYMid slice" clipPath="url(#plateClip)" />}
 
-            {/* Cutlery */}
-            <rect x="20" y="150" width="30" height="200" rx="5" fill="#C0C0C0" stroke="#999" strokeWidth="2" /> {/* Fork handle */}
-            <path d="M20,150 L20,100 L30,100 L30,150 M35,150 L35,100 L45,100 L45,150 M50,150 L50,100 L50,150" stroke="#C0C0C0" strokeWidth="4" />
+            {/* Typography & Ribbon */}
+            <g transform="translate(0, 420)">
+                {/* Ribbon Background for Caption */}
+                <path d="M50,85 L350,85 L360,105 L350,125 L50,125 L40,105 Z" fill="#fff" opacity="0.8" stroke="#ff69b4" strokeWidth="2" />
 
-            <rect x="350" y="150" width="30" height="200" rx="5" fill="#C0C0C0" stroke="#999" strokeWidth="2" /> {/* Knife handle */}
-            <path d="M350,150 Q350,80 365,80 Q380,80 380,150" fill="#C0C0C0" stroke="#999" strokeWidth="2" />
+                <text x="200" y="60" textAnchor="middle" fontSize={getSafeFontSize(safeName, 300, 36)} fontWeight="900" fill="#FF1493" stroke="#fff" strokeWidth="4" paintOrder="stroke" fontFamily="Arial Rounded MT Bold, Comic Sans MS, sans-serif">
+                    {safeName}
+                </text>
 
-            {/* Food Icons */}
-            <text x="50" y="450" fontSize="40">🍔</text>
-            <text x="310" y="450" fontSize="40">🍕</text>
-            <text x="50" y="520" fontSize="40">🌮</text>
-            <text x="310" y="520" fontSize="40">🍜</text>
-
-            <rect x="80" y="420" width="240" height="120" rx="10" fill="#fff" stroke="#FF69B4" strokeWidth="4" />
-            <text x="200" y="470" textAnchor="middle" fontSize={getSafeFontSize(safeName, 220, 24)} fontWeight="bold" fill="#FF1493" fontFamily="Comic Sans MS, cursive">
-                {safeName}
-            </text>
-            <text x="200" y="500" textAnchor="middle" fontSize="14" fill="#333" fontStyle="italic">
-                "{safeDesc}"
-            </text>
+                <text x="200" y="112" textAnchor="middle" fontSize="16" fill="#C71585" fontStyle="italic" fontWeight="bold">
+                    "{safeDesc}"
+                </text>
+            </g>
         </svg>
     );
 };

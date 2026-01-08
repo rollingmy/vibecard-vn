@@ -282,54 +282,148 @@ const BuiDoiChoLonTemplate: React.FC<TemplateProps> = ({ userName, userImage, de
     );
 }
 
-// 5. Cassette Tape
+// 5. Cassette Tape (Vintage Polish)
 const CassetteTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "MIXTAPE 2023";
     const safeDesc = description || "Tuyển Tập Nhạc Sến";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                {/* Plastic Grain Filter */}
+                <filter id="plastic-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="0.1 0 0 0 0  0 0.1 0 0 0  0 0 0.1 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise" />
+                    <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+                    <feBlend mode="multiply" in="composite" in2="SourceGraphic" />
+                </filter>
+                {/* Scratches Filter */}
+                <filter id="scratches-v">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" result="noise" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 5 -2" in="noise" result="scratchMap" />
+                    <feComposite operator="in" in="scratchMap" in2="SourceGraphic" result="scratchesApplied" />
+                    <feComposite in="SourceGraphic" in2="scratchesApplied" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+                </filter>
+                {/* Paper Wear Filter */}
+                <filter id="paper-wear">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+                </filter>
+                {/* Yellow Dust/Noise for Paper */}
+                <filter id="yellow-dust">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0.9  0 1 0 0 0.8  0 0 1 0 0.6  0 0 0 0.2 0" />
+                </filter>
+                {/* Avatar Glow */}
+                <filter id="avatar-glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* 3D Hole Bevel */}
+                <filter id="hole-bevel">
+                    <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="blur" />
+                    <feOffset dx="1" dy="1" in="blur" result="offsetBlur" />
+                    <feSpecularLighting in="blur" surfaceScale="2" specularConstant="1" specularExponent="10" lightingColor="white" result="specOut">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut" />
+                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
+                    <feMerge>
+                        <feMergeNode in="offsetBlur" />
+                        <feMergeNode in="litPaint" />
+                    </feMerge>
+                </filter>
+            </defs>
+
             <rect width="400" height="600" fill="#E0FFFF" />
 
             {/* Cassette Global Rotation */}
-            <g transform="translate(200, 300) rotate(90) translate(-300, -200)">
-                {/* Cassette Body */}
-                <rect x="50" y="100" width="500" height="300" rx="20" fill="#333" stroke="#111" strokeWidth="5" />
+            <g transform="translate(200, 280) rotate(90) translate(-300, -200)">
+                {/* Cassette Body - Black Plastic */}
+                <rect x="50" y="100" width="500" height="300" rx="10" fill="#222" stroke="#111" strokeWidth="2" filter="url(#plastic-grain)" />
+                {/* Scratches Overlay */}
+                <rect x="50" y="100" width="500" height="300" rx="10" fill="#fff" opacity="0.1" filter="url(#scratches-v)" />
+
+                {/* Highlights on Edges */}
+                <path d="M60,110 L540,110" fill="none" stroke="#555" strokeWidth="2" opacity="0.5" />
+                <path d="M60,390 L540,390" fill="none" stroke="#000" strokeWidth="4" opacity="0.7" />
 
                 {/* Sticker Label Area */}
-                <rect x="70" y="120" width="460" height="180" rx="10" fill="#FF8C00" />
-                <rect x="80" y="130" width="440" height="40" fill="#fff" opacity="0.8" /> {/* Write area */}
+                <g filter="url(#paper-wear)">
+                    <rect x="70" y="120" width="460" height="180" rx="4" fill="#FF8C00" />
+                    {/* Write area - Paper white with yellow tint */}
+                    <rect x="80" y="130" width="440" height="50" fill="#fdf5e6" opacity="0.9" />
+                    {/* Yellow Noise Overlay */}
+                    <rect x="80" y="130" width="440" height="50" filter="url(#yellow-dust)" opacity="0.3" style={{ mixBlendMode: 'multiply' }} />
 
-                {/* Text on Cassette */}
-                <text x="100" y="160" fontSize="24" fontFamily="Brush Script MT, cursive" fill="#000">
+                    {/* Scuffs / Stains */}
+                    <path d="M100,140 Q150,160 200,135" stroke="#a0522d" strokeWidth="1" opacity="0.3" fill="none" />
+                    <circle cx="450" cy="250" r="30" fill="#8b4513" opacity="0.1" filter="blur(10px)" />
+                </g>
+
+                {/* Text on Cassette Labels - Handwritten Marker */}
+                <text x="100" y="165" fontSize="32" fontFamily="Comic Sans MS, Chalkboard SE, sans-serif" fill="#000" transform="rotate(-1, 100, 165)" style={{ mixBlendMode: 'multiply' }}>
                     Mixtape: {safeName}
                 </text>
 
-                {/* Tape Window */}
-                <rect x="180" y="190" width="240" height="80" rx="10" fill="#444" stroke="#000" strokeWidth="2" />
-                {/* Spools */}
-                <circle cx="230" cy="230" r="30" fill="#fff" />
-                <circle cx="370" cy="230" r="30" fill="#fff" />
-                {/* Tape */}
-                <path d="M230,260 L370,260" stroke="#111" strokeWidth="40" opacity="0.9" />
+                {/* Tape Window Area */}
+                <rect x="180" y="200" width="240" height="80" rx="5" fill="#333" stroke="#000" strokeWidth="2" />
+
+                {/* Spools - with 3D Effect */}
+                <circle cx="230" cy="240" r="30" fill="#fff" />
+                <circle cx="230" cy="240" r="10" fill="#000" filter="url(#hole-bevel)" /> {/* Hole */}
+
+                <circle cx="370" cy="240" r="30" fill="#fff" />
+                <circle cx="370" cy="240" r="10" fill="#000" filter="url(#hole-bevel)" /> {/* Hole */}
+
+                {/* Magnetic Tape */}
+                <rect x="230" y="230" width="140" height="20" fill="#111" />
+                <circle cx="280" cy="240" r="15" fill="#111" /> {/* Tape Roll Center */}
+
+                {/* Screws */}
+                <circle cx="65" cy="115" r="4" fill="#555" />
+                <circle cx="535" cy="115" r="4" fill="#555" />
+                <circle cx="65" cy="385" r="4" fill="#555" />
+                <circle cx="535" cy="385" r="4" fill="#555" />
             </g>
 
-            {/* Re-orienting text for readability since cassette is sideways */}
+            {/* Re-orienting text for readability */}
             <g transform="translate(0,0)">
                 {/* Avatar Circle Sticker */}
-                <circle cx="200" cy="180" r="90" fill="#fff" stroke="#000" strokeWidth="4" />
+                {/* White Glow Background */}
+                <circle cx="200" cy="180" r="92" fill="white" opacity="0.6" filter="blur(4px)" />
+
+                <circle cx="200" cy="180" r="90" fill="#fdf5e6" stroke="#000" strokeWidth="1" filter="url(#paper-wear)" />
                 <defs>
                     <clipPath id="circleAv">
                         <circle cx="200" cy="180" r="86" />
                     </clipPath>
+                    {/* Dust Particles */}
+                    <pattern id="dust-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="white" opacity="0.4" />
+                        <circle cx="50" cy="60" r="0.8" fill="white" opacity="0.3" />
+                        <circle cx="80" cy="20" r="1.2" fill="white" opacity="0.4" />
+                        <circle cx="30" cy="80" r="0.5" fill="white" opacity="0.3" />
+                    </pattern>
                 </defs>
-                {userImage && <image href={userImage} x="114" y="94" width="172" height="172" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAv)" />}
+                {userImage && (
+                    <>
+                        <image href={userImage} x="114" y="94" width="172" height="172" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAv)" style={{ mixBlendMode: 'multiply' }} opacity="0.9" />
+                        <circle cx="200" cy="180" r="86" fill="url(#dust-pattern)" pointerEvents="none" />
+                    </>
+                )}
 
-                <text x="200" y="320" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#333" stroke="#fff" strokeWidth="4" paintOrder="stroke">
+                {/* "SIDE A" */}
+                <text x="200" y="325" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#333" stroke="#fff" strokeWidth="4" paintOrder="stroke" fontFamily="Arial Black">
                     SIDE A
                 </text>
-                <text x="200" y="520" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#000" transform="rotate(-90, 360, 300)" >
-                    {safeDesc}
+
+                {/* New Caption */}
+                <text x="200" y="560" textAnchor="middle" fontSize="16" fill="#1a237e" fontStyle="italic" fontFamily="serif" fontWeight="500">
+                    "Tua lại những ngày tháng rực rỡ nhất."
                 </text>
             </g>
         </svg>
@@ -397,43 +491,97 @@ const VHSTemplate: React.FC<TemplateProps> = ({ userName, userImage, description
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#111" />
+            <defs>
+                {/* Chromatic Aberration Filter */}
+                <filter id="chromatic-aberration">
+                    <feOffset in="SourceGraphic" dx="-2" dy="0" result="redChannel" />
+                    <feOffset in="SourceGraphic" dx="2" dy="0" result="blueChannel" />
+                    <feMerge>
+                        <feMergeNode in="redChannel" />
+                        <feMergeNode in="blueChannel" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
 
-            {/* Glitch Elements */}
-            <g opacity="0.8">
-                <rect x="0" y="100" width="400" height="10" fill="cyan" opacity="0.5" />
-                <rect x="0" y="105" width="400" height="2" fill="magenta" opacity="0.7" />
-                <rect x="0" y="450" width="400" height="20" fill="transparent" stroke="white" strokeDasharray="4 4" opacity="0.2" />
+                {/* Film Grain Filter */}
+                <filter id="film-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="0.3 0 0 0 0  0 0.3 0 0 0  0 0 0.3 0 0  0 0 0 0.1 0" in="noise" result="coloredNoise" />
+                    <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+                    <feBlend mode="multiply" in="composite" in2="SourceGraphic" />
+                </filter>
+
+                {/* Neon Glow */}
+                <filter id="neon-glow">
+                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+
+                {/* Glitch Shake */}
+                <filter id="glitch-shake" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.2" numOctaves="1" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+            </defs>
+
+            {/* Dark Background + Film Grain */}
+            <rect width="400" height="600" fill="#050505" />
+            <rect width="400" height="600" fill="#111" opacity="0.5" filter="url(#film-grain)" />
+
+            {/* Glitch Elements - Horizontal Streaks */}
+            <g opacity="0.6">
+                {/* Cyan/Magenta Bars */}
+                <rect x="0" y="80" width="400" height="15" fill="cyan" opacity="0.4" style={{ filter: 'blur(4px)' }} />
+                <rect x="0" y="85" width="400" height="2" fill="magenta" opacity="0.6" style={{ filter: 'blur(2px)' }} />
+                {/* Random Static Lines */}
+                <line x1="0" y1="150" x2="400" y2="150" stroke="#fff" strokeWidth="1" opacity="0.1" />
+                <line x1="0" y1="450" x2="400" y2="450" stroke="#fff" strokeWidth="2" opacity="0.05" />
+                <line x1="20" y1="300" x2="380" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="50 150" opacity="0.2" />
             </g>
 
-            {/* Image with offset "glitch" */}
-            {userImage && <image href={userImage} x="45" y="100" width="310" height="310" preserveAspectRatio="xMidYMid slice" opacity="0.5" />}
-            {userImage && <image href={userImage} x="40" y="100" width="310" height="310" preserveAspectRatio="xMidYMid slice" style={{ mixBlendMode: 'lighten' }} filter="brightness(1.2)" />}
+            {/* Image with Chromatic Aberration */}
+            <g filter="url(#chromatic-aberration)">
+                {userImage && <image href={userImage} x="45" y="100" width="310" height="310" preserveAspectRatio="xMidYMid slice" opacity="0.8" />}
+                {/* Color Dodge Overlay */}
+                {userImage && <image href={userImage} x="40" y="100" width="310" height="310" preserveAspectRatio="xMidYMid slice" style={{ mixBlendMode: 'color-dodge' }} opacity="0.4" />}
+            </g>
+
+            {/* Scanlines (Varied width) */}
+            <pattern id="scanlines" x="0" y="0" width="1" height="6" patternUnits="userSpaceOnUse">
+                <rect width="1" height="3" fill="#000" opacity="0.4" />
+                <rect y="3" width="1" height="1" fill="#000" opacity="0.2" />
+            </pattern>
+            <rect width="400" height="600" fill="url(#scanlines)" pointerEvents="none" />
 
 
             {/* TEXT OSD */}
-            <text x="30" y="60" fontSize="30" fill="#fff" fontFamily="monospace" style={{ textShadow: "2px 2px 0px #f0f" }}>
+            <text x="30" y="60" fontSize="26" fill="#0f0" fontFamily="monospace" fontWeight="bold" filter="url(#glitch-shake)" style={{ textShadow: "0 0 5px #0f0" }}>
                 PLAY &#9658;
             </text>
-            <text x="30" y="90" fontSize="20" fill="#fff" fontFamily="monospace">
+            <text x="30" y="90" fontSize="18" fill="#0f0" fontFamily="monospace" opacity="0.8" style={{ textShadow: "0 0 2px #0f0" }}>
                 SP 0:00:23
             </text>
 
-            <text x="200" y="480" textAnchor="middle" fontSize="30" fill="#fff" fontFamily="Arial Black, Arial, sans-serif" style={{ textShadow: "-3px 0px 0px cyan, 3px 0px 0px magenta" }}>
-                {safeName.toUpperCase()}
-            </text>
-            <text x="200" y="520" textAnchor="middle" fontSize="16" fill="#ddd" fontFamily="monospace">
+            <g filter="url(#chromatic-aberration)">
+                <text x="200" y="480" textAnchor="middle" fontSize="32" fill="#fff" fontFamily="Arial Black, Arial, sans-serif" letterSpacing="2" style={{ textShadow: "-3px 0px 0px cyan, 3px 0px 0px magenta" }}>
+                    {safeName.toUpperCase()}
+                </text>
+            </g>
+
+            <text x="200" y="520" textAnchor="middle" fontSize="16" fill="#ddd" fontFamily="monospace" filter="url(#glitch-shake)">
                 "{safeDesc}"
             </text>
 
-            {/* Scanlines */}
-            <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
-                <rect width="1" height="2" fill="#000" opacity="0.3" />
-            </pattern>
-            <rect width="400" height="600" fill="url(#scanlines)" />
+            {/* Tracking Error Bottom */}
+            <rect x="0" y="550" width="400" height="30" fill="url(#scanlines)" opacity="0.5" />
+            <path d="M0,560 L400,565 L400,570 L0,560" fill="#fff" opacity="0.1" />
+
         </svg>
     );
-}
+};
 
 // 8. Pacman Maze
 const PacmanTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {

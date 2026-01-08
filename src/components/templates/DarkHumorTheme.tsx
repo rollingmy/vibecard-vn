@@ -137,78 +137,154 @@ const ReaperTemplate: React.FC<TemplateProps> = ({ userName, userImage, descript
     );
 }
 
-// 3. Tram Cam Tuoi Tre (Battery Low)
+// 3. Tram Cam Tuoi Tre (Battery Low - Moody Tech Style)
 const TramCamTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "LOW BATTERY";
     const safeDesc = description || "System shutting down...";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#778899" />
+            <defs>
+                {/* Emergency Red Glow */}
+                <filter id="emergency-glow">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feFlood floodColor="#FF0000" floodOpacity="0.9" result="color" />
+                    <feComposite in="color" in2="coloredBlur" operator="in" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Moody Grain */}
+                <filter id="moody-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="0.1 0 0 0 0  0 0.1 0 0 0  0 0 0.1 0 0  0 0 0 0.3 0" in="noise" result="coloredNoise" />
+                    <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+                    <feBlend mode="multiply" in="composite" in2="SourceGraphic" />
+                </filter>
+            </defs>
 
-            {/* Downward Graph */}
-            <path d="M50,300 L120,350 L180,320 L250,450 L350,550" fill="none" stroke="#FF4500" strokeWidth="5" strokeDasharray="10 5" />
-            <circle cx="350" cy="550" r="8" fill="#FF4500" />
+            {/* Background - Moody Blue Grey */}
+            <rect width="400" height="600" fill="#2c3e50" />
+            <rect width="400" height="600" fill="#000" opacity="0.2" filter="url(#moody-grain)" />
+
+            {/* Downward Graph - MOVED TO BACK LAYER */}
+            <path d="M0,350 L80,330 L150,380 L250,300 L350,550 L420,580" fill="none" stroke="#e74c3c" strokeWidth="3" strokeDasharray="10 5" opacity="0.6" />
+            <circle cx="350" cy="550" r="6" fill="#e74c3c" />
+
+            {/* Avatar Frame - Increased size */}
+            {/* Added white border stroke="white" strokeWidth="2" */}
+            <rect x="60" y="80" width="280" height="280" fill="none" stroke="white" strokeWidth="2" opacity="0.8" />
+            {userImage && <image href={userImage} x="65" y="85" width="270" height="270" preserveAspectRatio="xMidYMid slice" filter="grayscale(1) contrast(1.2)" opacity="0.9" />}
 
             {/* Battery Icon */}
-            <g transform="translate(150, 400)">
-                <rect x="0" y="0" width="100" height="180" rx="10" fill="none" stroke="#fff" strokeWidth="8" />
-                <rect x="30" y="-15" width="40" height="20" fill="#fff" />
-                {/* 1% red level */}
-                <rect x="10" y="160" width="80" height="10" fill="#FF0000" />
-                <text x="50" y="100" textAnchor="middle" fontSize="40" fill="#fff" fontWeight="bold">1%</text>
+            <g transform="translate(150, 420)">
+                <rect x="0" y="0" width="100" height="160" rx="8" fill="none" stroke="#fff" strokeWidth="6" opacity="0.8" />
+                <rect x="30" y="-12" width="40" height="12" fill="#fff" opacity="0.8" />
+                {/* 1% red level with Glow */}
+                <rect x="10" y="140" width="80" height="10" fill="#FF0000" filter="url(#emergency-glow)" />
+                <text x="50" y="90" textAnchor="middle" fontSize="36" fill="#fff" fontWeight="bold" fontFamily="monospace">1%</text>
             </g>
 
-            {/* Avatar Frame */}
-            <rect x="80" y="80" width="240" height="240" fill="#fff" stroke="#000" strokeWidth="4" />
-            {userImage && <image href={userImage} x="80" y="80" width="240" height="240" preserveAspectRatio="xMidYMid slice" filter="grayscale(0.8)" />}
 
-            <text x="200" y="60" textAnchor="middle" fontSize="24" fontFamily="Arial" fontWeight="bold" fill="#fff">
+            {/* Title System Alert */}
+            <text x="200" y="50" textAnchor="middle" fontSize="22" fontFamily="Arial" fontWeight="bold" fill="#fff" letterSpacing="1">
                 TRẠM SẠC CẢM XÚC
             </text>
 
-            <text x="200" y="360" textAnchor="middle" fontSize={getSafeFontSize(safeName, 380, 26)} fontWeight="bold" fill="#000">
+            <text x="200" y="390" textAnchor="middle" fontSize={getSafeFontSize(safeName, 380, 40)} fontWeight="900" fill="#ff4d4d" fontFamily="Courier New, monospace" style={{ textShadow: "2px 2px 0px #000" }}>
                 {safeName}
             </text>
-            <text x="50" y="580" fontSize="14" fill="#fff" fontStyle="italic">
+
+            <text x="200" y="590" textAnchor="middle" fontSize="14" fill="#bdc3c7" fontStyle="italic" opacity="0.8">
                 "{safeDesc}"
             </text>
         </svg>
     );
 }
 
-// 4. Introvert Cave
+// 4. Introvert Cave (Redesigned: Digital Status Display)
 const CaveTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "HƯỚNG NỘI";
-    const safeDesc = description || "Do Not Disturb";
+    const safeDesc = description || "Do Not Disturb (trừ shipper)";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <radialGradient id="caveGrad" cx="0.5" cy="0.5" r="0.8">
-                    <stop offset="0.3" stopColor="#000" />
-                    <stop offset="1" stopColor="#2F4F4F" />
-                </radialGradient>
+                {/* Neon Orange Filter */}
+                <filter id="orange-neon" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feFlood floodColor="#FF8C00" floodOpacity="0.8" result="color" />
+                    <feComposite in="color" in2="coloredBlur" operator="in" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* BG Noise */}
+                <filter id="bg-noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" opacity="0.1" />
+                    <feColorMatrix type="saturate" values="0" />
+                    <feBlend mode="overlay" in2="SourceGraphic" />
+                </filter>
             </defs>
-            <rect width="400" height="600" fill="url(#caveGrad)" />
 
-            {/* Cave Entrance */}
-            <path d="M0,600 V0 H400 V600 H350 Q200,300 50,600 Z" fill="#1a1a1a" />
+            {/* Black Background with Noise */}
+            <rect width="400" height="600" fill="#0a0a0a" />
+            <rect width="400" height="600" fill="transparent" filter="url(#bg-noise)" opacity="0.3" />
 
-            {/* Avatar visible in the dark center */}
-            {userImage && <image href={userImage} x="100" y="200" width="200" height="200" preserveAspectRatio="xMidYMid slice" opacity="0.6" />}
+            {/* Status Frame Top - Charging */}
+            <g transform="translate(50, 50)">
+                {/* Cable */}
+                <path d="M150,-50 L150,50" stroke="#FF8C00" strokeWidth="4" filter="url(#orange-neon)" />
+                <rect x="50" y="50" width="200" height="80" rx="10" fill="#111" stroke="#FF8C00" strokeWidth="2" filter="url(#orange-neon)" />
 
-            {/* Hanging Sign */}
-            <path d="M150,50 L150,150" stroke="#D2691E" strokeWidth="4" />
-            <rect x="100" y="150" width="200" height="80" fill="#CD853F" stroke="#8B4513" strokeWidth="4" rx="5" />
-            <text x="200" y="180" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#5c3a21">DO NOT DISTURB</text>
-            <text x="200" y="210" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#5c3a21">ĐANG SẠC XÃ HỘI</text>
+                {/* Text "ĐANG SẠC..." */}
+                <text x="150" y="95" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#FF8C00" fontFamily="sans-serif" letterSpacing="2">
+                    ĐANG SẠC XÃ HỘI...
+                </text>
 
-            <text x="200" y="500" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 24)} fill="#778899" fontWeight="bold">
-                {safeName}
+                {/* Battery Icon Top Right */}
+                <g transform="translate(260, 60)">
+                    <rect x="0" y="0" width="25" height="12" rx="2" stroke="#FF8C00" strokeWidth="2" fill="none" />
+                    <rect x="2" y="2" width="15" height="8" fill="#FF8C00" /> {/* Level */}
+                    <path d="M26,3 L28,3 L28,9 L26,9 Z" fill="#FF8C00" />
+                    {/* Lightning Bolt */}
+                    <path d="M35,-5 L30,5 L35,5 L30,15" stroke="#FF8C00" strokeWidth="2" fill="none" transform="scale(0.8)" />
+                </g>
+            </g>
+
+            {/* Avatar Centered */}
+            <defs>
+                <clipPath id="circleAv">
+                    <circle cx="200" cy="280" r="100" />
+                </clipPath>
+            </defs>
+            {/* Glow behind avatar */}
+            <circle cx="200" cy="280" r="105" fill="none" stroke="#FF8C00" strokeWidth="2" strokeDasharray="5 5" opacity="0.5" />
+
+            {userImage ? (
+                <image href={userImage} x="100" y="180" width="200" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAv)" />
+            ) : (
+                <circle cx="200" cy="280" r="100" fill="#222" />
+            )}
+            {/* "Loading" ring around avatar */}
+            <path d="M200,175 A105,105 0 0,1 305,280" fill="none" stroke="#FF8C00" strokeWidth="4" strokeLinecap="round" filter="url(#orange-neon)" />
+
+
+            {/* Typography Bottom */}
+            <text x="200" y="450" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 36)} fill="#fff" fontFamily="sans-serif" fontWeight="900" letterSpacing="6">
+                {safeName.toUpperCase()}
             </text>
-            <text x="200" y="540" textAnchor="middle" fontSize="14" fill="#666" fontStyle="italic">
-                {safeDesc}
+
+            {/* Status Line */}
+            <line x1="100" y1="470" x2="300" y2="470" stroke="#333" strokeWidth="2" />
+
+            <text x="200" y="500" textAnchor="middle" fontSize="16" fill="#888" fontFamily="sans-serif" fontWeight="bold">
+                DO NOT DISTURB
+            </text>
+            <text x="200" y="525" textAnchor="middle" fontSize="14" fill="#FF8C00" fontFamily="sans-serif" fontWeight="bold" fontStyle="italic">
+                {safeDesc.replace('Do Not Disturb', '')}
             </text>
         </svg>
     );
@@ -571,7 +647,7 @@ const ConsumerTemplate: React.FC<TemplateProps> = ({ userName, userImage, descri
     );
 }
 
-// 10. Drama Is Coming
+// 10. Drama Is Coming (Epic Cinematic Style)
 const DramaTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "DRAMA QUEEN";
     const safeDesc = description || "Winter is coming...";
@@ -579,34 +655,91 @@ const DramaTemplate: React.FC<TemplateProps> = ({ userName, userImage, descripti
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
             <defs>
+                {/* Stone Carved Text Filter */}
+                <filter id="stone-carve">
+                    <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="blur" />
+                    <feOffset dx="1" dy="1" in="blur" result="offsetBlur" />
+                    <feSpecularLighting in="blur" surfaceScale="5" specularConstant="1" specularExponent="20" lightingColor="#bbbbbb" result="specOut">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut" />
+                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
+                    <feMerge>
+                        <feMergeNode in="offsetBlur" />
+                        <feMergeNode in="litPaint" />
+                    </feMerge>
+                </filter>
+                {/* Soft Glow for Name */}
+                <filter id="soft-glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Mist Texture */}
+                <filter id="mist-fog">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+                </filter>
                 <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#708090" />
-                    <stop offset="0.5" stopColor="#C0C0C0" />
-                    <stop offset="1" stopColor="#708090" />
+                    <stop offset="0" stopColor="#5d6d7e" />
+                    <stop offset="0.5" stopColor="#d5dbdb" />
+                    <stop offset="1" stopColor="#2c3e50" />
                 </linearGradient>
             </defs>
-            <rect width="400" height="600" fill="#2F4F4F" />
 
-            {/* Swords Background */}
-            <path d="M200,300 L50,550 M200,300 L350,550 M200,300 L50,50 M200,300 L350,50" stroke="#708090" strokeWidth="10" />
+            {/* Background - Dark Stone/Velvet */}
+            <rect width="400" height="600" fill="#1a252f" />
+            <rect width="400" height="600" fill="#000" opacity="0.3" filter="url(#mist-fog)" />
 
-            {/* Avatar Framed by swords/throne chair back */}
-            <path d="M100,50 L120,200 H280 L300,50" fill="none" stroke="url(#metalGrad)" strokeWidth="5" />
-            {userImage && <image href={userImage} x="100" y="100" width="200" height="250" preserveAspectRatio="xMidYMid slice" style={{ clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)' }} />}
+            {/* Ash Particles */}
+            <g fill="#fff" opacity="0.4">
+                {[...Array(20)].map((_, i) => (
+                    <circle
+                        key={i}
+                        cx={(i * 97) % 400}
+                        cy={(i * 131) % 600}
+                        r={(i % 3) + 1}
+                        filter="blur(1px)"
+                        opacity={((i % 5) + 1) / 10}
+                    />
+                ))}
+            </g>
 
-            {/* Text GOT Style */}
-            <rect x="0" y="400" width="400" height="200" fill="linear-gradient(to top, #000, transparent)" />
-            <text x="200" y="480" textAnchor="middle" fontSize="30" fontWeight="bold" fill="#fff" fontFamily="serif" style={{ textShadow: "0px 2px 4px #000" }}>
+            {/* Iron Throne Frame - Stylized Swords */}
+            <g transform="translate(0, 50)" filter="drop-shadow(0px 10px 10px rgba(0,0,0,0.8))">
+                {/* Back Swords */}
+                <path d="M50,100 L80,0 L110,100 M350,100 L320,0 L290,100" stroke="#5d6d7e" strokeWidth="4" fill="none" />
+                <path d="M120,80 L140,-20 L160,80 M280,80 L260,-20 L240,80" stroke="#707b7c" strokeWidth="4" fill="none" />
+                {/* Main Frame */}
+                <path d="M50,100 L350,100 L330,400 L70,400 Z" fill="none" stroke="url(#metalGrad)" strokeWidth="8" />
+                {/* Seat Details */}
+                <path d="M50,400 L30,450 M350,400 L370,450" stroke="#2c3e50" strokeWidth="6" />
+            </g>
+
+            {/* Avatar */}
+            <defs>
+                <clipPath id="throneClip">
+                    <polygon points="55,105 345,105 325,395 75,395" />
+                </clipPath>
+            </defs>
+            {userImage && <image href={userImage} x="50" y="50" width="300" height="400" preserveAspectRatio="xMidYMid slice" clipPath="url(#throneClip)" opacity="0.9" />}
+
+            {/* Cinematic Text Overlay */}
+            <rect x="0" y="420" width="400" height="180" fill="linear-gradient(to top, #000, transparent)" />
+
+            <text x="200" y="480" textAnchor="middle" fontSize="32" fontWeight="bold" fill="#d5dbdb" fontFamily="serif" letterSpacing="2" filter="url(#stone-carve)">
                 DRAMA IS COMING
             </text>
 
-            <path d="M50,500 H350" stroke="#C0C0C0" strokeWidth="2" />
+            <path d="M100,500 H300" stroke="#d5dbdb" strokeWidth="1" opacity="0.5" />
 
-            <text x="200" y="540" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 24)} fontWeight="normal" fill="#C0C0C0" fontFamily="serif">
+            <text x="200" y="540" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 32)} fontWeight="normal" fill="#fff" fontFamily="serif" filter="url(#soft-glow)">
                 {safeName.toUpperCase()}
             </text>
-            <text x="200" y="570" textAnchor="middle" fontSize="14" fill="#aaa" fontStyle="italic">
-                {safeDesc}
+            <text x="200" y="575" textAnchor="middle" fontSize="14" fill="#bdc3c7" fontStyle="italic" fontFamily="serif" letterSpacing="1">
+                "{safeDesc}"
             </text>
         </svg>
     );

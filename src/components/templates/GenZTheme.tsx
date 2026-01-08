@@ -693,22 +693,46 @@ export const GenZTheme = {
     ),
 
     // ===================================
-    // 48. KHUM (No)
+    // 48. KHUM (Glitch Minimalist Style)
     // ===================================
     'khum': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <clipPath id="avatar-clip-x">
                     <circle cx="150" cy="150" r="80" />
                 </clipPath>
+                {/* Red Glow for X */}
+                <filter id="red-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Pixel Text Pattern (Grid) */}
+                <pattern id="pixel-text-grid" x="0" y="0" width="60" height="30" patternUnits="userSpaceOnUse">
+                    <text x="10" y="20" fontSize="10" fill="#e0e0e0" fontFamily="monospace" fontWeight="bold">KHÔNG</text>
+                </pattern>
+
+                {/* Glitch Clip Paths */}
+                <clipPath id="glitch-clip-1">
+                    <rect x="0" y="260" width="300" height="10" />
+                </clipPath>
+                <clipPath id="glitch-clip-2">
+                    <rect x="0" y="275" width="300" height="5" />
+                </clipPath>
             </defs>
 
-            {/* Concrete Grey BG */}
-            <rect width="300" height="400" fill="#9e9e9e" />
+            {/* High Contrast Grey BG */}
+            <rect width="300" height="400" fill="#eeeeee" />
+            <rect width="300" height="400" fill="url(#pixel-text-grid)" />
 
-            {/* Graffiti Wall Texture */}
-            <text x="50" y="50" fontSize="20" opacity="0.2" transform="rotate(-15)">Nope</text>
-            <text x="250" y="350" fontSize="30" opacity="0.2" transform="rotate(10)">Nah</text>
+            {/* Warning Icon (Top Left) */}
+            <g transform="translate(20, 20) scale(0.8)">
+                <path d="M15,5 L28,28 L2,28 Z" fill="#212121" stroke="none" />
+                <text x="15" y="23" textAnchor="middle" fontSize="14" fill="#ffeb3b" fontWeight="bold">!</text>
+            </g>
+
 
             {/* Avatar */}
             {userImage ? (
@@ -717,49 +741,105 @@ export const GenZTheme = {
                     href={userImage}
                     clipPath="url(#avatar-clip-x)"
                     preserveAspectRatio="xMidYMid slice"
-                    style={{ filter: "grayscale(100%)" }}
+                    style={{ filter: "grayscale(100%) contrast(1.2)" }}
                 />
             ) : (
                 <text x="150" y="160" textAnchor="middle" fontSize="60">🙅</text>
             )}
 
-            {/* Big Red X Spray Paint */}
-            <path d="M80,80 L220,220" stroke="#d50000" strokeWidth="15" strokeLinecap="round" opacity="0.8" />
-            <path d="M220,80 L80,220" stroke="#d50000" strokeWidth="15" strokeLinecap="round" opacity="0.8" />
+            {/* Thin Red X with Glow */}
+            <g filter="url(#red-glow)" opacity="0.9">
+                <line x1="80" y1="80" x2="220" y2="220" stroke="#d50000" strokeWidth="8" strokeLinecap="round" />
+                <line x1="220" y1="80" x2="80" y2="220" stroke="#d50000" strokeWidth="8" strokeLinecap="round" />
+            </g>
 
-            <text x="150" y="280" textAnchor="middle" fontSize="50" fontWeight="900" fill="white" stroke="black" strokeWidth="2" fontFamily="Arial Black, sans-serif">KHUM!</text>
+            {/* Glitch Text "KHUM!" */}
+            <g>
+                <text x="153" y="280" textAnchor="middle" fontSize="50" fontWeight="900" fill="#00e5ff" fontFamily="Arial Black, sans-serif" opacity="0.7" clipPath="url(#glitch-clip-1)">KHUM!</text>
+                <text x="147" y="280" textAnchor="middle" fontSize="50" fontWeight="900" fill="#ff0000" fontFamily="Arial Black, sans-serif" opacity="0.7" clipPath="url(#glitch-clip-2)">KHUM!</text>
+                <text x="150" y="280" textAnchor="middle" fontSize="50" fontWeight="900" fill="#212121" fontFamily="Arial Black, sans-serif">KHUM!</text>
+            </g>
 
-            <rect x="50" y="320" width="200" height="50" fill="black" transform="rotate(-2 150 345)" />
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="bold" fill="white" fontFamily="sans-serif" transform="rotate(-2 150 345)">
+
+            {/* Banner: Black Rect + Sharp White Text */}
+            <rect x="40" y="315" width="220" height="40" fill="black" />
+            <text x="150" y="342" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fill="white" fontFamily="Arial, sans-serif" letterSpacing="2">
                 {userName || "TỪ CHỐI HIỂU"}
             </text>
-        </>
+
+            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#757575" fontFamily="monospace">
+                Mọi nỗ lực giải thích đều vô nghĩa.
+            </text>
+        </svg>
     ),
 
     // ===================================
     // 49. LEM MON (Lemon)
     // ===================================
+    // ===================================
+    // 49. LEM MON (Juicy Fresh Style)
+    // ===================================
     'lem-mon': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <clipPath id="avatar-clip-lemon">
                     <ellipse cx="150" cy="150" rx="90" ry="70" />
                 </clipPath>
+                {/* Grain Texture Filter */}
+                <filter id="grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="saturate" values="0" />
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.3" />
+                    </feComponentTransfer>
+                    <feComposite operator="in" in2="SourceGraphic" result="grain" />
+                    <feComposite operator="arithmetic" k1="0" k2="1" k3="0.3" k4="0" in="grain" in2="SourceGraphic" />
+                </filter>
+                {/* Soft Shadow for Leaf */}
+                <filter id="leaf-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#33691e" floodOpacity="0.4" />
+                </filter>
             </defs>
 
-            {/* Acid Yellow Green BG */}
-            <rect width="300" height="400" fill="#c6ff00" />
+            {/* Acid Yellow Green BG with Texture */}
+            <rect width="300" height="400" fill="#c6ff00" filter="url(#grain)" />
 
-            {/* Lemon Slices Pattern */}
-            <circle cx="0" cy="0" r="50" fill="#f4ff81" opacity="0.5" />
-            <circle cx="300" cy="400" r="80" fill="#f4ff81" opacity="0.5" />
-            <circle cx="300" cy="0" r="40" fill="#f4ff81" opacity="0.5" />
+            {/* Lemon Slices Pattern (More defined) */}
+            <circle cx="0" cy="0" r="60" fill="none" stroke="#f4ff81" strokeWidth="20" opacity="0.6" />
+            <path d="M0,0 L60,0" stroke="#f4ff81" strokeWidth="2" />
+            <path d="M0,0 L42,42" stroke="#f4ff81" strokeWidth="2" />
+            <path d="M0,0 L0,60" stroke="#f4ff81" strokeWidth="2" />
 
-            {/* Lemon Avatar Frame */}
-            <ellipse cx="150" cy="150" rx="100" ry="80" fill="#ffeb3b" stroke="#76ff03" strokeWidth="5" />
+            <circle cx="300" cy="400" r="90" fill="none" stroke="#f4ff81" strokeWidth="20" opacity="0.6" />
+            <path d="M300,400 L210,400" stroke="#f4ff81" strokeWidth="2" />
+            <path d="M300,400 L300,310" stroke="#f4ff81" strokeWidth="2" />
+
+            {/* Water Drops (Shiny) */}
+            <g opacity="0.8">
+                <circle cx="50" cy="300" r="5" fill="#ffffff" opacity="0.4" />
+                <circle cx="52" cy="298" r="2" fill="#ffffff" />
+
+                <circle cx="260" cy="50" r="8" fill="#ffffff" opacity="0.4" />
+                <circle cx="263" cy="47" r="3" fill="#ffffff" />
+
+                <circle cx="200" cy="250" r="4" fill="#ffffff" opacity="0.4" />
+                <circle cx="201" cy="249" r="1.5" fill="#ffffff" />
+            </g>
+
+
+            {/* Lemon Avatar Frame (Deep Green Stroke + Details) */}
+            <ellipse cx="150" cy="150" rx="100" ry="80" fill="#ffeb3b" stroke="#33691e" strokeWidth="4" />
             {/* Ends of lemon */}
-            <path d="M50,150 Q40,150 35,160" stroke="#76ff03" strokeWidth="5" fill="none" />
-            <path d="M250,150 Q260,150 265,140" stroke="#76ff03" strokeWidth="5" fill="none" />
+            <path d="M45,150 Q35,150 30,160" stroke="#33691e" strokeWidth="4" fill="none" />
+            <path d="M255,150 Q265,150 270,140" stroke="#33691e" strokeWidth="4" fill="none" />
+
+            {/* Leaf and Stem */}
+            <g transform="translate(130, 60)" filter="url(#leaf-shadow)">
+                <path d="M20,10 Q20,0 25,-5" stroke="#33691e" strokeWidth="4" fill="none" /> {/* Stem */}
+                <path d="M25,0 Q45,0 55,20 Q45,40 25,40 Q5,40 0,20 Q5,0 25,0 Z" fill="#64dd17" stroke="#33691e" strokeWidth="2" transform="rotate(-15 25 10)" /> {/* Leaf */}
+                <path d="M10,25 L40,15" stroke="#33691e" strokeWidth="1" opacity="0.5" transform="rotate(-15 25 10)" />{/* Leaf vein */}
+            </g>
+
 
             {userImage ? (
                 <image
@@ -772,13 +852,15 @@ export const GenZTheme = {
                 <text x="150" y="170" textAnchor="middle" fontSize="60">🍋</text>
             )}
 
-            <text x="150" y="280" textAnchor="middle" fontSize="30" fontStyle="italic" fontWeight="bold" fill="#33691e">"Chua lè chua lét"</text>
+            {/* Removed floating text */}
 
             <text x="150" y="330" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#1b5e20" fontFamily="sans-serif">
                 {userName || "LEM MÒN"}
             </text>
-            <text x="150" y="360" textAnchor="middle" fontSize="14" fill="#64dd17">Thôi bớt diễn giùm</text>
-        </>
+
+            {/* New Quote in Bottom Banner */}
+            <text x="150" y="365" textAnchor="middle" fontSize="12" fill="#1b5e20" fontWeight="bold" fontStyle="italic">"Không phải em là chua, do anh chưa đủ ngọt"</text>
+        </svg>
     ),
 
     // ===================================
@@ -846,25 +928,54 @@ export const GenZTheme = {
     // 53. BAN DOI AI (AI Partner)
     // ===================================
     'ban-doi-ai': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <clipPath id="avatar-clip-heart-pixel">
                     <path d="M150,220 C100,180 50,150 50,100 C50,50 100,50 150,100 C200,50 250,50 250,100 C250,150 200,180 150,220 Z" />
                 </clipPath>
+                {/* Neon Pink Glow Filter */}
+                <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                    <feFlood floodColor="#d500f9" result="color" />
+                    <feComposite in="color" in2="blur" operator="in" result="glow" />
+                    <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Outer Glow for Match Rate */}
+                <filter id="outer-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#ff4081" floodOpacity="0.8" />
+                </filter>
+                {/* Gradient for Match Bar */}
+                <linearGradient id="match-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#ff4081" />
+                    <stop offset="100%" stopColor="#f8bbd0" />
+                </linearGradient>
             </defs>
 
             {/* Cyber Pink BG */}
-            <rect width="300" height="400" fill="#f8bbd0" />
-            <pattern id="dot-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1" fill="#ec407a" />
+            <rect width="300" height="400" fill="#fce4ec" />
+            {/* Digital Circuit Grid Pattern */}
+            <pattern id="circuit-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M10,0 L10,40 M0,10 L40,10" stroke="#f48fb1" strokeWidth="1" opacity="0.3" />
+                <circle cx="10" cy="10" r="2" fill="#f48fb1" opacity="0.5" />
             </pattern>
-            <rect width="300" height="400" fill="url(#dot-pattern)" opacity="0.2" />
+            <rect width="300" height="400" fill="url(#circuit-pattern)" />
 
-            {/* Holographic Heart UI */}
-            <path d="M150,230 C90,180 40,150 40,90 C40,30 100,30 150,90 C200,30 260,30 260,90 C260,150 210,180 150,230 Z"
-                fill="none" stroke="#e91e63" strokeWidth="2" strokeDasharray="5 5" />
+            {/* Holographic Heart UI (Glowy Dashed Lines + Binary Code) */}
+            <g filter="url(#neon-glow)" opacity="0.7">
+                <path d="M150,230 C90,180 40,150 40,90 C40,30 100,30 150,90 C200,30 260,30 260,90 C260,150 210,180 150,230 Z"
+                    fill="none" stroke="#e91e63" strokeWidth="2" strokeDasharray="5 5" />
+            </g>
+
+            {/* Binary Code Decoration */}
+            <text x="50" y="80" fontSize="10" fill="#e91e63" opacity="0.5" fontFamily="monospace">0101</text>
+            <text x="230" y="80" fontSize="10" fill="#e91e63" opacity="0.5" fontFamily="monospace">1010</text>
+            <text x="150" y="250" textAnchor="middle" fontSize="10" fill="#e91e63" opacity="0.5" fontFamily="monospace">00110011</text>
+
             <path d="M150,240 C80,180 30,150 30,80 C30,10 100,10 150,80 C200,10 270,10 270,80 C270,150 220,180 150,240 Z"
-                fill="none" stroke="#880e4f" strokeWidth="1" opacity="0.5" />
+                fill="none" stroke="#880e4f" strokeWidth="1" opacity="0.3" />
 
             {/* Avatar */}
             {userImage ? (
@@ -878,44 +989,87 @@ export const GenZTheme = {
                 <text x="150" y="150" textAnchor="middle" fontSize="60">🤖</text>
             )}
 
-            {/* Status Box */}
-            <rect x="50" y="260" width="200" height="80" fill="white" stroke="#e91e63" strokeWidth="2" rx="10" />
-            <text x="150" y="280" textAnchor="middle" fontSize="12" fill="#880e4f" fontWeight="bold">MATCH RATE: 99.9%</text>
+            {/* Status Box (Cyber Style) */}
+            <g transform="translate(0, 5)">
+                <rect x="50" y="260" width="200" height="85" fill="white" stroke="#d500f9" strokeWidth="2" rx="10" opacity="0.9" />
 
-            <rect x="70" y="290" width="160" height="10" fill="#fce4ec" rx="5" />
-            <rect x="70" y="290" width="158" height="10" fill="#e91e63" rx="5" />
+                {/* Match Rate Bar (Gradient + Glow) */}
+                <text x="150" y="280" textAnchor="middle" fontSize="12" fill="#880e4f" fontWeight="bold" fontFamily="monospace" letterSpacing="1">MATCH RATE: 99.9%</text>
+                <rect x="70" y="290" width="160" height="10" fill="#fce4ec" rx="5" />
+                <rect x="70" y="290" width="158" height="10" fill="url(#match-grad)" rx="5" filter="url(#outer-glow)" />
 
-            {/* Name */}
-            <text x="150" y="325" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="900" fill="#d81b60">
-                {userName || "VIRTUAL LOVER"}
-            </text>
-            <text x="150" y="340" textAnchor="middle" fontSize="10" fill="#ad1457" fontStyle="italic">"Anh là thực tế ảo của em"</text>
+                {/* Name - Neon Glow */}
+                <text x="150" y="325" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fill="#d500f9" fontFamily="monospace" filter="url(#neon-glow)">
+                    {userName || "VIRTUAL LOVER"}
+                </text>
+                {/* Caption - Digital Font */}
+                <text x="150" y="340" textAnchor="middle" fontSize="10" fill="#880e4f" fontWeight="bold" fontFamily="monospace">"Anh là thực tế ảo của em"</text>
+            </g>
 
-            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#880e4f">NO BUGS, ONLY HUGS</text>
-        </>
+            <text x="150" y="385" textAnchor="middle" fontSize="12" fill="#880e4f" fontWeight="bold" fontFamily="monospace" letterSpacing="2">NO BUGS, ONLY HUGS</text>
+        </svg>
     ),
 
     // ===================================
     // 55. NGUOI TOI CO (Caveman)
     // ===================================
     'nguoi-toi-co': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <clipPath id="avatar-clip-stone">
                     <path d="M70,100 L230,100 L220,250 L80,250 Z" />
                 </clipPath>
+                {/* Stone Wall Texture Filter */}
+                <filter id="stone-wall">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+                    <feDiffuseLighting in="noise" lightingColor="#d7ccc8" surfaceScale="2">
+                        <feDistantLight azimuth="45" elevation="60" />
+                    </feDiffuseLighting>
+                </filter>
+                {/* Fire Glow */}
+                <filter id="fire-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                    <feFlood floodColor="#ff6f00" floodOpacity="0.8" result="color" />
+                    <feComposite in="color" in2="blur" operator="in" result="glow" />
+                    <feMerge>
+                        <feMergeNode in="glow" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Carved Text Inner Shadow */}
+                <filter id="carved-text">
+                    <feOffset dx="1" dy="1" />
+                    <feGaussianBlur stdDeviation="1" />
+                    <feComposite operator="out" in2="SourceGraphic" result="inverse" />
+                    <feFlood floodColor="black" floodOpacity="0.8" result="color" />
+                    <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+                    <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+                </filter>
             </defs>
 
-            {/* Stone Wall BG */}
-            <rect width="300" height="400" fill="#795548" />
-            <pattern id="stone-pattern" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M0,0 L50,0 L50,50 L0,50 Z" fill="none" stroke="#5d4037" strokeWidth="2" />
-                <path d="M10,10 L30,20 L10,30" fill="none" stroke="#4e342e" strokeWidth="1" />
-            </pattern>
-            <rect width="300" height="400" fill="url(#stone-pattern)" opacity="0.3" />
+            {/* Stone Wall BG with Texture and Cracks */}
+            <rect width="300" height="400" fill="#5d4037" filter="url(#stone-wall)" />
 
-            {/* Cave Entrance Frame */}
-            <path d="M50,80 Q150,20 250,80 L240,270 Q150,300 60,270 Z" fill="#3e2723" />
+            {/* Cave Paintings (Faded) */}
+            <g opacity="0.4" stroke="#3e2723" strokeWidth="2" fill="none">
+                {/* Hunter */}
+                <path d="M50,50 L60,30 L70,50 M60,30 L60,80 M60,60 L80,50" />
+                <circle cx="60" cy="25" r="5" fill="#3e2723" />
+                {/* Mammoth */}
+                <path d="M230,60 Q250,50 270,70 L270,100 M230,60 Q210,70 230,100 M270,70 L280,60" />
+            </g>
+
+            {/* Cracks and Moss */}
+            <path d="M0,0 L50,50 M300,0 L250,50" stroke="#3e2723" strokeWidth="2" opacity="0.5" />
+            <path d="M0,400 L40,360 M300,400 L260,360" stroke="#33691e" strokeWidth="4" opacity="0.3" />
+
+
+            {/* Cave Entrance Frame (Irregular Stone) */}
+            <path d="M40,90 Q150,10 260,90 L250,280 Q150,310 50,280 Z" fill="#4e342e" stroke="#3e2723" strokeWidth="4" />
+
+            {/* Cracks on Frame */}
+            <path d="M50,100 L70,120 M250,260 L230,240" stroke="#000" strokeWidth="1" opacity="0.5" />
+
 
             {/* Avatar */}
             {userImage ? (
@@ -929,18 +1083,41 @@ export const GenZTheme = {
                 <text x="150" y="200" textAnchor="middle" fontSize="60">🍖</text>
             )}
 
-            {/* Torch */}
-            <text x="40" y="150" fontSize="30">🔥</text>
-            <text x="230" y="150" fontSize="30">🔥</text>
+            {/* Primitive Icons */}
+            {/* Bone Top Left */}
+            <g transform="translate(40, 60) rotate(-30)">
+                <path d="M0,10 Q-5,0 0,-10 L40,-5 Q45,0 40,5 Z" fill="#efebe9" stroke="#5d4037" strokeWidth="1" />
+                <circle cx="0" cy="-10" r="5" fill="#efebe9" stroke="#5d4037" />
+                <circle cx="0" cy="10" r="5" fill="#efebe9" stroke="#5d4037" />
+                <circle cx="40" cy="-5" r="5" fill="#efebe9" stroke="#5d4037" />
+                <circle cx="40" cy="5" r="5" fill="#efebe9" stroke="#5d4037" />
+            </g>
 
-            {/* Stone Tablet Name */}
-            <path d="M40,300 L260,300 L250,380 L50,380 Z" fill="#9e9e9e" stroke="#616161" strokeWidth="3" />
-            <text x="150" y="320" textAnchor="middle" fontSize="10" fill="#424242" fontWeight="bold" fontFamily="monospace">UNKNOWN SPECIES</text>
+            {/* Stone Axe Bottom Right */}
+            <g transform="translate(250, 260) rotate(20)">
+                <rect x="0" y="0" width="10" height="60" fill="#8d6e63" stroke="black" strokeWidth="1" />
+                <path d="M5,10 L-20,0 L-20,30 L5,20" fill="#78909c" stroke="black" strokeWidth="1" />
+            </g>
 
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#212121" style={{ textShadow: "1px 1px 0px white" }}>
+            {/* Torch (Enhanced Glow) */}
+            <g filter="url(#fire-glow)">
+                <text x="30" y="200" fontSize="30">🔥</text>
+                <text x="240" y="200" fontSize="30">🔥</text>
+            </g>
+
+            {/* Stone Tablet Name (Cracked) */}
+            <path d="M40,300 L260,300 L255,380 L45,380 Z" fill="#bdbdbd" stroke="#616161" strokeWidth="3" />
+            <path d="M50,300 L60,320" stroke="#424242" strokeWidth="1" opacity="0.5" />
+
+            <text x="150" y="320" textAnchor="middle" fontSize="12" fill="#424242" fontWeight="bold" fontFamily="Papyrus, fantasy" filter="url(#carved-text)">UNKNOWN SPECIES</text>
+
+            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#3e2723" fontFamily="Papyrus, fantasy" filter="url(#carved-text)">
                 {userName || "NGƯỜI TỐI CỔ"}
             </text>
-        </>
+
+            {/* Caption */}
+            <text x="150" y="370" textAnchor="middle" fontSize="10" fill="#616161" fontStyle="italic" fontFamily="serif">"Loài người tiến hóa tới đâu rồi các bác?"</text>
+        </svg>
     ),
 
     // ===================================
@@ -1002,26 +1179,68 @@ export const GenZTheme = {
     // ===================================
     // 59. NEURAL LINK CHIP (Brain Chip)
     // ===================================
+    // 59. NEURAL LINK CHIP (Neural Link HUD Style)
+    // ===================================
     'neural-link-chip': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-hex">
                     <path d="M150,110 L200,135 L200,185 L150,210 L100,185 L100,135 Z" />
                 </clipPath>
+                {/* Strong Neon Glow */}
+                <filter id="neon-strong-cyan">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Red/Blue Glitch Offset */}
+                <filter id="glitch-offset">
+                    <feOffset in="SourceGraphic" dx="-2" dy="0" result="left" />
+                    <feOffset in="SourceGraphic" dx="2" dy="0" result="right" />
+                    <feComposite operator="arithmetic" k2="1" k3="1" in="left" in2="right" result="merged" />
+                </filter>
+                {/* Grid Pattern */}
+                <pattern id="grid-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M40,0 L0,0 L0,40" fill="none" stroke="#004d40" strokeWidth="1" opacity="0.5" />
+                </pattern>
             </defs>
 
-            {/* Black Bio-Tech BG */}
-            <rect width="300" height="400" fill="#000" />
+            {/* Black Bio-Tech BG with Grid */}
+            <rect width="300" height="400" fill="#050505" />
+            <rect width="300" height="400" fill="url(#grid-pattern)" opacity="0.6" />
 
-            {/* Neural Network Connections */}
-            <path d="M150,210 L150,300 M200,185 L260,250 M100,185 L40,250" stroke="#00e5ff" strokeWidth="1" opacity="0.5" />
-            <circle cx="40" cy="250" r="3" fill="#00e5ff" />
-            <circle cx="260" cy="250" r="3" fill="#00e5ff" />
-            <circle cx="150" cy="300" r="3" fill="#00e5ff" />
+            {/* Binary Code Background (Subtle) */}
+            <g opacity="0.3" fontSize="10" fontFamily="monospace" fill="#00ff00">
+                <text x="20" y="50">010101</text>
+                <text x="250" y="80">110011</text>
+                <text x="20" y="350">101010</text>
+                <text x="250" y="320">001100</text>
+            </g>
 
-            {/* Chip Structure */}
-            <path d="M150,100 L210,130 L210,190 L150,220 L90,190 L90,130 Z" fill="#1a1a1a" stroke="#00e5ff" strokeWidth="2" />
-            <path d="M150,110 L200,135 L200,185 L150,210 L100,185 L100,135 Z" fill="#000" />
+            {/* Blue Particles */}
+            <circle cx="50" cy="150" r="1.5" fill="#00e5ff" opacity="0.6" />
+            <circle cx="280" cy="50" r="1" fill="#00e5ff" opacity="0.8" />
+            <circle cx="20" cy="300" r="2" fill="#00e5ff" opacity="0.5" />
+
+            {/* Circuit Lines with Pulse Animation */}
+            <g filter="url(#neon-strong-cyan)">
+                {/* Static Lines */}
+                <path d="M150,210 L150,300 M200,185 L260,250 M100,185 L40,250" stroke="#004d40" strokeWidth="2" />
+                {/* Pulsing Lines (Dashed running) */}
+                <path d="M150,210 L150,300 M200,185 L260,250 M100,185 L40,250" stroke="#00e5ff" strokeWidth="2" strokeDasharray="5 10">
+                    <animate attributeName="stroke-dashoffset" from="15" to="0" dur="0.5s" repeatCount="indefinite" />
+                </path>
+            </g>
+
+            {/* Connection Nodes */}
+            <circle cx="40" cy="250" r="4" fill="#000" stroke="#00e5ff" strokeWidth="2" />
+            <circle cx="260" cy="250" r="4" fill="#000" stroke="#00e5ff" strokeWidth="2" />
+            <circle cx="150" cy="300" r="4" fill="#000" stroke="#00e5ff" strokeWidth="2" />
+
+            {/* Chip Structure (Hexagon) */}
+            <path d="M150,100 L210,130 L210,190 L150,220 L90,190 L90,130 Z" fill="#000" stroke="#00e5ff" strokeWidth="2" filter="url(#neon-strong-cyan)" />
 
             {/* Avatar */}
             {userImage ? (
@@ -1035,87 +1254,159 @@ export const GenZTheme = {
                 <text x="150" y="170" textAnchor="middle" fontSize="40">🧠</text>
             )}
 
-            {/* Data Streams */}
-            <text x="20" y="100" fill="#00e5ff" fontSize="10" fontFamily="monospace" opacity="0.7">SYNC: 100%</text>
-            <text x="220" y="100" fill="#00e5ff" fontSize="10" fontFamily="monospace" opacity="0.7">CPU: 99%</text>
+            {/* HUD Data Streams */}
+            <g fontFamily="Courier New, monospace" fontWeight="bold">
+                <text x="20" y="100" fill="#00e5ff" fontSize="12" filter="url(#neon-strong-cyan)">SYNC: 100%</text>
+                <text x="210" y="100" fill="#00e5ff" fontSize="12" filter="url(#neon-strong-cyan)">CPU: 99%</text>
+            </g>
 
-            {/* Bottom Info */}
-            <path d="M50,320 L250,320 L240,380 L60,380 Z" fill="#0d1117" stroke="#00e5ff" strokeWidth="1" />
-            <text x="150" y="340" textAnchor="middle" fill="#00e5ff" fontSize="10" letterSpacing="2">IMPLANT SUCCESSFUL</text>
-
-            <text x="150" y="365" textAnchor="middle" fontSize={Math.min(nameFontSize, 22)} fontWeight="900" fill="white" style={{ textShadow: "0 0 10px #00e5ff" }}>
-                {userName || "CYBORG V1"}
+            {/* Vertical System Text */}
+            <text x="10" y="200" transform="rotate(-90, 10, 200)" fontSize="8" fill="#00e5ff" opacity="0.6" fontFamily="monospace" letterSpacing="1">
+                SYSTEM_REBOOTING... ACCESS_GRANTED
             </text>
+
+            {/* Bottom Info Box */}
+            <g transform="translate(0, 0)">
+                {/* Frame Extended Downwards */}
+                <path d="M50,320 L250,320 L240,410 L60,410 Z" fill="#000" stroke="#00e5ff" strokeWidth="2" opacity="0.8" />
+                <rect x="60" y="325" width="180" height="80" fill="#00e5ff" opacity="0.05" />
+
+                {/* 1. Moved UP */}
+                <text x="150" y="340" textAnchor="middle" fill="#00e5ff" fontSize="10" fontWeight="bold" letterSpacing="2" fontFamily="sans-serif">IMPLANT SUCCESSFUL</text>
+
+                {/* 2. Glitched Name - Spaced out */}
+                <g filter="url(#glitch-offset)">
+                    <text x="150" y="370" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#fff" fontFamily="Courier New, monospace" letterSpacing="-1">
+                        {userName ? userName.toUpperCase() : "CYBORG V1"}
+                    </text>
+                </g>
+
+                {/* 3. Caption Moved DOWN & Bright Color */}
+                <text x="150" y="400" textAnchor="middle" fontSize="9" fill="#E0FFFF" fontFamily="monospace" fontStyle="italic" fontWeight="bold">
+                    "Tải kiến thức trực tiếp vào não (vẫn trượt môn)"
+                </text>
+            </g>
         </>
     ),
 
     // ===================================
-    // 61. TIME MACHINE TICKET (Ticket)
+    // 61. TIME MACHINE TICKET (Vintage Journey)
     // ===================================
     'time-machine-ticket': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
-                <clipPath id="avatar-clip-ticket">
-                    <circle cx="230" cy="180" r="40" />
+                {/* Paper Grunge Texture */}
+                <filter id="paper-grunge">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+                    <feDiffuseLighting in="noise" lightingColor="#fff9c4" surfaceScale="2">
+                        <feDistantLight azimuth="45" elevation="60" />
+                    </feDiffuseLighting>
+                    <feComposite operator="in" in2="SourceGraphic" />
+                    <feBlend mode="multiply" in2="SourceGraphic" />
+                </filter>
+                {/* Sepia & Serrated Edge for Avatar */}
+                <filter id="sepia-tone">
+                    <feColorMatrix type="matrix" values="0.39 0.769 0.189 0 0  0.349 0.686 0.168 0 0  0.272 0.534 0.131 0 0  0 0 0 1 0" />
+                </filter>
+                <clipPath id="avatar-clip-stamp">
+                    {/* Serrated Edge Polygon (Simplified) */}
+                    <polygon points="200,150 205,150 205,155 210,155 210,150 215,150 215,155 220,155 220,150 225,150 225,155 230,155 230,150 235,150 235,155 240,155 240,150 245,150 245,155 250,155 250,150 255,150 255,155 260,155 260,150 260,210 255,210 255,205 250,205 250,210 245,210 245,205 240,205 240,210 235,210 235,205 230,205 230,210 225,210 225,205 220,205 220,210 215,210 215,205 210,205 210,210 205,210 205,205 200,205 200,210 200,150" transform="translate(0, 0) scale(1.0)" />
+                    {/* Using circle for simplicity/robustness if polygon fails, but let's try a simple rect with stroke dasharray hack visually, or just use a standard rect clip and apply border elsewhere. Let's stick to a simple rect clip and draw the serrated border on top. */}
+                    <rect x="190" y="142" width="70" height="80" />
                 </clipPath>
+                {/* Silver Glow */}
+                <filter id="silver-glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
             </defs>
 
-            {/* Vortex Background */}
-            <rect width="300" height="400" fill="#4B0082" />
-            <circle cx="150" cy="200" r="180" fill="none" stroke="cyan" strokeWidth="1" opacity="0.2" />
-            <circle cx="150" cy="200" r="140" fill="none" stroke="magenta" strokeWidth="1" opacity="0.2" />
-            <circle cx="150" cy="200" r="100" fill="none" stroke="yellow" strokeWidth="1" opacity="0.2" />
-
-            {/* Ticket Shape */}
-            <g transform="translate(15, 120)">
-                <path d="M0,0 L270,0 L270,160 L0,160 Z" fill="#FFF8DC" stroke="black" strokeWidth="2" />
-                {/* Cutouts */}
-                <circle cx="0" cy="80" r="10" fill="#4B0082" />
-                <circle cx="270" cy="80" r="10" fill="#4B0082" />
-
-                {/* Dashed Line */}
-                <line x1="190" y1="10" x2="190" y2="150" stroke="black" strokeWidth="2" strokeDasharray="5 5" />
-
-                {/* Content Left */}
-                <text x="20" y="30" fontSize="16" fontWeight="900" fill="black">TIME TRAVEL</text>
-                <text x="20" y="50" fontSize="10" fontFamily="monospace">BOARDING PASS</text>
-
-                <text x="20" y="80" fontSize="10" fill="#555">PASSENGER:</text>
-                <text x="20" y="100" fontSize={Math.min(nameFontSize, 18)} fontWeight="bold" fill="black">
-                    {userName || "TIME TRAVELER"}
-                </text>
-
-                <text x="20" y="130" fontSize="10" fill="#555">DESTINATION:</text>
-                <text x="90" y="130" fontSize="12" fontWeight="bold">NOSTALGIA CITY</text>
-
-                {/* Content Right */}
-                <text x="200" y="30" fontSize="10" fontWeight="bold">DATE</text>
-                <text x="200" y="45" fontSize="12" fontFamily="monospace">????</text>
-
-                <text x="200" y="130" fontSize="10" fontWeight="bold">CLASS</text>
-                <text x="235" y="130" fontSize="12">VIP</text>
-
-                {/* Avatar Overlay on Ticket Right */}
-                <circle cx="215" cy="60" r="30" fill="#ddd" stroke="black" strokeWidth="1" />
-                {/* We map coordinates relative to ticket g group. Global coordinates: 15+215=230, 120+60=180 */}
+            {/* Vortex Background with Gears & Particles */}
+            <rect width="300" height="400" fill="#2E003E" />
+            <g opacity="0.3">
+                {/* Concentric Circles */}
+                <circle cx="150" cy="200" r="180" fill="none" stroke="cyan" strokeWidth="1" strokeDasharray="10 5" opacity="0.3" />
+                <circle cx="150" cy="200" r="140" fill="none" stroke="magenta" strokeWidth="1" strokeDasharray="20 10" opacity="0.3" />
+                <circle cx="150" cy="200" r="100" fill="none" stroke="yellow" strokeWidth="1" opacity="0.3" />
+                {/* Gears (Simplified) */}
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ba68c8" strokeWidth="4" strokeDasharray="8 4" />
+                <circle cx="250" cy="350" r="60" fill="none" stroke="#ba68c8" strokeWidth="4" strokeDasharray="12 6" />
+                {/* Star Particles */}
+                <circle cx="100" cy="100" r="2" fill="white" />
+                <circle cx="200" cy="50" r="1" fill="white" />
+                <circle cx="50" cy="300" r="2" fill="white" />
             </g>
 
+            {/* The Ticket (Boarding Pass) */}
+            <g transform="translate(15, 120)">
+                {/* Paper Base with Grunge */}
+                <rect x="0" y="0" width="270" height="160" fill="#FFF8DC" stroke="none" />
+                <rect x="0" y="0" width="270" height="160" fill="transparent" filter="url(#paper-grunge)" opacity="0.5" />
+                <rect x="0" y="0" width="270" height="160" fill="none" stroke="#000" strokeWidth="2" />
+
+                {/* Ticket Stains */}
+                <circle cx="250" cy="20" r="30" fill="#F4A460" opacity="0.2" filter="blur(10px)" />
+                <path d="M10,150 Q50,130 100,155" stroke="#8B4513" strokeWidth="2" opacity="0.1" fill="none" />
+
+                {/* Cutouts */}
+                <circle cx="0" cy="80" r="10" fill="#2E003E" />
+                <circle cx="270" cy="80" r="10" fill="#2E003E" />
+                {/* Dashed Separator */}
+                <line x1="185" y1="10" x2="185" y2="150" stroke="#000" strokeWidth="1" strokeDasharray="3 3" />
+
+                {/* Left Content */}
+                <text x="20" y="30" fontSize="18" fontWeight="900" fill="#3E2723" fontFamily="Courier New, monospace" letterSpacing="-1">TIME TRAVEL</text>
+                <text x="20" y="45" fontSize="8" fontFamily="sans-serif" letterSpacing="2" fill="#5D4037">BOARDING PASS T-800</text>
+
+                <text x="20" y="75" fontSize="8" fill="#8D6E63" fontWeight="bold">PASSENGER</text>
+                <text x="20" y="95" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fill="#000" fontFamily="Courier New, monospace">
+                    {userName ? userName.toUpperCase() : "TIME TRAVELER"}
+                </text>
+
+                <text x="20" y="125" fontSize="8" fill="#8D6E63" fontWeight="bold">DESTINATION</text>
+                <text x="80" y="125" fontSize="12" fontWeight="bold" fill="#3E2723">NOSTALGIA CITY</text>
+
+                {/* Right Content */}
+                <text x="195" y="30" fontSize="8" fontWeight="bold" fill="#8D6E63">DATE</text>
+                <text x="195" y="45" fontSize="14" fontFamily="Courier New, monospace" fontWeight="bold" fill="#B71C1C">199X</text>
+
+                <text x="195" y="125" fontSize="8" fontWeight="bold" fill="#8D6E63">CLASS</text>
+                <text x="230" y="125" fontSize="14" fontWeight="bold" fill="#3E2723">VIP</text>
+
+                {/* Postal Stamp Red Overlay */}
+                <g transform="translate(160, 40) rotate(-15)" opacity="0.7">
+                    <circle cx="30" cy="30" r="28" fill="none" stroke="#B71C1C" strokeWidth="2" />
+                    <circle cx="30" cy="30" r="26" fill="none" stroke="#B71C1C" strokeWidth="1" strokeDasharray="2 2" />
+                    <text x="30" y="20" textAnchor="middle" fontSize="6" fill="#B71C1C" fontWeight="bold">POST OFFICE</text>
+                    <text x="30" y="35" textAnchor="middle" fontSize="10" fill="#B71C1C" fontWeight="bold">APPROVED</text>
+                    <text x="30" y="45" textAnchor="middle" fontSize="6" fill="#B71C1C">09-00-1990</text>
+                </g>
+            </g>
+
+            {/* Avatar Section (Sepia + Serrated) */}
             {userImage ? (
-                <image
-                    x="190" y="152" width="100" height="100"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-ticket)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
+                <g transform="translate(15, 120)">
+                    {/* Background for photo */}
+                    <rect x="190" y="55" width="70" height="50" fill="#fff" />
+                    <image
+                        x="190" y="55" width="70" height="50"
+                        href={userImage}
+                        preserveAspectRatio="xMidYMid slice"
+                        filter="url(#sepia-tone)"
+                    />
+                    {/* Serrated Border (Pseudo) */}
+                    <rect x="188" y="53" width="74" height="54" fill="none" stroke="white" strokeWidth="2" strokeDasharray="4 2" />
+                    {/* Photo Corners */}
+                    {/* <path d="M188,53 L198,53 L188,63 Z" fill="black" opacity="0.3" /> */}
+                </g>
             ) : (
                 <text x="230" y="190" textAnchor="middle" fontSize="30">⏳</text>
             )}
 
-            {/* Holes Punch */}
-            <circle cx="40" cy="140" r="3" fill="black" opacity="0.3" />
-            <circle cx="40" cy="260" r="3" fill="black" opacity="0.3" />
-
-            <text x="150" y="350" textAnchor="middle" fill="white" fontSize="12">CHUYẾN TÀU TUỔI THƠ</text>
+            <text x="150" y="350" textAnchor="middle" fill="#E6E6FA" fontSize="14" fontWeight="bold" letterSpacing="3" style={{ textShadow: "0 0 5px white" }}>CHUYẾN TÀU TUỔI THƠ</text>
         </>
     ),
 };
