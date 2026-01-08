@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
+import { Be_Vietnam_Pro, VT323 } from "next/font/google"; // Import VT323
 import "./globals.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ["300", "400", "500", "600", "700", "900"],
   subsets: ["vietnamese"],
   variable: "--font-be-vietnam-pro",
+});
+
+const vt323 = VT323({
+  weight: "400",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-vt323",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <body
-        className={`${beVietnamPro.variable} font-sans antialiased`}
+        className={`${beVietnamPro.variable} ${vt323.variable} font-sans antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>

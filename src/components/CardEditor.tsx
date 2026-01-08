@@ -76,6 +76,7 @@ const DEFAULT_NAMES: Record<string, string> = {
     'otp-cong-so': "CRUSH CÔNG SỞ",
     'truong-phong-he-du': "HỆ DÙ CHE",
     'dev-day': "DEV ĐÂY",
+    'dang-yasuo': "ĐẤNG YASUO",
     'tho-code-dao': "DEV FULL-STACK",
     'cau-thuy-tinh': "TÂM HỒN MỎNG MANH",
     // Gaming Theme

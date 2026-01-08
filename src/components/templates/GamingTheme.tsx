@@ -2,52 +2,109 @@ import React from 'react';
 import { TemplateProps } from './types';
 
 export const GamingTheme = {
+
+
     // ===================================
-    // 31. YASUO GANK TEM (Yasuo Mastery 7)
+    // 31.5. DANG YASUO (The God)
     // ===================================
-    'yasuo-gank-tem': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
+    'dang-yasuo': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <clipPath id="avatar-clip-mastery">
-                    <circle cx="150" cy="150" r="70" />
+                <clipPath id="avatar-clip-god">
+                    <circle cx="200" cy="220" r="90" />
                 </clipPath>
+                <mask id="mastery-mask">
+                    <rect width="100%" height="100%" fill="white" />
+                    <circle cx="200" cy="220" r="90" fill="black" />
+                </mask>
+                {/* Sparkle Animation */}
+                <symbol id="sparkle" viewBox="0 0 20 20">
+                    <path d="M10,0 L12,8 L20,10 L12,12 L10,20 L8,12 L0,10 L8,8 Z" fill="#fff" />
+                </symbol>
             </defs>
 
-            {/* Dark Blue Background */}
-            <rect width="300" height="400" fill="#0d1b2a" />
+            {/* 1. NỀN & NEUBRUTALISM */}
+            {/* Hard Shadow */}
+            <rect x="10" y="10" width="380" height="580" fill="black" />
 
-            {/* Wind Effects */}
-            <path d="M0,350 Q150,300 300,350" fill="none" stroke="#a9d6e5" strokeWidth="2" opacity="0.3" />
-            <path d="M0,360 Q150,310 300,360" fill="none" stroke="#a9d6e5" strokeWidth="2" opacity="0.3" />
+            {/* Main Card */}
+            <rect width="380" height="580" fill="#034052" stroke="black" strokeWidth="4" />
 
-            {/* Mastery Badge (Simplified) */}
-            <path d="M150,50 L200,80 L200,220 L150,250 L100,220 L100,80 Z" fill="#034052" stroke="#4682B4" strokeWidth="3" />
-            <path d="M150,40 L220,90 L150,130 L80,90 Z" fill="#1b4332" opacity="0.5" /> {/* Top Gem Socket */}
+            {/* Wind Texture */}
+            <path d="M-50,500 Q150,400 450,550" fill="none" stroke="#a9d6e5" strokeWidth="20" opacity="0.1" />
+            <path d="M-50,550 Q150,450 450,600" fill="none" stroke="#a9d6e5" strokeWidth="10" opacity="0.1" />
+            <rect width="380" height="580" fill="url(#noise)" opacity="0.05" />
 
-            {/* Avatar Circle */}
+            {/* 2. CHI TIẾT GAME THỦ (HUD) */}
+            {/* Rank Badge */}
+            <g transform="translate(130, 40)">
+                <path d="M0,0 L120,0 L130,15 L60,40 L-10,15 Z" fill="#d1d5db" stroke="black" strokeWidth="2" /> {/* Iron/Challenger shape */}
+                <text x="60" y="22" textAnchor="middle" fontSize="14" fontWeight="bold" fill="black" fontFamily="sans-serif">IRON IV</text>
+            </g>
+
+            {/* Lag Indicator */}
+            <g transform="translate(310, 40)">
+                <path d="M10,20 Q25,5 40,20" fill="none" stroke="#f00" strokeWidth="3" opacity="0.5" />
+                <path d="M15,25 Q25,15 35,25" fill="none" stroke="#f00" strokeWidth="3" />
+                <circle cx="25" cy="30" r="3" fill="#f00" />
+                <text x="25" y="45" textAnchor="middle" fontSize="10" fill="#f00" fontWeight="bold">999ms</text>
+            </g>
+
+            {/* 3. NÂNG CẤP KHUNG AVATAR (Mastery 7) */}
+            {/* Mastery Background Wing */}
+            <path d="M200,80 L280,120 L280,300 L200,340 L120,300 L120,120 Z" fill="#0f2b33" stroke="#4682B4" strokeWidth="4" />
+            <circle cx="200" cy="220" r="100" fill="none" stroke="#d4af37" strokeWidth="4" strokeDasharray="10 5" /> {/* Gold ring */}
+
+            {/* Avatar */}
             {userImage ? (
                 <image
-                    x="80" y="80" width="140" height="140"
+                    x="110" y="130" width="180" height="180"
                     href={userImage}
-                    clipPath="url(#avatar-clip-mastery)"
+                    clipPath="url(#avatar-clip-god)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="150" y="165" textAnchor="middle" fontSize="50">🌪️</text>
+                <text x="200" y="240" textAnchor="middle" fontSize="80">🌪️</text>
             )}
 
-            {/* Mastery Level 7 Icon (Blue Ribbon) */}
-            <circle cx="150" cy="235" r="25" fill="#0077be" stroke="gold" strokeWidth="2" />
-            <text x="150" y="245" textAnchor="middle" fill="white" fontWeight="bold" fontSize="20" fontFamily="serif">VII</text>
+            {/* Mastery 7 Badge Front */}
+            <g transform="translate(200, 310)">
+                <circle r="30" fill="#0077be" stroke="#d4af37" strokeWidth="3" />
+                <path d="M-20,-10 L0,20 L20,-10" fill="none" stroke="#d4af37" strokeWidth="2" />
+                <text x="0" y="10" textAnchor="middle" fill="#fff" fontWeight="bold" fontSize="24" fontFamily="serif">VII</text>
+            </g>
 
-            <text x="150" y="300" textAnchor="middle" fontSize="16" fill="#a9d6e5" fontWeight="bold">HASAGI!</text>
+            {/* Animated Sparkles */}
+            <use href="#sparkle" x="120" y="150" width="20" height="20">
+                <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
+            </use>
+            <use href="#sparkle" x="260" y="250" width="15" height="15">
+                <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite" />
+            </use>
 
-            <text x="150" y="340" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#e0f7fa" style={{ textShadow: "0 0 5px #0077be" }}>
+            {/* Enemy Missing Pings (?) */}
+            <text x="140" y="150" fontSize="30" fill="#fbbf24" fontWeight="bold">
+                ?
+                <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+            </text>
+            <text x="250" y="170" fontSize="40" fill="#fbbf24" fontWeight="bold">?
+                <animate attributeName="opacity" values="1;0;1" dur="1.2s" begin="0.5s" repeatCount="indefinite" />
+            </text>
+            <text x="180" y="120" fontSize="24" fill="#ef4444" fontWeight="bold">?</text>
+
+
+            {/* 4. TYPOGRAPHY & HIỆU ỨNG */}
+            <text x="190" y="420" textAnchor="middle" fontSize={Math.min(nameFontSize, 32)} fontWeight="900" fill="#e0f7fa" style={{ textShadow: "0 0 10px #00e5ff, 2px 2px 0px #000" }}>
                 {userName || "ĐẤNG YASUO"}
             </text>
 
-            <text x="150" y="370" textAnchor="middle" fontSize="12" fill="#888">0/10/0 IS MY POWER SPIKE</text>
-        </>
+            <text x="190" y="460" textAnchor="middle" fontSize="16" fill="#a9d6e5" fontFamily="monospace" fontWeight="bold" letterSpacing="1">
+                0/10/0 IS MY POWER SPIKE
+            </text>
+            <text x="190" y="520" textAnchor="middle" fontSize="14" fill="#0077be" fontStyle="italic">
+                "Hasagi! Trăn trối (đồng đội)"
+            </text>
+        </svg>
     ),
 
     // ===================================
