@@ -686,7 +686,7 @@ export const GenZTheme = {
             </g>
 
             {/* Subtext */}
-            <text x="150" y="375" textAnchor="middle" fontSize="12" fontWeight="bold" fill="black" padding="5px" style={{ backgroundColor: "white" }}>
+            <text x="150" y="375" textAnchor="middle" fontSize="12" fontWeight="bold" fill="black" style={{ backgroundColor: "white" }}>
                 CHUYỆN TÂM LINH KHÔNG ĐÙA ĐƯỢC ĐÂU
             </text>
         </svg>

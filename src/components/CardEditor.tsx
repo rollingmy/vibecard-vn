@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback, useMemo } from "react";
-import { toPng } from "html-to-image";
+// import { toPng } from "html-to-image"; // Removed static import
 import { Download, Loader2, Camera, CheckCircle } from "lucide-react";
 import dynamic from "next/dynamic";
 import { FlexTheme } from "./templates/FlexTheme";
@@ -203,6 +203,9 @@ export default function CardEditor({ template }: CardEditorProps) {
                 }));
             };
             await waitForImages(cardRef.current);
+
+            // Dynamic Import for html-to-image
+            const { toPng } = await import('html-to-image');
 
             // B. SAFARI FIX: Add explicit delay
             await new Promise(resolve => setTimeout(resolve, 300));

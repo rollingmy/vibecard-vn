@@ -1,5 +1,5 @@
 import React from 'react';
-import { TemplateProps } from './registry';
+import { TemplateProps } from './types';
 
 // Helper for Auto-Scaling Font Size (LIP Rule 1)
 const getSafeFontSize = (text: string, baseSize: number, maxWidth: number) => {
@@ -61,7 +61,7 @@ export const OfficeLifeTemplates = {
             )}
 
             {/* Neubrutalism Text Box */}
-            <rect x="25" y="290" width="250" height="60" fill="white" stroke="black" strokeWidth="4" shadow="5px 5px 0px black" />
+            <rect x="25" y="290" width="250" height="60" fill="white" stroke="black" strokeWidth="4" />
 
             <text x="150" y="280" textAnchor="middle" fontSize="14" fontWeight="900" fill="black">TARGET:</text>
             {/* LIP Rule: Max Width 230px inside box */}
@@ -506,7 +506,7 @@ export const OfficeLifeTemplates = {
             <rect x="5" y="5" width="290" height="390" fill="none" stroke="black" strokeWidth="4" rx="10" />
 
             {/* Pop-up "Secret Chat" Window */}
-            <rect x="25" y="60" width="250" height="310" fill="white" stroke="black" strokeWidth="3" rx="10" shadow="5px 5px 0px rgba(0,0,0,0.2)" />
+            <rect x="25" y="60" width="250" height="310" fill="white" stroke="black" strokeWidth="3" rx="10" />
 
             {/* Chat Header */}
             <rect x="25" y="60" width="250" height="40" fill="#3F0E40" rx="10" />

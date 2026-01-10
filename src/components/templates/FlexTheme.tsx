@@ -956,7 +956,7 @@ export const FlexTheme = {
             <text x="35" y="328" fontSize="14" fontWeight="bold">[{userName || "SUMMONER"}]</text>
 
             <foreignObject x="25" y="335" width="250" height="30">
-                <div xmlns="http://www.w3.org/1999/xhtml" style={{
+                <div style={{
                     fontFamily: 'serif',
                     fontSize: '10px',
                     fontStyle: 'italic',

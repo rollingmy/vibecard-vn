@@ -109,7 +109,7 @@ export default function TemplateLabPage() {
                                                 className="w-full h-full"
                                                 preserveAspectRatio="xMidYMid meet"
                                             >
-                                                {RenderTemplate(test.props)}
+                                                {(RenderTemplate as any)(test.props)}
                                             </svg>
                                         </div>
                                     </div>
