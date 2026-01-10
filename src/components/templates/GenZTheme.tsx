@@ -263,7 +263,7 @@ export const GenZTheme = {
             </text>
 
             <text x="150" y="380" textAnchor="middle" fontSize="12" fill="#795548" fontStyle="italic" fontFamily="sans-serif">
-                Thành tích: Phá nồi cơm, báo cha mẹ.
+                Thành tích: Phá nồi cơm, báo cha mẹ
             </text>
         </svg>
     ),
@@ -526,15 +526,15 @@ export const GenZTheme = {
                         <feMergeNode in="SourceGraphic" />
                     </feMerge>
                 </filter>
-                {/* Radial Gradient BG */}
+                {/* Radial Gradient BG - Adjusted for Creamy White */}
                 <radialGradient id="romantic-glow" cx="50%" cy="50%" r="60%">
-                    <stop offset="0%" stopColor="#fce4ec" />
-                    <stop offset="100%" stopColor="#fff" stopOpacity="0.5" />
+                    <stop offset="0%" stopColor="#fff8e1" />
+                    <stop offset="100%" stopColor="#fff" stopOpacity="0" />
                 </radialGradient>
             </defs>
 
-            {/* Background */}
-            <rect width="300" height="400" fill="#f8bbd0" />
+            {/* Background - Creamy White */}
+            <rect width="300" height="400" fill="#FDFBF7" />
             <rect width="300" height="400" fill="url(#romantic-glow)" />
 
             {/* Sparkles everywhere */}

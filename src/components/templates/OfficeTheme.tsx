@@ -554,40 +554,43 @@ export const OfficeLifeTemplates = {
         </>
     ),
 
+    // 8. TRƯỞNG PHÒNG HỆ DÙ (Hand-drawn Satire)
     // ===================================
-    // 8. TRƯỞNG PHÒNG HỆ DÙ (Chill Boss)
-    // ===================================
-    'truong-phong-he-du': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    'truong-phong-he-du': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
-                <filter id="glow-umbrella" x="-50%" y="-50%" width="200%" height="200%">
-                    <feDropShadow dx="0" dy="0" stdDeviation="5" floodColor="#80cbc4" />
-                </filter>
                 <clipPath id="avatar-clip-circle-zen">
                     <circle cx="150" cy="180" r="80" />
                 </clipPath>
+                {/* Paper Textue Filter (Optional, keeping it simple for Satire style) */}
             </defs>
 
             {/* Zen Tea Green Background */}
             <rect width="300" height="400" fill="#e0f2f1" />
 
-            {/* Bamboo Stalks Background */}
-            <rect x="20" y="0" width="10" height="400" fill="#a5d6a7" />
-            <rect x="270" y="0" width="10" height="400" fill="#a5d6a7" />
+            {/* Bamboo Stalks Background - Simplified Hand-drawn */}
+            <path d="M25,0 L25,400 M35,0 L35,400" stroke="#a5d6a7" strokeWidth="2" fill="none" opacity="0.6" />
+            <path d="M265,0 L265,400 M275,0 L275,400" stroke="#a5d6a7" strokeWidth="2" fill="none" opacity="0.6" />
 
-            {/* 4. ĐỒNG BỘ NEUBRUTALISM - Thick Black Border */}
-            <rect x="5" y="5" width="290" height="390" fill="none" stroke="black" strokeWidth="3" />
+            {/* Single Thin Dark Green Border */}
+            <rect x="10" y="10" width="280" height="380" fill="none" stroke="#004d40" strokeWidth="2" rx="5" />
 
-            {/* Umbrella Graphic covering Avatar */}
-            <g filter="url(#glow-umbrella)">
-                <path d="M50,150 A100,60 0 0,1 250,150" fill="white" stroke="#009688" strokeWidth="4" />
-                <line x1="150" y1="150" x2="150" y2="90" stroke="#009688" strokeWidth="4" />
-                <path d="M150,90 C200,90 250,150 250,150" fill="none" stroke="#80cbc4" strokeWidth="2" />
-                <path d="M150,90 C100,90 50,150 50,150" fill="none" stroke="#80cbc4" strokeWidth="2" />
+            {/* Umbrella Graphic covering Avatar - Hand Drawn Style - Moved UP 25px */}
+            <g transform="translate(0, -25)">
+                {/* Canopy - Hand drawn curves */}
+                <path d="M50,150 Q150,60 250,150" fill="#b2dfdb" stroke="#004d40" strokeWidth="2" strokeLinecap="round" />
+                <path d="M50,150 Q100,140 150,150 Q200,140 250,150" fill="none" stroke="#004d40" strokeWidth="1.5" strokeLinecap="round" />
+                {/* Ribs */}
+                <path d="M150,85 L150,150" stroke="#004d40" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M150,85 Q100,110 90,145" fill="none" stroke="#004d40" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
+                <path d="M150,85 Q200,110 210,145" fill="none" stroke="#004d40" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
+
+                {/* Staff/Handle */}
+                <path d="M150,150 L150,210 Q150,230 130,230" fill="none" stroke="#004d40" strokeWidth="3" strokeLinecap="round" />
             </g>
 
-            {/* 1. FIX LỖI AVATAR (The Protected Face) */}
-            <circle cx="150" cy="180" r="82" fill="white" stroke="#009688" strokeWidth="2" />
+            {/* Avatar (The Protected Face) */}
+            <circle cx="150" cy="180" r="82" fill="white" stroke="#004d40" strokeWidth="2" strokeDasharray="5 5" />
             {userImage ? (
                 <image
                     x="70" y="100" width="160" height="160"
@@ -599,27 +602,39 @@ export const OfficeLifeTemplates = {
                 <text x="150" y="200" textAnchor="middle" fontSize="60">⛱️</text>
             )}
 
-            {/* Tea Cup and Steam */}
-            <text x="150" y="320" textAnchor="middle" fontSize="40">🍵</text>
+            {/* Hand Drawn Tea Cup - Moved UP (290 -> 270) */}
+            <g transform="translate(130, 270)">
+                {/* Cup Body */}
+                <path d="M0,0 Q0,30 20,30 L30,30 Q50,30 50,0" fill="#fff" stroke="#004d40" strokeWidth="2" strokeLinecap="round" />
+                <line x1="0" y1="0" x2="50" y2="0" stroke="#004d40" strokeWidth="2" strokeLinecap="round" />
+                {/* Handle */}
+                <path d="M50,5 Q60,5 60,15 Q60,25 50,20" fill="none" stroke="#004d40" strokeWidth="2" strokeLinecap="round" />
 
-            {/* 3. CHI TIẾT "ZEN" - Animated Steam */}
-            <path d="M140,290 Q130,280 140,270 T140,250" fill="none" stroke="#aaa" strokeWidth="2" opacity="0.6">
-                <animate attributeName="d" values="M140,290 Q130,280 140,270 T140,250; M140,285 Q150,275 140,265 T140,245; M140,290 Q130,280 140,270 T140,250" dur="3s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
-            </path>
-            <path d="M160,290 Q170,280 160,270 T160,250" fill="none" stroke="#aaa" strokeWidth="2" opacity="0.6">
-                <animate attributeName="d" values="M160,290 Q170,280 160,270 T160,250; M160,285 Q150,275 160,265 T160,245; M160,290 Q170,280 160,270 T160,250" dur="2.5s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite" />
-            </path>
+                {/* Hand-drawn Steam (3 Curves) */}
+                <path d="M15,-10 Q25,-20 15,-30" fill="none" stroke="#00796b" strokeWidth="1.5" strokeLinecap="round" opacity="0.6">
+                    <animate attributeName="d" values="M15,-10 Q25,-20 15,-30; M15,-15 Q5,-25 15,-35; M15,-10 Q25,-20 15,-30" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
+                </path>
+                <path d="M25,-15 Q35,-25 25,-35" fill="none" stroke="#00796b" strokeWidth="1.5" strokeLinecap="round" opacity="0.6">
+                    <animate attributeName="d" values="M25,-15 Q35,-25 25,-35; M25,-20 Q15,-30 25,-40; M25,-15 Q35,-25 25,-35" dur="3.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.6;0;0.6" dur="3.5s" repeatCount="indefinite" />
+                </path>
+                <path d="M35,-10 Q45,-20 35,-30" fill="none" stroke="#00796b" strokeWidth="1.5" strokeLinecap="round" opacity="0.6">
+                    <animate attributeName="d" values="M35,-10 Q45,-20 35,-30; M35,-15 Q25,-25 35,-35; M35,-10 Q45,-20 35,-30" dur="4s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite" />
+                </path>
+            </g>
 
-            <text x="150" y="50" textAnchor="middle" fontSize="16" fontFamily="sans-serif" fill="#00796b" fontWeight="bold">ZEN MASTER</text>
+            {/* Titles - Hand-written Font */}
+            <text x="150" y="60" textAnchor="middle" fontSize="16" fontFamily='"Comic Sans MS", "Chalkboard SE", cursive' fill="#004d40" fontWeight="bold">ZEN MASTER</text>
 
-            {/* 2. THÊM CAPTION "CHỮA LÀNH" */}
-            <text x="150" y="350" textAnchor="middle" fontSize="10" fill="#004d40" fontStyle="italic" fontFamily="sans-serif">
-                "Công việc là phù du, dù che là vĩnh cửu"
+            {/* Caption - Italic - Moved to 335 (Font 10) */}
+            <text x="150" y="335" textAnchor="middle" fontSize="10" fill="#00695c" fontStyle="italic" fontFamily='"Comic Sans MS", "Chalkboard SE", cursive'>
+                {description || "Công việc là phù du, dù che là vĩnh cửu"}
             </text>
 
-            <text x="150" y="375" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#004d40" style={{ textTransform: "uppercase" }}>
+            {/* Name - Moved to 380 */}
+            <text x="150" y="380" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#004d40" fontFamily='"Comic Sans MS", "Chalkboard SE", cursive' style={{ textTransform: "uppercase" }}>
                 {userName || "HỆ DÙ CHE"}
             </text>
         </>

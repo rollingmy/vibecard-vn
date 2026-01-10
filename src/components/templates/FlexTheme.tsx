@@ -969,33 +969,65 @@ export const FlexTheme = {
         <>
             <defs>
                 <clipPath id="avatar-clip-helmet-space">
-                    <circle cx="150" cy="150" r="70" />
+                    <circle cx="150" cy="150" r="72" />
                 </clipPath>
+                {/* 1. HIỆU ỨNG THỊ GIÁC (Visual Effects) */}
+                <linearGradient id="visor-glass" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="30%" stopColor="white" stopOpacity="0" />
+                    <stop offset="48%" stopColor="white" stopOpacity="0.1" />
+                    <stop offset="50%" stopColor="white" stopOpacity="0.4" />
+                    <stop offset="52%" stopColor="#87CEEB" stopOpacity="0.6" /> {/* Cyan tint */}
+                    <stop offset="60%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+
+                <radialGradient id="nebula-purple" cx="100%" cy="0%" r="80%" fx="100%" fy="0%">
+                    <stop offset="0%" stopColor="#4B0082" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient id="nebula-blue" cx="0%" cy="100%" r="80%" fx="0%" fy="100%">
+                    <stop offset="0%" stopColor="#000080" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+                </radialGradient>
+
+                <filter id="glow-orange">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
             </defs>
 
-            {/* Galaxy BG */}
-            <rect width="300" height="400" fill="#000" />
-            <circle cx="250" cy="50" r="80" fill="purple" opacity="0.3" filter="url(#blur)" />
-            <circle cx="50" cy="350" r="100" fill="blue" opacity="0.3" filter="url(#blur)" />
+            {/* Galaxy BG - 3. CHI TIẾT NỀN */}
+            <rect width="300" height="400" fill="#050505" />
+            <rect width="300" height="400" fill="url(#nebula-purple)" style={{ mixBlendMode: 'screen' }} />
+            <rect width="300" height="400" fill="url(#nebula-blue)" style={{ mixBlendMode: 'screen' }} />
 
             {/* Stars */}
-            <circle cx="20" cy="20" r="1" fill="white" />
-            <circle cx="280" cy="30" r="1" fill="white" />
-            <circle cx="150" cy="50" r="1" fill="white" />
-            <circle cx="80" cy="300" r="1" fill="white" />
-            <circle cx="250" cy="250" r="1" fill="white" />
+            <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="280" cy="50" r="1" fill="white" opacity="0.6" />
+            <circle cx="150" cy="30" r="1" fill="white" opacity="0.7" />
+            <circle cx="80" cy="350" r="1.5" fill="cyan" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="250" cy="250" r="1" fill="white" opacity="0.5" />
 
-            {/* Astronaut Helmet */}
-            <circle cx="150" cy="160" r="90" fill="#eee" stroke="#999" strokeWidth="2" />
-            <path d="M150,160 L150,250 M150,160 L70,200" stroke="#ccc" strokeWidth="1" opacity="0.5" />
+            {/* Astronaut Helmet - 4. GIỮ NGUYÊN CẤU TRÚC */}
+            <circle cx="150" cy="160" r="92" fill="#dcdcdc" stroke="#555" strokeWidth="2" />
+            <path d="M150,160 L150,250 M150,160 L70,200" stroke="#999" strokeWidth="1" opacity="0.5" />
 
-            {/* Visor Area */}
-            <circle cx="150" cy="150" r="75" fill="#111" stroke="#333" strokeWidth="4" />
+            {/* Tech Details on Helmet */}
+            <path d="M58,160 A92,92 0 0,0 242,160" fill="none" stroke="#555" strokeWidth="1" strokeDasharray="5 2" opacity="0.5" />
+
+            {/* Visor Area - Darker for Cinematic contrast */}
+            <circle cx="150" cy="150" r="75" fill="#080808" stroke="#333" strokeWidth="3" />
 
             {/* Avatar inside Visor */}
             {userImage ? (
                 <image
-                    x="80" y="80" width="140" height="140"
+                    x="75" y="75" width="150" height="150"
                     href={userImage}
                     clipPath="url(#avatar-clip-helmet-space)"
                     preserveAspectRatio="xMidYMid slice"
@@ -1004,22 +1036,28 @@ export const FlexTheme = {
                 <text x="150" y="170" textAnchor="middle" fontSize="60">👩‍🚀</text>
             )}
 
-            {/* Reflection on Visor */}
-            <path d="M110,100 Q150,80 190,100" fill="none" stroke="white" strokeWidth="3" opacity="0.3" />
+            {/* 1. HIỆU ỨNG THỊ GIÁC: Lens flare/Glossy reflection */}
+            <circle cx="150" cy="150" r="75" fill="url(#visor-glass)" pointerEvents="none" />
+            <path d="M110,90 Q150,70 190,90" fill="none" stroke="white" strokeWidth="2" opacity="0.4" />
 
             {/* Suit Details */}
-            <path d="M60,240 Q150,280 240,240 L260,400 L40,400 Z" fill="#eee" stroke="#999" strokeWidth="1" />
-            <rect x="110" y="300" width="80" height="40" rx="5" fill="#ccc" stroke="#999" strokeWidth="1" />
+            <path d="M60,250 Q150,290 240,250 L260,400 L40,400 Z" fill="#e0e0e0" stroke="#777" strokeWidth="1" />
+            <rect x="110" y="310" width="80" height="40" rx="2" fill="#d0d0d0" stroke="#888" strokeWidth="1" />
 
-            {/* Mission Patch */}
-            <circle cx="200" cy="320" r="15" fill="orange" />
-            <rect x="120" y="310" width="20" height="5" fill="red" />
-            <rect x="120" y="320" width="20" height="5" fill="blue" />
+            {/* Tech Lines on Suit */}
+            <line x1="110" y1="330" x2="190" y2="330" stroke="#aaa" strokeWidth="1" />
 
-            <text x="150" y="60" textAnchor="middle" fontSize="12" fill="#fff" fontFamily="monospace" letterSpacing="4">APOLLO 13</text>
+            {/* Mission Patch - 1. HIỆU ỨNG THỊ GIÁC: Soft Glow */}
+            <circle cx="200" cy="330" r="12" fill="#FF4500" filter="url(#glow-orange)" />
+            <rect x="120" y="318" width="20" height="4" fill="#DC143C" />
+            <rect x="120" y="326" width="20" height="4" fill="#000080" />
 
-            <text x="150" y="380" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="white" fontFamily="sans-serif">
-                {userName || "ASTRONAUT"}
+            {/* 1. TỐI ƯU TYPOGRAPHY: APOLLO 13 (Square/Blocky Font) */}
+            <text x="150" y="50" textAnchor="middle" fontSize="18" fill="#e0e0e0" fontFamily="Impact, 'Arial Black', sans-serif" letterSpacing="6" opacity="0.9">APOLLO 13</text>
+
+            {/* 1. TỐI ƯU TYPOGRAPHY: ASTRONAUT (NASA Red/Dark Blue) */}
+            <text x="150" y="385" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#B22234" fontFamily="Impact, 'Arial Black', sans-serif" letterSpacing="1" style={{ textShadow: "0px 0px 10px rgba(178, 34, 52, 0.5)" }}>
+                {userName ? userName.toUpperCase() : "ASTRONAUT"}
             </text>
         </>
     ),

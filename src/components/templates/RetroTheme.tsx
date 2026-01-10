@@ -473,14 +473,25 @@ const CassetteTemplate: React.FC<TemplateProps> = ({ userName, userImage, descri
 
             {/* Re-orienting text for readability */}
             <g transform="translate(0,0)">
-                {/* Avatar Circle Sticker */}
-                {/* White Glow Background */}
-                <circle cx="200" cy="180" r="92" fill="white" opacity="0.6" filter="blur(4px)" />
+                {/* Avatar Circle - Resized for Reel Hub Effect */}
+                {/* 1. Underlying Mechanical Reel Hub (White Plastic) */}
+                <circle cx="200" cy="180" r="90" fill="#f5f5f5" stroke="#ccc" strokeWidth="1" />
 
-                <circle cx="200" cy="180" r="90" fill="#fdf5e6" stroke="#000" strokeWidth="1" filter="url(#paper-wear)" />
+                {/* 2. Spokes / Teeth of the Reel Hub */}
+                <g transform="translate(200, 180)" opacity="0.6">
+                    {[0, 60, 120, 180, 240, 300].map((angle) => (
+                        <rect key={angle} x="-6" y="-90" width="12" height="25" fill="#ddd" transform={`rotate(${angle})`} />
+                    ))}
+                    <circle cx="0" cy="0" r="65" fill="none" stroke="#ddd" strokeWidth="2" />
+                </g>
+
+                {/* 3. Paper Sticker Background (Smaller) */}
+                <circle cx="200" cy="180" r="72" fill="#fdf5e6" stroke="#000" strokeWidth="1" filter="url(#paper-wear)" />
+
                 <defs>
                     <clipPath id="circleAv">
-                        <circle cx="200" cy="180" r="86" />
+                        {/* 4. Resized Avatar Clip (80% of original) */}
+                        <circle cx="200" cy="180" r="70" />
                     </clipPath>
                     {/* Dust Particles */}
                     <pattern id="dust-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -492,8 +503,8 @@ const CassetteTemplate: React.FC<TemplateProps> = ({ userName, userImage, descri
                 </defs>
                 {userImage && (
                     <>
-                        <image href={userImage} x="114" y="94" width="172" height="172" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAv)" style={{ mixBlendMode: 'multiply' }} opacity="0.9" />
-                        <circle cx="200" cy="180" r="86" fill="url(#dust-pattern)" pointerEvents="none" />
+                        <image href={userImage} x="130" y="110" width="140" height="140" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAv)" style={{ mixBlendMode: 'multiply' }} opacity="0.9" />
+                        <circle cx="200" cy="180" r="70" fill="url(#dust-pattern)" pointerEvents="none" />
                     </>
                 )}
 

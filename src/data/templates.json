@@ -190,9 +190,9 @@
     },
     {
         "id": "truong-phong-he-du",
-        "name": "Trưởng Phòng Hệ Dù",
-        "color": "#20B2AA",
-        "description": "Chơi là chính, làm là phụ, dù che là chủ yếu",
+        "name": "Hệ Dù Che",
+        "color": "#009688",
+        "description": "Công việc là phù du, dù che là vĩnh cửu",
         "category": "work"
     },
     {
@@ -305,7 +305,7 @@
         "id": "ton-com-cha-me",
         "name": "Tốn Cơm Cha Mẹ",
         "color": "#FFA07A",
-        "description": "Nuôi tốn cơm mà chưa thấy báo đáp gì",
+        "description": "Thành tích: Phá nồi cơm, báo cha mẹ",
         "category": "genz"
     },
     {
