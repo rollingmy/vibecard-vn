@@ -864,65 +864,7 @@ export const GenZTheme = {
     ),
 
     // ===================================
-    // 50. FLEXING TIME (Rolex)
-    // ===================================
-    'flexing-time': ({ userName, userImage, nameFontSize }: TemplateProps) => (
-        <>
-            <defs>
-                <clipPath id="avatar-clip-watch">
-                    <circle cx="150" cy="180" r="70" />
-                </clipPath>
-                <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ffd700" />
-                    <stop offset="50%" stopColor="#fff176" />
-                    <stop offset="100%" stopColor="#fbc02d" />
-                </linearGradient>
-            </defs>
 
-            {/* Luxury Black Pattern BG */}
-            <rect width="300" height="400" fill="#212121" />
-            <path d="M0,0 L300,400 M300,0 L0,400" stroke="#333" strokeWidth="1" />
-
-            {/* Watch Strap top/bottom */}
-            <rect x="100" y="0" width="100" height="100" fill="url(#gold-grad)" />
-            <rect x="100" y="260" width="100" height="140" fill="url(#gold-grad)" />
-            <line x1="150" y1="0" x2="150" y2="100" stroke="#b08b04" strokeWidth="1" />
-            <line x1="150" y1="260" x2="150" y2="400" stroke="#b08b04" strokeWidth="1" />
-
-            {/* Watch Face */}
-            <circle cx="150" cy="180" r="85" fill="#111" stroke="url(#gold-grad)" strokeWidth="8" />
-            <path d="M150,95 L150,180" stroke="white" strokeWidth="2" /> {/* 12 oclock mark */}
-            <path d="M235,180 L150,180" stroke="white" strokeWidth="2" /> {/* 3 oclock mark */}
-            <path d="M150,265 L150,180" stroke="white" strokeWidth="2" /> {/* 6 oclock mark */}
-            <path d="M65,180 L150,180" stroke="white" strokeWidth="2" /> {/* 9 oclock mark */}
-
-            {/* Avatar inside Face */}
-            {userImage ? (
-                <image
-                    x="80" y="110" width="140" height="140"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-watch)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
-            ) : (
-                <text x="150" y="195" textAnchor="middle" fontSize="50">⌚</text>
-            )}
-
-            {/* Diamonds/Bling */}
-            <circle cx="70" cy="180" r="5" fill="#e0f7fa" />
-            <circle cx="230" cy="180" r="5" fill="#e0f7fa" />
-            <circle cx="150" cy="100" r="5" fill="#e0f7fa" />
-            <circle cx="150" cy="260" r="5" fill="#e0f7fa" />
-
-            <text x="150" y="60" textAnchor="middle" fontSize="24" fill="url(#gold-grad)" fontWeight="bold" fontFamily="serif">FLEX</text>
-
-            {/* Name Plate on Strap */}
-            <rect x="60" y="320" width="180" height="40" fill="#111" stroke="url(#gold-grad)" strokeWidth="2" rx="5" />
-            <text x="150" y="345" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fill="url(#gold-grad)" style={{ textTransform: "uppercase" }}>
-                {userName || "RICH KID"}
-            </text>
-        </>
-    ),
 
     // ===================================
     // 53. BAN DOI AI (AI Partner)
@@ -1408,5 +1350,85 @@ export const GenZTheme = {
 
             <text x="150" y="350" textAnchor="middle" fill="#E6E6FA" fontSize="14" fontWeight="bold" letterSpacing="3" style={{ textShadow: "0 0 5px white" }}>CHUYẾN TÀU TUỔI THƠ</text>
         </>
+    ),
+
+    // ===================================
+    // 52. DOG LOVER GEN Z (Sticker / Scrapbook Style)
+    // ===================================
+    'dog-lover-gen-z': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                {/* Sticker Glow / Shadow Filter */}
+                <filter id="sticker-effect" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="2" dy="4" stdDeviation="3" floodOpacity="0.15" />
+                </filter>
+                {/* Clip Path for Round Avatar */}
+                <clipPath id="circleAvatarDog">
+                    <circle cx="150" cy="180" r="90" />
+                </clipPath>
+                {/* Doodle Pattern */}
+                <pattern id="doodle-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    {/* Bone */}
+                    <path d="M20,20 Q15,15 20,10 Q25,5 30,10 L50,20 Q55,25 50,30 Q45,35 40,30 L20,20" fill="none" stroke="#8D6E63" strokeWidth="1" strokeLinecap="round" opacity="0.2" transform="rotate(-15)" />
+                    {/* Star */}
+                    <path d="M80,80 L82,85 L87,85 L83,88 L84,93 L80,90 L76,93 L77,88 L73,85 L78,85 Z" fill="none" stroke="#8D6E63" strokeWidth="1" opacity="0.2" />
+                </pattern>
+            </defs>
+
+            {/* 1. Background: Butter Yellow */}
+            <rect width="300" height="400" fill="#FEF9E7" />
+            <rect width="300" height="400" fill="url(#doodle-pattern)" />
+            {/* Single Paw Doodle at Bottom Right */}
+            <g transform="translate(240, 340) rotate(15)" opacity="0.2">
+                <ellipse cx="25" cy="28" rx="6" ry="5" fill="#8D6E63" />
+                <circle cx="18" cy="20" r="2.5" fill="#8D6E63" />
+                <circle cx="25" cy="17" r="2.5" fill="#8D6E63" />
+                <circle cx="32" cy="20" r="2.5" fill="#8D6E63" />
+            </g>
+
+            {/* 2. Avatar with Sticker Effect */}
+            <g filter="url(#sticker-effect)">
+                {/* White Sticker Border Background (Ears + Circle) */}
+                <g fill="#fff">
+                    {/* Left Ear Border */}
+                    <path d="M65,110 Q40,60 90,50 Q120,60 110,100 Z" stroke="#fff" strokeWidth="10" strokeLinejoin="round" />
+                    {/* Right Ear Border */}
+                    <path d="M235,110 Q260,60 210,50 Q180,60 190,100 Z" stroke="#fff" strokeWidth="10" strokeLinejoin="round" />
+                    {/* Main Circle Border */}
+                    <circle cx="150" cy="180" r="98" />
+                </g>
+
+                {/* Inner Ears Color (Brown) */}
+                <path d="M65,110 Q40,60 90,50 Q120,60 110,100 Z" fill="#8D6E63" />
+                <path d="M235,110 Q260,60 210,50 Q180,60 190,100 Z" fill="#8D6E63" />
+
+                {/* Avatar Image */}
+                <circle cx="150" cy="180" r="90" fill="#fff" />
+                {userImage ? (
+                    <image href={userImage} x="60" y="90" width="180" height="180" preserveAspectRatio="xMidYMid slice" clipPath="url(#circleAvatarDog)" />
+                ) : (
+                    <text x="150" y="200" textAnchor="middle" fontSize="60">🐶</text>
+                )}
+
+                {/* Glossy Sticker Highlight */}
+                <path d="M90,160 Q150,140 210,160 Q150,110 90,160" fill="white" opacity="0.2" clipPath="url(#circleAvatarDog)" />
+            </g>
+
+            {/* 3. Typography */}
+            {/* Title: Bubbly Orange */}
+            <text x="150" y="315" textAnchor="middle" fontSize={Math.min(nameFontSize, 28)} fontWeight="900" fill="#FF8C00" fontFamily="Comic Sans MS, Balsamiq Sans, cursive" style={{ textShadow: "2px 2px 0px #fff" }}>
+                {userName || "NGƯỜI YÊU CHÓ"}
+            </text>
+
+            {/* Bone Icon below title */}
+            <g transform="translate(135, 325) rotate(-10)">
+                <path d="M5,10 Q2,7 5,5 Q7,2 10,5 L25,10 Q28,12 25,15 Q22,18 20,15 L5,10" fill="#fff" stroke="#FF8C00" strokeWidth="2" />
+            </g>
+
+            {/* Caption: Handwritten Choco */}
+            <text x="150" y="370" textAnchor="middle" fontSize="14" fill="#5D4037" fontStyle="italic" fontFamily="Brush Script MT, cursive" fontWeight="bold">
+                Trung thành tuyệt đối, hơn cả người yêu
+            </text>
+        </svg>
     ),
 };

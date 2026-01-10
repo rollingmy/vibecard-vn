@@ -101,6 +101,7 @@ const DEFAULT_NAMES: Record<string, string> = {
     'khum': "TỪ CHỐI HIỂU",
     'lem-mon': "LEM MÒN",
     'flexing-time': "RICH KID",
+    'dog-lover-gen-z': "NGƯỜI YÊU CHÓ",
     // Retro Theme
     'pixel-mario': "GAME OVER",
     'tamagotchi-pet': "MY PET",

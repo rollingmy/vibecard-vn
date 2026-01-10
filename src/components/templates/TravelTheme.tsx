@@ -674,31 +674,59 @@ const CatTemplate: React.FC<TemplateProps> = ({ userName, userImage, description
 const DogTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "NGƯỜI YÊU CHÓ";
     const safeDesc = description || "Gâu Gâu";
+    const nameSize = getSafeFontSize(safeName, 350, 32);
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="600" fill="#D2691E" />
+            <defs>
+                {/* Soft Drop Shadow for House */}
+                <filter id="soft-shadow-house" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+                    <feOffset dx="0" dy="4" result="offsetBlur" />
+                    <feComponentTransfer in="offsetBlur" result="faintShadow">
+                        <feFuncA type="linear" slope="0.2" />
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode in="faintShadow" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
 
-            {/* Bones pattern */}
-            <pattern id="bonePattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M10,20 Q5,15 10,10 Q15,5 20,10 L40,20 Q45,25 40,30 Q35,35 30,30 L10,20" fill="#DEB887" opacity="0.3" transform="rotate(45)" />
-            </pattern>
-            <rect width="400" height="600" fill="url(#bonePattern)" />
+                {/* Single Large Paw Definition */}
+                <g id="large-paw-symbol">
+                    <ellipse cx="50" cy="55" rx="30" ry="25" />
+                    <circle cx="20" cy="20" r="10" />
+                    <circle cx="50" cy="10" r="10" />
+                    <circle cx="80" cy="20" r="10" />
+                </g>
+            </defs>
 
-            {/* Dog House Shape Frame */}
-            <path d="M100,200 L200,100 L300,200 V400 H100 V200 Z" fill="#fff" stroke="#8B4513" strokeWidth="5" />
+            {/* 1. Background: Warm Cream Beige */}
+            <rect width="400" height="600" fill="#FFF5E1" />
+
+            {/* 2. Symbolic Large Paws (Faint) */}
+            {/* Top Left */}
+            <use href="#large-paw-symbol" x="-20" y="-20" fill="#8B4513" opacity="0.05" transform="scale(2.5) rotate(-15)" />
+            {/* Bottom Right */}
+            <use href="#large-paw-symbol" x="280" y="480" fill="#8B4513" opacity="0.05" transform="scale(2) rotate(15)" />
+
+            {/* Dog House Shape Frame - Rounded & Shadowed */}
+            <g filter="url(#soft-shadow-house)">
+                <path d="M100,200 L200,100 L300,200 V400 H100 V200 Z" fill="#fff" stroke="#8B4513" strokeWidth="6" strokeLinejoin="round" strokeLinecap="round" />
+            </g>
 
             <defs>
                 <clipPath id="dogClip">
-                    <path d="M105,200 L200,105 L295,200 V395 H105 V200 Z" />
+                    <path d="M105,200 L200,105 L295,200 V395 H105 V200 Z" strokeLinejoin="round" />
                 </clipPath>
             </defs>
             {userImage && <image href={userImage} x="100" y="100" width="200" height="300" preserveAspectRatio="xMidYMid slice" clipPath="url(#dogClip)" />}
 
-            <text x="200" y="460" textAnchor="middle" fontSize={getSafeFontSize(safeName, 350, 30)} fontWeight="bold" fill="#fff" style={{ textShadow: "2px 2px 0px #8B4513" }}>
-                {safeName}
+            {/* Typography - Dark Brown for Contrast */}
+            <text x="200" y="460" textAnchor="middle" fontSize={nameSize} fontWeight="900" fill="#5D4037" fontFamily="Arial Rounded MT Bold, Varela Round, sans-serif" style={{ textShadow: "1px 1px 0px rgba(255,255,255,0.5)" }}>
+                {safeName.toUpperCase()}
             </text>
-            <text x="200" y="500" textAnchor="middle" fontSize="14" fill="#FFE4B5">
+            <text x="200" y="500" textAnchor="middle" fontSize="16" fill="#8D6E63" fontWeight="600" fontFamily="sans-serif">
                 {safeDesc}
             </text>
         </svg>

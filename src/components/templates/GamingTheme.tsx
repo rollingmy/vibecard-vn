@@ -116,16 +116,54 @@ export const GamingTheme = {
                 <clipPath id="avatar-clip-helmet">
                     <rect x="75" y="130" width="150" height="80" rx="10" />
                 </clipPath>
+                {/* 1. White Outline Glow for Pan */}
+                <filter id="pan-glow">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor="white" floodOpacity="0.8" />
+                </filter>
+                {/* 2. Dirt Texture */}
+                <filter id="dirt-texture">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="matrix" values="0.3 0 0 0 0  0 0.2 0 0 0  0 0 0.1 0 0  0 0 0 0.3 0" />
+                </filter>
+                {/* 3. Red Smoke Gradient */}
+                <linearGradient id="red-smoke-grad" x1="0" y1="1" x2="0" y2="0">
+                    <stop offset="0%" stopColor="#d32f2f" stopOpacity="0" />
+                    <stop offset="40%" stopColor="#ef5350" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#e57373" stopOpacity="0" />
+                </linearGradient>
             </defs>
 
             {/* Battleground Dirt Background */}
-            <rect width="300" height="400" fill="#5d4037" />
-            <rect width="300" height="400" fill="black" opacity="0.2" />
+            <rect width="300" height="400" fill="#3E2723" />
+            <rect width="300" height="400" filter="url(#dirt-texture)" opacity="0.6" style={{ mixBlendMode: 'multiply' }} />
+
+            {/* Map Grid Overlay (Subtle) */}
+            <path d="M0,50 h300 M0,100 h300 M0,150 h300 M0,200 h300 M0,250 h300 M0,300 h300 M0,350 h300" stroke="#fff" strokeWidth="0.5" opacity="0.05" />
+            <path d="M50,0 v400 M100,0 v400 M150,0 v400 M200,0 v400 M250,0 v400" stroke="#fff" strokeWidth="0.5" opacity="0.05" />
+
+            {/* Red Smoke Rising (Behind Crate) */}
+            <path d="M120,50 Q100,20 130,-10 T160,-50" fill="none" stroke="url(#red-smoke-grad)" strokeWidth="60" filter="url(#pan-glow)" opacity="0.6">
+                <animate attributeName="d" values="M120,50 Q100,20 130,-10 T160,-50; M120,50 Q140,20 110,-10 T140,-50; M120,50 Q100,20 130,-10 T160,-50" dur="5s" repeatCount="indefinite" />
+            </path>
 
             {/* Airdrop Parachute top */}
-            <path d="M100,-20 L200,-20 L250,50 L50,50 Z" fill="#d32f2f" />
-            <line x1="50" y1="50" x2="150" y2="100" stroke="white" strokeWidth="1" />
-            <line x1="250" y1="50" x2="150" y2="100" stroke="white" strokeWidth="1" />
+            <path d="M100,-20 L200,-20 L250,50 L50,50 Z" fill="#b71c1c" stroke="#333" strokeWidth="1" />
+            <line x1="50" y1="50" x2="150" y2="100" stroke="white" strokeWidth="1" opacity="0.8" />
+            <line x1="250" y1="50" x2="150" y2="100" stroke="white" strokeWidth="1" opacity="0.8" />
+
+            {/* Ember Particles (Floating sparks) */}
+            <circle cx="50" cy="350" r="1" fill="#ff9800" opacity="0.8">
+                <animate attributeName="cy" from="350" to="300" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="280" cy="380" r="1.5" fill="#ff5722" opacity="0.6">
+                <animate attributeName="cy" from="380" to="320" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="20" cy="200" r="1" fill="#ffeb3b" opacity="0.5">
+                <animate attributeName="cy" from="200" to="150" dur="4s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+            </circle>
 
             {/* Spetsnaz Helmet Graphic */}
             <path d="M75,100 Q150,50 225,100 L225,250 Q150,280 75,250 Z" fill="#37474f" stroke="black" strokeWidth="3" />
@@ -143,13 +181,17 @@ export const GamingTheme = {
                 <text x="150" y="180" textAnchor="middle" fontSize="40">🔫</text>
             )}
 
-            {/* Pan Icon */}
-            <circle cx="240" cy="280" r="30" fill="#212121" stroke="#555" strokeWidth="2" />
-            <rect x="235" y="305" width="10" height="40" fill="#212121" transform="rotate(-15 240 310)" />
+            {/* Pan Icon - Enhanced with Outline & Glow */}
+            <g filter="url(#pan-glow)">
+                <circle cx="240" cy="280" r="30" fill="#212121" stroke="#fff" strokeWidth="1.5" />
+                <rect x="235" y="305" width="10" height="40" fill="#212121" stroke="#555" strokeWidth="1" transform="rotate(-15 240 310)" />
+                {/* Metallic shine line */}
+                <path d="M230,270 Q240,260 250,270" fill="none" stroke="#555" strokeWidth="2" opacity="0.5" />
+            </g>
 
-            <text x="150" y="320" textAnchor="middle" fill="#ffeb3b" fontWeight="bold" fontSize="14">WINNER WINNER CHICKEN DINNER</text>
+            <text x="150" y="320" textAnchor="middle" fill="#ffeb3b" fontWeight="bold" fontSize="14" style={{ textShadow: "1px 1px 2px black" }}>WINNER WINNER CHICKEN DINNER</text>
 
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="white" fontFamily="Stencil, sans-serif">
+            <text x="150" y="355" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#eee" fontFamily="Stencil, Black Ops One, Impact, sans-serif" style={{ letterSpacing: "2px", textShadow: "2px 2px 0px #333" }}>
                 {userName || "POCHINKI KING"}
             </text>
         </>

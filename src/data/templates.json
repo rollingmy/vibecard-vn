@@ -694,11 +694,19 @@
         "category": "love"
     },
     {
+        "id": "dog-lover-gen-z",
+        "name": "Người Yêu Chó",
+        "color": "#A0522D",
+        "description": "Trung thành tuyệt đối, hơn cả người yêu",
+        "category": "love"
+    },
+    {
         "id": "dog-lover",
         "name": "Người Yêu Chó",
         "color": "#D2691E",
         "description": "Trung thành tuyệt đối, hơn cả người yêu",
-        "category": "love"
+        "category": "love",
+        "hidden": true
     },
     {
         "id": "minimalist-white",
