@@ -242,21 +242,21 @@
         "id": "hacker-lor",
         "name": "Hacker Lỏ",
         "color": "#006400",
-        "description": "Hack được wifi nhà hàng xóm là giỏi lắm rồi",
+        "description": "Hacker lỏ: Chỉ giỏi hack pass wifi nhà hàng xóm",
         "category": "gaming"
     },
     {
         "id": "game-over-screen",
-        "name": "Game Over",
+        "name": "GAME OVER",
         "color": "#8B0000",
         "description": "Cuộc đời là game khó, và bạn vừa hết mạng",
         "category": "gaming"
     },
     {
         "id": "nintendo-switch",
-        "name": "Nintendo Player",
-        "color": "#FF4500",
-        "description": "Cầm Switch ra đường cho ngầu thôi",
+        "name": "Nintendo Switch",
+        "color": "#E60012",
+        "description": "Cuộc sống là một trò chơi, quan trọng là mình có Joy-con.",
         "category": "gaming"
     },
     {
@@ -282,9 +282,9 @@
     },
     {
         "id": "mining-coin-rig",
-        "name": "Trại Trâu Cày Coin",
-        "color": "#BDB76B",
-        "description": "Tiền điện tháng này cao hơn tiền lãi",
+        "name": "Trâu Cày Coin",
+        "color": "#4CAF50",
+        "description": "Đào coin vì đam mê, nhưng đời toàn cho đào... nợ",
         "category": "gaming"
     },
     {
@@ -431,7 +431,7 @@
         "id": "pixel-mario",
         "name": "Pixel Plumber",
         "color": "#FF4500",
-        "description": "Ăn nấm để lớn, đụng rùa là đi",
+        "description": "Level 99: Đã quá già để nhảy qua những rắc rối",
         "category": "gaming"
     },
     {

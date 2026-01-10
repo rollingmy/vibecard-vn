@@ -158,45 +158,87 @@ export const GamingTheme = {
     // ===================================
     // 33. HACKER LỎ (Terminal)
     // ===================================
-    'hacker-lor': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    // 33. HACKER LỎ (Cyber Infiltration)
+    'hacker-lor': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-mask">
-                    <circle cx="150" cy="150" r="70" />
+                    <circle cx="150" cy="150" r="66" />
                 </clipPath>
+                {/* Neon Green Glow */}
+                <filter id="neon-green-glow">
+                    <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* CRT Noise */}
+                <filter id="crt-noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="saturate" values="0" />
+                </filter>
+                {/* Glitch Effect */}
+                <filter id="text-glitch-green">
+                    <feOffset in="SourceGraphic" dx="-2" dy="0" result="offset1" />
+                    <feColorMatrix in="offset1" type="matrix" values="0 1 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" result="green" />
+                    <feMerge>
+                        <feMergeNode in="green" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
             </defs>
 
             {/* Terminal Black BG */}
-            <rect width="300" height="400" fill="black" />
+            <rect width="300" height="400" fill="#050505" />
 
-            {/* Green Code Rain */}
-            <text x="20" y="50" fill="#0f0" fontSize="10" fontFamily="monospace" opacity="0.5" writingMode="tb">fail connect...</text>
-            <text x="280" y="50" fill="#0f0" fontSize="10" fontFamily="monospace" opacity="0.5" writingMode="tb">brute force...</text>
+            {/* CRT Noise Overlay */}
+            <rect width="300" height="400" filter="url(#crt-noise)" opacity="0.12" style={{ mixBlendMode: 'overlay' }} />
 
-            {/* Access Granted Box */}
-            <rect x="50" y="250" width="200" height="40" fill="none" stroke="#0f0" strokeWidth="2" />
-            <rect x="55" y="255" width="190" height="30" fill="#0f0" opacity="0.2" />
-            <text x="150" y="275" textAnchor="middle" fill="#0f0" fontWeight="bold" fontFamily="monospace" letterSpacing="2">ACCESS GRANTED</text>
+            {/* Green Code Texts (Shortened to avoid overlap) */}
+            <text x="20" y="50" fill="#0f0" fontSize="10" fontFamily="monospace" opacity="0.6" writingMode="tb">fail connect</text>
+            <text x="280" y="50" fill="#0f0" fontSize="10" fontFamily="monospace" opacity="0.6" writingMode="tb">brute force</text>
 
-            {/* Avatar with Guy Fawkes Mask Overlay */}
+            {/* Access Granted Box - Neon Glow */}
+            <g transform="translate(0, 5)" filter="url(#neon-green-glow)">
+                <rect x="50" y="250" width="200" height="40" fill="none" stroke="#0f0" strokeWidth="2" />
+                <rect x="55" y="255" width="190" height="30" fill="#0f0" opacity="0.1" />
+                <text x="160" y="275" textAnchor="middle" fill="#0f0" fontWeight="bold" fontFamily="Courier New, monospace" letterSpacing="2" fontSize="14">ACCESS GRANTED</text>
+                {/* Unlock Icon */}
+                <path d="M85,268 h8 v6 h-8 z M89,268 v-3 a2,2 0 0 0 -4,0" fill="none" stroke="#0f0" strokeWidth="1.5" />
+            </g>
+
+            {/* Avatar Area - Slightly Reduced */}
             {userImage ? (
-                <image
-                    x="80" y="80" width="140" height="140"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-mask)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
+                <g>
+                    <image
+                        x="84" y="84" width="132" height="132"
+                        href={userImage}
+                        clipPath="url(#avatar-clip-mask)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                    {/* Green Overlay */}
+                    <circle cx="150" cy="150" r="66" fill="#0f0" opacity="0.15" style={{ mixBlendMode: 'overlay' }} />
+                </g>
             ) : (
                 <text x="150" y="165" textAnchor="middle" fontSize="60">👺</text>
             )}
 
-            {/* Mask Moustache Overlay (Simple) */}
-            <path d="M130,170 Q150,160 170,170" fill="none" stroke="black" strokeWidth="2" opacity="0.7" />
-            <path d="M150,170 L150,180" fill="none" stroke="black" strokeWidth="2" opacity="0.7" />
+            {/* Scanning Border Animation */}
+            <circle cx="150" cy="150" r="71" fill="none" stroke="#0f0" strokeWidth="2" strokeDasharray="10 10" opacity="0.8" filter="url(#neon-green-glow)">
+                <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="4s" repeatCount="indefinite" />
+            </circle>
 
-            <rect x="40" y="320" width="220" height="50" fill="#111" stroke="#0f0" strokeWidth="1" />
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#0f0" fontFamily="Courier New, monospace">
+            {/* Name Box - Moved UP 15px */}
+            <rect x="40" y="305" width="220" height="50" fill="#000" stroke="#0f0" strokeWidth="1" />
+            {/* Name - Mono Glitch */}
+            <text x="150" y="335" textAnchor="middle" fontSize={Math.min(nameFontSize, 22)} fontWeight="bold" fill="#0f0" fontFamily="Courier New, monospace" filter="url(#text-glitch-green)" style={{ letterSpacing: '2px' }}>
                 {userName || "ANONYMOUS"}
+            </text>
+
+            {/* Caption - Bottom Layer, Top Visual */}
+            <text x="150" y="385" textAnchor="middle" fontSize="9" fill="#aaffaa" fontFamily="monospace" fontWeight="bold" filter="url(#neon-green-glow)">
+                {description || "Hacker lỏ: Chỉ giỏi hack pass wifi nhà hàng xóm"}
             </text>
         </>
     ),
@@ -204,107 +246,193 @@ export const GamingTheme = {
     // ===================================
     // 34. GAME OVER SCREEN (Wasted)
     // ===================================
+    // 34. GAME OVER SCREEN (Cinematic Fail/Wasted)
     'game-over-screen': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-tv">
                     <rect x="0" y="0" width="300" height="400" />
                 </clipPath>
-                <filter id="noise">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+                {/* Film Grain Noise */}
+                <filter id="wasted-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" />
                 </filter>
+                {/* Soft Red Glow for Text */}
+                <filter id="wasted-glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Fade Mask based on Gradient */}
+                <linearGradient id="fade-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="white" stopOpacity="0" />
+                    <stop offset="20%" stopColor="white" stopOpacity="1" />
+                    <stop offset="80%" stopColor="white" stopOpacity="1" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+                <mask id="fade-mask">
+                    <rect x="0" y="0" width="300" height="400" fill="url(#fade-grad)" />
+                </mask>
             </defs>
 
             {/* Black Screen BG */}
-            <rect width="300" height="400" fill="black" />
+            <rect width="300" height="400" fill="#000" />
 
-            {/* Avatar Full Screen Grayscale */}
+            {/* Avatar Full Screen Grayscale + Contrast */}
             {userImage ? (
                 <image
                     x="0" y="0" width="300" height="400"
                     href={userImage}
                     preserveAspectRatio="xMidYMid slice"
-                    opacity="0.5"
-                    style={{ filter: "grayscale(100%)" }}
+                    opacity="0.6"
+                    style={{ filter: "grayscale(100%) contrast(1.2)" }}
                 />
             ) : (
                 <text x="150" y="200" textAnchor="middle" fontSize="80" opacity="0.5">💀</text>
             )}
 
             {/* Noise Overlay */}
-            <rect width="300" height="400" filter="url(#noise)" opacity="0.1" />
+            <rect width="300" height="400" filter="url(#wasted-grain)" opacity="0.15" />
 
-            {/* WASTED Text Bar */}
-            <rect x="0" y="180" width="300" height="60" fill="black" opacity="0.7" />
-            <text x="150" y="225" textAnchor="middle" fill="#cc0000" fontSize="40" fontWeight="900" fontFamily="sans-serif" style={{ textShadow: "2px 2px 0px black" }}>WASTED</text>
+            {/* WASTED Text Bar - Narrower with Fade Edges */}
+            <rect x="0" y="180" width="300" height="50" fill="black" opacity="0.85" mask="url(#fade-mask)" />
 
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="bold" fill="white" fontFamily="monospace">
-                {userName || "TRY AGAIN?"}
+            {/* WASTED Text - GTA Style */}
+            <text x="150" y="220" textAnchor="middle" fill="#cc0000" fontSize="42" fontWeight="900"
+                fontFamily="Impact, Pricedown, sans-serif"
+                stroke="black" strokeWidth="1"
+                filter="url(#wasted-glow)"
+                style={{ letterSpacing: "2px" }}>
+                {userName || "GAME OVER"}
+            </text>
+
+            {/* Blinking Try Again */}
+            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fill="white" fontFamily="monospace">
+                TRY AGAIN?
+                <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
             </text>
         </>
     ),
 
     // ===================================
-    // 35. NINTENDO SWITCH
-    // ===================================
-    'nintendo-switch': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    // 35. NINTENDO SWITCH (Console Pro)
+    'nintendo-switch': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-screen">
                     <rect x="60" y="80" width="180" height="240" rx="5" />
                 </clipPath>
+                {/* Soft White Glow */}
+                <filter id="soft-white-glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* 3D Bevel for Buttons */}
+                <filter id="btn-bevel">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur" />
+                    <feOffset in="blur" dx="1" dy="1" result="shadow" />
+                    <feSpecularLighting in="blur" surfaceScale="2" specularConstant="1" specularExponent="20" lightingColor="#white" result="specular">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular" />
+                    <feComposite in="SourceGraphic" in2="shadow" operator="over" />
+                </filter>
+                {/* Screen Gloss Gradient */}
+                <linearGradient id="gloss-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+                    <stop offset="40%" stopColor="white" stopOpacity="0" />
+                    <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
             </defs>
 
             {/* Black Bezel BG */}
             <rect width="300" height="400" fill="#222" />
 
-            {/* Screen Area */}
-            <rect x="60" y="80" width="180" height="240" fill="#111" stroke="#333" strokeWidth="2" />
+            {/* Screen Area with Bezel */}
+            {/* Main Screen */}
+            <rect x="60" y="80" width="180" height="240" fill="#111" stroke="#000" strokeWidth="6" />
 
             {/* Avatar on Screen */}
             {userImage ? (
-                <image
-                    x="60" y="80" width="180" height="240"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-screen)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
+                <g>
+                    <image
+                        x="60" y="80" width="180" height="240"
+                        href={userImage}
+                        clipPath="url(#avatar-clip-screen)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                    {/* Gloss Reflection */}
+                    <rect x="60" y="80" width="180" height="240" fill="url(#gloss-grad)" clipPath="url(#avatar-clip-screen)" style={{ pointerEvents: 'none' }} />
+                </g>
             ) : (
                 <text x="150" y="200" textAnchor="middle" fontSize="50">🎮</text>
             )}
 
-            {/* Joy-Cons */}
+            {/* Joy-Cons (Device Body) with Border */}
             {/* Left Blue */}
-            <path d="M10,80 L60,80 L60,320 L10,320 Q0,320 0,310 L0,90 Q0,80 10,80" fill="#00b0ff" />
-            <circle cx="30" cy="120" r="8" fill="#222" /> {/* Stick */}
-            <rect x="25" y="150" width="10" height="10" fill="#222" /> {/* D-pad */}
-            <rect x="45" y="100" width="10" height="5" fill="#333" /> {/* - btn */}
+            <path d="M10,80 L60,80 L60,320 L10,320 Q0,320 0,310 L0,90 Q0,80 10,80" fill="#00b0ff" stroke="black" strokeWidth="1" />
+            <circle cx="30" cy="120" r="10" fill="#222" filter="url(#btn-bevel)" /> {/* Stick Base */}
+            <circle cx="30" cy="120" r="8" fill="#111" /> {/* Stick Top */}
+
+            <rect x="25" y="150" width="10" height="10" fill="#222" rx="2" filter="url(#btn-bevel)" /> {/* D-pad Mock */}
+            <rect x="45" y="100" width="10" height="4" fill="#333" rx="1" /> {/* - btn */}
 
             {/* Right Red */}
-            <path d="M240,80 L290,80 Q300,80 300,90 L300,310 Q300,320 290,320 L240,320 L240,80" fill="#ff3d00" />
-            <circle cx="270" cy="180" r="8" fill="#222" /> {/* Stick */}
-            <circle cx="270" cy="130" r="5" fill="#222" /> {/* Buttons */}
-            <circle cx="260" cy="140" r="5" fill="#222" />
-            <circle cx="280" cy="140" r="5" fill="#222" />
-            <circle cx="270" cy="150" r="5" fill="#222" />
-            <rect x="245" y="100" width="10" height="5" fill="#333" /> {/* + btn */}
+            <path d="M240,80 L290,80 Q300,80 300,90 L300,310 Q300,320 290,320 L240,320 L240,80" fill="#ff3d00" stroke="black" strokeWidth="1" />
+            <circle cx="270" cy="180" r="10" fill="#222" filter="url(#btn-bevel)" /> {/* Stick Base */}
+            <circle cx="270" cy="180" r="8" fill="#111" /> {/* Stick Top */}
 
-            {/* Name at bottom */}
-            <text x="150" y="370" textAnchor="middle" fill="white" fontSize={Math.min(nameFontSize, 20)} fontWeight="bold" fontFamily="sans-serif">
+            {/* Buttons 3D */}
+            <circle cx="270" cy="130" r="5" fill="#222" filter="url(#btn-bevel)" />
+            <circle cx="260" cy="140" r="5" fill="#222" filter="url(#btn-bevel)" />
+            <circle cx="280" cy="140" r="5" fill="#222" filter="url(#btn-bevel)" />
+            <circle cx="270" cy="150" r="5" fill="#222" filter="url(#btn-bevel)" />
+
+            <rect x="245" y="100" width="10" height="4" fill="#333" rx="1" /> {/* + btn */}
+
+            {/* Name at bottom - Glowing */}
+            <text x="150" y="360" textAnchor="middle" fill="white" fontSize={Math.min(nameFontSize, 20)} fontWeight="900" fontFamily="sans-serif" filter="url(#soft-white-glow)" letterSpacing="1">
                 {userName || "PLAYER 1"}
+            </text>
+
+            {/* Caption */}
+            <text x="150" y="380" textAnchor="middle" fill="#ccc" fontSize="10" fontWeight="normal" fontFamily="sans-serif">
+                {description || "Cuộc sống là một trò chơi, quan trọng là mình có Joy-con."}
             </text>
         </>
     ),
 
     // ===================================
-    // 36. KEYBOARD WARRIOR (RGB)
+    // 36. KEYBOARD WARRIOR (RGB Dark)
     // ===================================
-    'keyboard-warrior': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    'keyboard-warrior': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-key">
-                    <rect x="75" y="75" width="150" height="150" rx="10" />
+                    <rect x="80" y="70" width="140" height="140" rx="10" />
                 </clipPath>
+                {/* Cyan Neon Glow Weak */}
+                <filter id="neon-cyan-glow-weak">
+                    <feGaussianBlur stdDeviation="1" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Cyan Neon Glow Strong */}
+                <filter id="neon-cyan-glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
                 <linearGradient id="rgb-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#f00" />
                     <stop offset="33%" stopColor="#0f0" />
@@ -317,35 +445,43 @@ export const GamingTheme = {
             <rect width="300" height="400" fill="#111" />
 
             {/* Keycap Border */}
-            <rect x="65" y="65" width="170" height="170" fill="none" stroke="url(#rgb-grad)" strokeWidth="4" rx="15" />
-            <rect x="75" y="75" width="150" height="150" fill="#222" rx="10" />
+            <rect x="70" y="60" width="160" height="160" fill="none" stroke="url(#rgb-grad)" strokeWidth="4" rx="15" />
+            <rect x="80" y="70" width="140" height="140" fill="#222" rx="10" />
 
-            {/* Avatar */}
+            {/* Avatar - Reduced size for space */}
             {userImage ? (
                 <image
-                    x="75" y="75" width="150" height="150"
+                    x="80" y="70" width="140" height="140"
                     href={userImage}
                     clipPath="url(#avatar-clip-key)"
                     preserveAspectRatio="xMidYMid slice"
                 />
             ) : (
-                <text x="150" y="160" textAnchor="middle" fontSize="60">⌨️</text>
+                <text x="150" y="150" textAnchor="middle" fontSize="60">⌨️</text>
             )}
 
-            {/* Keys Grid Details */}
-            <rect x="40" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
-            <text x="60" y="275" textAnchor="middle" fill="white" fontSize="12">C</text>
-            <rect x="90" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
-            <text x="110" y="275" textAnchor="middle" fill="white" fontSize="12">T</text>
-            <rect x="140" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
-            <text x="160" y="275" textAnchor="middle" fill="white" fontSize="12">R</text>
-            <rect x="190" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
-            <text x="210" y="275" textAnchor="middle" fill="white" fontSize="12">L</text>
+            {/* Keys Grid Details - Moved UP 20px (y=230) */}
+            <g transform="translate(0, -20)">
+                <rect x="40" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
+                <text x="60" y="275" textAnchor="middle" fill="white" fontSize="12">C</text>
+                <rect x="90" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
+                <text x="110" y="275" textAnchor="middle" fill="white" fontSize="12">T</text>
+                <rect x="140" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
+                <text x="160" y="275" textAnchor="middle" fill="white" fontSize="12">R</text>
+                <rect x="190" y="250" width="40" height="40" fill="#333" stroke="#555" rx="5" />
+                <text x="210" y="275" textAnchor="middle" fill="white" fontSize="12">L</text>
 
-            <rect x="40" y="300" width="220" height="40" fill="#333" stroke="url(#rgb-grad)" strokeWidth="2" rx="5" />
-            <text x="150" y="325" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">SPACE BAR (TYPING...)</text>
+                {/* Space Bar (y=300 -> 280) Ends 320 */}
+                <rect x="40" y="300" width="220" height="40" fill="#333" stroke="url(#rgb-grad)" strokeWidth="2" rx="5" />
+                <text x="150" y="325" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">SPACE BAR</text>
+            </g>
 
-            <text x="150" y="370" textAnchor="middle" fill="url(#rgb-grad)" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fontFamily="sans-serif">
+            {/* New Caption - Moved down to 350 (Gap 30px from Space) */}
+            <text x="150" y="350" textAnchor="middle" fill="#00e5ff" fontSize="8" fontFamily="monospace" fontWeight="bold" filter="url(#neon-cyan-glow-weak)">
+                {description || "Gõ phím bình thiên hạ, enter định giang san"}
+            </text>
+
+            <text x="150" y="385" textAnchor="middle" fill="url(#rgb-grad)" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fontFamily="sans-serif">
                 {userName || "ANH HÙNG BÀN PHÍM"}
             </text>
         </>
@@ -354,60 +490,112 @@ export const GamingTheme = {
     // ===================================
     // 37. 404 NOT FOUND (Dino)
     // ===================================
-    'loi-404-not-found': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    // 37. 404 NOT FOUND (Browser Parody)
+    'loi-404-not-found': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-pixel">
-                    <rect x="100" y="100" width="100" height="100" />
+                    <rect x="90" y="170" width="120" height="120" />
                 </clipPath>
+                {/* Paper Noise */}
+                <filter id="paper-noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.1 0" in="noise" result="coloredNoise" />
+                </filter>
+                {/* Soft Blur for Image */}
+                <filter id="soft-blur-noise">
+                    <feGaussianBlur stdDeviation="0.5" result="blur" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" result="noise" />
+                    <feComposite in="noise" in2="blur" operator="in" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="noise" />
+                    </feMerge>
+                </filter>
+                {/* Button Shadow */}
+                <filter id="btn-soft-shadow">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.2" />
+                </filter>
             </defs>
 
-            {/* White Offline Screen */}
-            <rect width="300" height="400" fill="white" />
+            {/* White Offline Screen with Noise */}
+            <rect width="300" height="400" fill="#f8f9fa" />
+            <rect width="300" height="400" filter="url(#paper-noise)" opacity="0.4" />
 
-            {/* Dino Icon (Simplified) */}
-            <path d="M140,50 L160,50 L160,60 L170,60 L170,70 L140,70 L140,50" fill="#555" /> {/* Head */}
-            <rect x="140" y="70" width="10" height="20" fill="#555" /> {/* Neck */}
+            {/* Dino Icon (8-bit Pixel Art Style) */}
+            <g transform="translate(130, 60) scale(4)">
+                {/* Simple Dino Shape */}
+                <path d="M5,0 h5 v1 h-1 v1 h-1 v1 h1 v1 h3 v1 h-1 v1 h-1 v1 h-4 v-1 h-2 v-2 h2 v-1 h2 v-1 h-3 v-1 h2 v-1" fill="#5f6368" />
+            </g>
 
-            <text x="150" y="120" textAnchor="middle" fontSize="24" fontFamily="monospace" fill="#555" fontWeight="bold">No Internet</text>
-            <text x="150" y="140" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="#777">ERR_INTERNET_DISCONNECTED</text>
+            <text x="150" y="120" textAnchor="middle" fontSize="22" fontFamily="monospace" fill="#202124" fontWeight="900">No Internet</text>
+            <text x="150" y="140" textAnchor="middle" fontSize="11" fontFamily="monospace" fill="#5f6368" fontWeight="bold">ERR_INTERNET_DISCONNECTED</text>
 
-            {/* Avatar Pixellated Frame */}
-            <rect x="90" y="170" width="120" height="120" fill="none" stroke="#555" strokeWidth="4" strokeDasharray="10 5" />
+            {/* Avatar - Dashed Box */}
+            <rect x="85" y="165" width="130" height="130" fill="none" stroke="#5f6368" strokeWidth="2" strokeDasharray="8 6" rx="4" />
+
             {userImage ? (
                 <image
-                    x="100" y="180" width="100" height="100"
+                    x="90" y="170" width="120" height="120"
                     href={userImage}
                     clipPath="url(#avatar-clip-pixel)"
                     preserveAspectRatio="xMidYMid slice"
                     style={{ imageRendering: "pixelated" }}
+                    filter="url(#soft-blur-noise)"
+                    opacity="0.9"
                 />
             ) : (
                 <text x="150" y="240" textAnchor="middle" fontSize="40">🦖</text>
             )}
 
-            <rect x="100" y="320" width="100" height="30" fill="#2196f3" rx="4" />
-            <text x="150" y="340" textAnchor="middle" fill="white" fontWeight="bold" fontSize="12">Reload</text>
+            {/* Reload Button */}
+            <g filter="url(#btn-soft-shadow)" style={{ cursor: 'pointer' }}>
+                <rect x="100" y="320" width="100" height="36" fill="#1a73e8" rx="18" />
+                <text x="150" y="343" textAnchor="middle" fill="white" fontWeight="bold" fontSize="13" fontFamily="sans-serif">Reload</text>
+            </g>
 
-            <text x="150" y="380" textAnchor="middle" fill="#555" fontSize={Math.min(nameFontSize, 20)} fontFamily="monospace">
+            <text x="150" y="385" textAnchor="middle" fill="#5f6368" fontSize={Math.min(nameFontSize, 20)} fontFamily="monospace" fontWeight="bold">
                 {userName || "MẤT KẾT NỐI"}
             </text>
+
+            {/* Description/Caption */}
+            {description && (
+                <text x="150" y="280" textAnchor="middle" fill="#5f6368" fontSize="10" fontFamily="monospace" fontStyle="italic">
+                    "{description}"
+                </text>
+            )}
         </>
     ),
 
     // ===================================
     // 38. AI ROBOT X (Gundam HUD)
     // ===================================
+    // 40. GUNDAM PILOT (Mecha Cockpit)
     'ai-robot-x': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-hud">
                     <circle cx="150" cy="150" r="80" />
                 </clipPath>
+                {/* Cyan Glow Strong */}
+                <filter id="cyan-glow-strong">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Film Grain Noise */}
+                <filter id="film-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.2 0" in="noise" result="coloredNoise" />
+                </filter>
             </defs>
 
-            {/* Deep Space BG */}
+            {/* Deep Space BG with Grain */}
             <rect width="300" height="400" fill="#000022" />
+            <rect width="300" height="400" filter="url(#film-grain)" opacity="0.1" />
+
             <circle cx="150" cy="200" r="140" fill="none" stroke="#00e5ff" strokeWidth="1" opacity="0.5" />
             <circle cx="150" cy="200" r="100" fill="none" stroke="#d500f9" strokeWidth="1" opacity="0.3" strokeDasharray="5 5" />
 
@@ -415,8 +603,13 @@ export const GamingTheme = {
             <path d="M20,20 L50,20 L60,30 L20,30 Z" fill="#00e5ff" />
             <text x="25" y="28" fill="black" fontSize="8" fontWeight="bold">SYS.ON</text>
 
+            {/* Right Side Stats */}
             <path d="M250,30 L280,30 L280,380 L250,380 Z" fill="none" stroke="#00e5ff" strokeWidth="1" />
             <rect x="255" y="200" width="20" height="100" fill="#00e5ff" opacity="0.5" /> {/* Fuel gauge */}
+            <text x="265" y="60" textAnchor="middle" fill="#00e5ff" fontSize="8" fontWeight="bold" opacity="0.7">ALT</text>
+            <text x="265" y="72" textAnchor="middle" fill="#fff" fontSize="8" opacity="0.7">5000</text>
+            <text x="265" y="100" textAnchor="middle" fill="#00e5ff" fontSize="8" fontWeight="bold" opacity="0.7">SPD</text>
+            <text x="265" y="112" textAnchor="middle" fill="#fff" fontSize="8" opacity="0.7">M.2</text>
 
             {/* Avatar Center */}
             {userImage ? (
@@ -430,40 +623,73 @@ export const GamingTheme = {
                 <text x="150" y="160" textAnchor="middle" fontSize="60">🤖</text>
             )}
 
-            {/* Crosshair Overlay */}
-            <line x1="150" y1="120" x2="150" y2="180" stroke="#ff0000" strokeWidth="1" opacity="0.8" />
-            <line x1="120" y1="150" x2="180" y2="150" stroke="#ff0000" strokeWidth="1" opacity="0.8" />
-            <circle cx="150" cy="150" r="50" fill="none" stroke="#ff0000" strokeWidth="1" strokeDasharray="4 4" />
+            {/* Crosshair Overlay - Pulsing */}
+            <g>
+                <line x1="150" y1="120" x2="150" y2="180" stroke="#ff0000" strokeWidth="1.5" opacity="0.8" />
+                <line x1="120" y1="150" x2="180" y2="150" stroke="#ff0000" strokeWidth="1.5" opacity="0.8" />
+                <circle cx="150" cy="150" r="50" fill="none" stroke="#ff0000" strokeWidth="1.5" strokeDasharray="4 4" />
+                <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+            </g>
 
-            <rect x="40" y="300" width="220" height="60" fill="none" stroke="#00e5ff" strokeWidth="2" />
-            <path d="M40,300 L60,300 L50,310 L40,310 Z" fill="#00e5ff" />
+            <rect x="40" y="300" width="220" height="60" fill="none" stroke="#00e5ff" strokeWidth="2" filter="url(#cyan-glow-strong)" />
+            <path d="M40,300 L60,300 L50,310 L40,310 Z" fill="#00e5ff" filter="url(#cyan-glow-strong)" />
 
             <text x="50" y="325" fill="#00e5ff" fontSize="10">K PILOT:</text>
-            <text x="150" y="345" textAnchor="middle" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} style={{ textShadow: "0 0 5px #00e5ff" }}>
+            {/* Title with Strong Glow */}
+            <text x="150" y="345" textAnchor="middle" fill="white" fontWeight="900" fontSize={Math.min(nameFontSize, 24)} style={{ textShadow: "0 0 8px #00e5ff" }} filter="url(#cyan-glow-strong)">
                 {userName || "GUNDAM PILOT"}
+            </text>
+
+            {/* Caption - Top Layer, Spacious, Pushed down for padding */}
+            <text x="150" y="390" textAnchor="middle" fill="#00e5ff" fontSize="12" fontWeight="bold" letterSpacing="0.5">
+                Khởi động hệ thống, sẵn sàng quét sạch deadline!
             </text>
         </>
     ),
 
     // ===================================
-    // 39. MINING COIN RIG (GPU)
+    // 39. MINING COIN RIG (Hardware Master)
     // ===================================
-    'mining-coin-rig': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    'mining-coin-rig': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-fan">
                     <circle cx="150" cy="120" r="60" />
                 </clipPath>
+                {/* Green Glow for Fan */}
+                <filter id="green-fan-glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Metallic Text Filter */}
+                <filter id="metallic-emboss">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur" />
+                    <feSpecularLighting in="blur" surfaceScale="3" specularConstant="1" specularExponent="20" lightingColor="#fff" result="spec">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="spec" in2="SourceAlpha" operator="in" result="specOut" />
+                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+                </filter>
+                {/* Circuit Pattern */}
+                <pattern id="circuit-board" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M10,10 h20 v10 h-10" fill="none" stroke="#4caf50" strokeWidth="1" opacity="0.3" />
+                    <path d="M40,40 v-20 h-10" fill="none" stroke="#4caf50" strokeWidth="1" opacity="0.3" />
+                    <circle cx="10" cy="10" r="2" fill="#4caf50" opacity="0.3" />
+                    <circle cx="40" cy="40" r="2" fill="#4caf50" opacity="0.3" />
+                </pattern>
             </defs>
 
             {/* Circuit Board BG */}
             <rect width="300" height="400" fill="#1b5e20" />
-            <path d="M0,50 L300,50 M0,150 L300,150 M0,250 L300,250" stroke="#4caf50" strokeWidth="1" opacity="0.3" />
+            <rect width="300" height="400" fill="url(#circuit-board)" />
             <rect x="20" y="20" width="10" height="360" fill="#ffd700" /> {/* Bus bar */}
 
             {/* GPU Fan Housing */}
             <rect x="60" y="40" width="180" height="160" fill="#333" stroke="black" strokeWidth="2" />
-            <circle cx="150" cy="120" r="65" fill="#222" />
+            <circle cx="150" cy="120" r="65" fill="#222" filter="url(#green-fan-glow)" />
 
             {/* Avatar on Fan Hub */}
             {userImage ? (
@@ -477,128 +703,227 @@ export const GamingTheme = {
                 <text x="150" y="130" textAnchor="middle" fontSize="40">⛏️</text>
             )}
 
-            {/* Fan Blades Overlay */}
-            <path d="M150,120 L150,55" stroke="black" strokeWidth="2" transform="rotate(0 150 120)" />
-            <path d="M150,120 L150,55" stroke="black" strokeWidth="2" transform="rotate(120 150 120)" />
-            <path d="M150,120 L150,55" stroke="black" strokeWidth="2" transform="rotate(240 150 120)" />
+            {/* Fan Blades Overlay - Reducded opacity/thickness */}
+            <path d="M150,120 L150,55" stroke="black" strokeWidth="1" opacity="0.4" transform="rotate(0 150 120)" />
+            <path d="M150,120 L150,55" stroke="black" strokeWidth="1" opacity="0.4" transform="rotate(120 150 120)" />
+            <path d="M150,120 L150,55" stroke="black" strokeWidth="1" opacity="0.4" transform="rotate(240 150 120)" />
 
             {/* Stats Panel */}
             <rect x="40" y="220" width="220" height="100" fill="#222" stroke="#4caf50" strokeWidth="2" />
-            <text x="50" y="240" fill="#4caf50" fontSize="12" fontFamily="monospace">HASH: 120 MH/s</text>
-            <text x="50" y="260" fill="#4caf50" fontSize="12" fontFamily="monospace">TEMP: 85°C 🔥</text>
+
+            <text x="50" y="240" fill="#00ff00" fontSize="12" fontFamily="Courier New, monospace" fontWeight="bold">HASH: 120 MH/s</text>
+            <text x="50" y="260" fill="#00ff00" fontSize="12" fontFamily="Courier New, monospace" fontWeight="bold">
+                TEMP: 85°C 🔥
+                <animate attributeName="opacity" values="1;0.3;1" dur="0.5s" repeatCount="indefinite" />
+            </text>
+
             <rect x="50" y="280" width="200" height="10" fill="#333" />
             <rect x="50" y="280" width="150" height="10" fill="#4caf50" /> {/* Progress */}
 
-            <text x="150" y="370" textAnchor="middle" fill="#ffd700" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" style={{ textShadow: "1px 1px 0px black" }}>
+            {/* Name - Metallic */}
+            <text x="150" y="360" textAnchor="middle" fill="#ffd700" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" filter="url(#metallic-emboss)" style={{ textShadow: "1px 1px 2px black" }}>
                 {userName || "TRÂU CÀY COIN"}
+            </text>
+
+            {/* Caption */}
+            <text x="150" y="380" textAnchor="middle" fill="#81c784" fontSize="10" fontWeight="normal" fontStyle="italic">
+                {description || "Đào coin vì đam mê, nhưng đời toàn cho đào... nợ"}
             </text>
         </>
     ),
 
     // ===================================
     // 56. CYBERPUNK CITY (Neon)
-    // ===================================
     'cyberpunk-city': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-hex-cyber">
                     <polygon points="150,90 220,130 220,210 150,250 80,210 80,130" />
                 </clipPath>
+                {/* Glitch Filter for Name */}
+                <filter id="text-glitch">
+                    <feOffset in="SourceGraphic" dx="-2" dy="0" result="red" />
+                    <feOffset in="SourceGraphic" dx="2" dy="0" result="blue" />
+                    <feMerge>
+                        <feMergeNode in="red" />
+                        <feMergeNode in="blue" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Digital Noise */}
+                <filter id="digital-noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise" />
+                </filter>
+                {/* Strong Neon Glow */}
+                <filter id="strong-neon-glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
             </defs>
 
-            {/* Dark City BG */}
+            {/* Dark City BG with Digital Noise */}
             <rect width="300" height="400" fill="#0d001a" />
+            <rect width="300" height="400" filter="url(#digital-noise)" opacity="0.15" />
 
-            {/* Neon Buildings */}
-            <rect x="20" y="200" width="40" height="200" fill="#240046" stroke="#d500f9" strokeWidth="1" />
-            <rect x="240" y="180" width="50" height="220" fill="#240046" stroke="#00e5ff" strokeWidth="1" />
-            <rect x="70" y="250" width="60" height="150" fill="#3c096c" />
-            <rect x="180" y="220" width="50" height="180" fill="#3c096c" />
+            {/* Neon Buildings with Light Streaks */}
+            <g>
+                <rect x="20" y="200" width="40" height="200" fill="#240046" stroke="#d500f9" strokeWidth="1" />
+                <path d="M40,220 V380" stroke="#d500f9" strokeWidth="2" opacity="0.5" />
+
+                <rect x="240" y="180" width="50" height="220" fill="#240046" stroke="#00e5ff" strokeWidth="1" />
+                <path d="M265,200 V380" stroke="#00e5ff" strokeWidth="2" opacity="0.5" />
+
+                <rect x="70" y="250" width="60" height="150" fill="#3c096c" />
+                <path d="M100,270 V380" stroke="#fff" strokeWidth="1" opacity="0.3" />
+
+                <rect x="180" y="220" width="50" height="180" fill="#3c096c" />
+                <path d="M205,240 V380" stroke="#fff" strokeWidth="1" opacity="0.3" />
+            </g>
 
             {/* Grid Floor */}
             <path d="M0,350 L300,350 M0,350 L150,300 L300,350" stroke="#f50057" strokeWidth="1" opacity="0.5" />
 
-            {/* Hologram Circle */}
-            <circle cx="150" cy="170" r="90" fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="10 5" opacity="0.8" />
+            {/* Hologram Circle - Neon Glow Enhanced */}
+            <circle cx="150" cy="170" r="90" fill="none" stroke="#00e5ff" strokeWidth="2" strokeDasharray="10 5" opacity="0.8" filter="url(#strong-neon-glow)" />
             <circle cx="150" cy="170" r="80" fill="none" stroke="#d500f9" strokeWidth="1" />
 
-            {/* Avatar */}
+            {/* Avatar with Blue-Purple Overlay */}
             {userImage ? (
-                <image
-                    x="80" y="90" width="140" height="160"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-hex-cyber)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
+                <g>
+                    <image
+                        x="80" y="90" width="140" height="160"
+                        href={userImage}
+                        clipPath="url(#avatar-clip-hex-cyber)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                    {/* Overlay */}
+                    <polygon points="150,90 220,130 220,210 150,250 80,210 80,130" fill="#4a00e0" opacity="0.2" style={{ mixBlendMode: 'overlay' }} />
+                </g>
             ) : (
                 <text x="150" y="180" textAnchor="middle" fontSize="50">🌃</text>
             )}
 
-            {/* Glitch Text */}
-            <text x="150" y="60" textAnchor="middle" fontSize="24" fontWeight="900" fill="#00e5ff" fontFamily="monospace" style={{ textShadow: "2px 0px #f50057" }}>NIGHT CITY</text>
+            {/* Glitch Text Title: NIGHT CITY */}
+            <text x="150" y="60" textAnchor="middle" fontSize="24" fontWeight="900" fill="#00e5ff" fontFamily="monospace" style={{ textShadow: "0 0 10px #00e5ff, 2px 0px #f50057" }}>NIGHT CITY</text>
 
             <rect x="40" y="320" width="220" height="50" fill="black" stroke="#d500f9" strokeWidth="2" transform="skewX(-10)" />
-            <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#fff" fontFamily="sans-serif" transform="skewX(-10)">
-                {userName || "NETRUNNER"}
-            </text>
+            {/* Name - Glitch Effect */}
+            <g transform="skewX(-10)" filter="url(#text-glitch)">
+                <text x="150" y="350" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="#fff" fontFamily="sans-serif">
+                    {userName || "NETRUNNER"}
+                </text>
+            </g>
 
-            <text x="150" y="380" textAnchor="middle" fontSize="10" fill="#00e5ff">WAKE UP SAMURAI</text>
+            {/* Caption - Larger Neon Yellow */}
+            <text x="150" y="385" textAnchor="middle" fontSize="12" fill="#FFFF00" fontWeight="bold" letterSpacing="1" style={{ textShadow: "0 0 8px #FFFF00" }}>
+                WAKE UP SAMURAI
+            </text>
         </>
     ),
 
     // ===================================
     // 57. METAVERSE AVATAR (VR)
     // ===================================
+    // 57. METAVERSE AVATAR (Digital Glow)
     'metaverse-avatar': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
-                <clipPath id="avatar-clip-goggles">
-                    <rect x="75" y="100" width="150" height="150" rx="20" />
+                <clipPath id="avatar-clip-circle-hud">
+                    <circle cx="150" cy="170" r="80" />
                 </clipPath>
-                <linearGradient id="vr-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#7b1fa2" />
-                    <stop offset="100%" stopColor="#4a148c" />
+                {/* Purple Outer Glow */}
+                <filter id="purple-outer-glow">
+                    <feGaussianBlur stdDeviation="5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Light Text Glitch */}
+                <filter id="light-glitch">
+                    <feOffset in="SourceGraphic" dx="-1" dy="0" result="cyan" />
+                    <feOffset in="SourceGraphic" dx="1" dy="0" result="magenta" />
+                    <feMerge>
+                        <feMergeNode in="cyan" />
+                        <feMergeNode in="magenta" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {/* Gradient for BG */}
+                <linearGradient id="cyber-grad-glow" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#240046" />
+                    <stop offset="100%" stopColor="#3c096c" />
                 </linearGradient>
             </defs>
 
-            {/* VR Space BG */}
-            <rect width="300" height="400" fill="url(#vr-grad)" />
+            {/* Deep Purple Space BG */}
+            <rect width="300" height="400" fill="url(#cyber-grad-glow)" />
 
-            {/* Floating UI Panels */}
-            <rect x="20" y="50" width="60" height="80" rx="5" fill="white" opacity="0.1" stroke="white" strokeWidth="1" />
-            <rect x="220" y="100" width="70" height="100" rx="5" fill="white" opacity="0.1" stroke="white" strokeWidth="1" />
+            {/* Digital Particles */}
+            <g opacity="0.6">
+                <circle cx="20" cy="50" r="1" fill="#e0aaff" />
+                <circle cx="280" cy="80" r="2" fill="#e0aaff" />
+                <circle cx="50" cy="350" r="1" fill="#c77dff" />
+                <circle cx="250" cy="320" r="1" fill="#c77dff" />
+                <circle cx="150" cy="20" r="1" fill="#e0aaff" />
+                <rect x="100" y="100" width="2" height="2" fill="#e0aaff" />
+                <rect x="200" y="250" width="2" height="2" fill="#e0aaff" />
+            </g>
 
-            {/* Connection Lines */}
-            <line x1="150" y1="175" x2="80" y2="90" stroke="white" strokeWidth="1" opacity="0.5" strokeDasharray="4 4" />
-            <line x1="150" y1="175" x2="220" y2="150" stroke="white" strokeWidth="1" opacity="0.5" strokeDasharray="4 4" />
-
-            {/* Avatar Frame - VR Headset Style */}
-            <rect x="70" y="95" width="160" height="160" rx="20" fill="rgba(255,255,255,0.1)" stroke="#ea80fc" strokeWidth="2" />
+            {/* Avatar Glow Ring */}
+            <circle cx="150" cy="170" r="84" fill="none" stroke="#be29ec" strokeWidth="2" filter="url(#purple-outer-glow)" />
 
             {/* Avatar */}
-            {userImage ? (
-                <image
-                    x="75" y="100" width="150" height="150"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-goggles)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
-            ) : (
-                <text x="150" y="180" textAnchor="middle" fontSize="60">👓</text>
-            )}
+            <g filter="url(#purple-outer-glow)">
+                <circle cx="150" cy="170" r="82" fill="none" stroke="#e0aaff" strokeWidth="1" />
+                {userImage ? (
+                    <image
+                        x="70" y="90" width="160" height="160"
+                        href={userImage}
+                        clipPath="url(#avatar-clip-circle-hud)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                ) : (
+                    <text x="150" y="180" textAnchor="middle" fontSize="40">👾</text>
+                )}
+            </g>
 
-            {/* VR Goggles Overlay */}
-            <rect x="60" y="140" width="180" height="60" rx="10" fill="black" opacity="0.8" />
-            <text x="150" y="175" textAnchor="middle" fill="#00e676" fontFamily="monospace" fontSize="14" fontWeight="bold">CONNECTED</text>
+            {/* Data Stream Lines */}
+            <line x1="20" y1="170" x2="60" y2="170" stroke="#c0c0c0" strokeWidth="1" opacity="0.3" />
+            <line x1="240" y1="170" x2="280" y2="170" stroke="#c0c0c0" strokeWidth="1" opacity="0.3" />
 
-            <text x="150" y="300" textAnchor="middle" fontSize="10" fill="#ea80fc" letterSpacing="2">PLAYER ONE READY</text>
+            {/* HUD Elements */}
+            <path d="M110,80 L190,80" stroke="#e0aaff" strokeWidth="1" strokeDasharray="5 5" />
+            <path d="M110,260 L190,260" stroke="#e0aaff" strokeWidth="1" strokeDasharray="5 5" />
 
-            <text x="150" y="340" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="white" style={{ textShadow: "0 0 10px #ea80fc" }}>
-                {userName || "VIRTUAL BEING"}
+            {/* Name - Strong Glow */}
+            <text x="150" y="60" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#e0aaff" letterSpacing="2" style={{ textShadow: "0 0 10px #be29ec" }}>
+                VIRTUAL BEING
             </text>
 
-            <rect x="100" y="360" width="100" height="5" fill="#333" rx="2" />
-            <rect x="100" y="360" width="70" height="5" fill="#00e676" rx="2" /> {/* Loading bar */}
+            <text x="150" y="320" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="bold" fill="#fff" style={{ textShadow: "0 0 8px #be29ec" }}>
+                {userName || "READY PLAYER ONE"}
+            </text>
+
+            {/* Connected Banner - Moved Down to bottom of Avatar frame */}
+            <rect x="100" y="245" width="100" height="20" fill="#000" stroke="#00ff00" strokeWidth="1" />
+            <text x="150" y="259" textAnchor="middle" fontSize="10" fill="#00ff00" fontWeight="bold" letterSpacing="1">CONNECTED</text>
+
+            {/* Stats */}
+            <text x="50" y="360" textAnchor="middle" fontSize="10" fill="#c0c0c0">EXP</text>
+            <rect x="70" y="355" width="160" height="5" fill="#333" rx="2" />
+            <rect x="70" y="355" width="120" height="5" fill="#00e676" rx="2" /> {/* Green Progress Bar */}
+
+            {/* Bottom Caption - Glitch */}
+            <g filter="url(#light-glitch)">
+                <text x="150" y="385" textAnchor="middle" fontSize="14" fill="#e0aaff" fontFamily="monospace">
+                    PLAYER ONE READY
+                </text>
+            </g>
         </>
     ),
 };

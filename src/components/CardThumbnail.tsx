@@ -70,7 +70,7 @@ const DEFAULT_NAMES: Record<string, string> = {
     'yasuo-gank-tem': "ĐẤNG YASUO",
     'pro-player-pubg': "POCHINKI KING",
     'hacker-lor': "ANONYMOUS",
-    'game-over-screen': "TRY AGAIN?",
+    'game-over-screen': "GAME OVER",
     'nintendo-switch': "PLAYER 1",
     'keyboard-warrior': "ANH HÙNG BÀN PHÍM",
     'loi-404-not-found': "MẤT KẾT NỐI",

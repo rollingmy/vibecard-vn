@@ -827,58 +827,88 @@ export const FlexTheme = {
     'can-cuoc-gen-z': ({ userName, userImage, nameFontSize }: TemplateProps) => (
         <>
             <defs>
-                <clipPath id="avatar-clip-rounded">
-                    <rect x="15" y="115" width="110" height="140" rx="5" />
+                <clipPath id="avatar-clip-rounded-modern">
+                    <rect x="15" y="115" width="110" height="140" rx="15" />
                 </clipPath>
+                {/* Holographic Gradient */}
+                <linearGradient id="holo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#87CEEB" stopOpacity="0.8" />
+                    <stop offset="25%" stopColor="#E0FFFF" stopOpacity="0.6" />
+                    <stop offset="50%" stopColor="#87CEEB" stopOpacity="0.8" />
+                    <stop offset="75%" stopColor="#E0FFFF" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#87CEEB" stopOpacity="0.8" />
+                </linearGradient>
+                {/* Metallic Gold Filter */}
+                <filter id="metallic-gold-chip">
+                    <feSpecularLighting result="specOut" specularExponent="20" lightingColor="#ffd700">
+                        <fePointLight x="-5000" y="-10000" z="20000" />
+                    </feSpecularLighting>
+                    <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+                </filter>
+                {/* Soft Card Shadow */}
+                <filter id="card-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#000" floodOpacity="0.3" />
+                </filter>
+                {/* Security Pattern */}
+                <pattern id="security-waves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M0,10 Q5,0 10,10 T20,10" fill="none" stroke="#ccc" strokeWidth="0.5" opacity="0.3" />
+                </pattern>
             </defs>
 
-            {/* Light Metallic Background */}
-            <rect width="300" height="400" fill="#F0F8FF" />
-            <path d="M0,0 L300,100 L300,0 Z" fill="#87CEEB" opacity="0.3" />
-            <path d="M0,400 L300,300 L0,300 Z" fill="#87CEEB" opacity="0.3" />
+            {/* Main Content Wrapper for Floating Effect */}
+            <g transform="translate(10, 10) scale(0.93)" filter="url(#card-shadow)">
 
-            {/* ID Header */}
-            <rect x="20" y="30" width="40" height="40" rx="5" fill="black" />
-            <path d="M30,50 L50,50 M40,40 L40,60" stroke="white" strokeWidth="4" />
+                {/* Light Metallic Background with Security Pattern */}
+                <rect width="300" height="400" fill="#F0F8FF" rx="10" />
+                <rect width="300" height="400" fill="url(#security-waves)" rx="10" />
 
-            <text x="80" y="55" fontSize="24" fontWeight="900" letterSpacing="-1">CITIZEN ID</text>
-            <text x="80" y="75" fontSize="12" fontFamily="monospace" fill="gray">PLANET: Z-420</text>
+                {/* Holographic Blue Blocks */}
+                <path d="M0,0 L300,120 L300,0 Z" fill="url(#holo-grad)" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
+                <path d="M0,400 L300,280 L0,280 Z" fill="url(#holo-grad)" opacity="0.9" style={{ mixBlendMode: 'multiply' }} />
 
-            {/* Photo Area (Left) - Safe Zone Left */}
-            <rect x="15" y="115" width="110" height="140" fill="white" stroke="black" strokeWidth="2" rx="5" />
-            {userImage ? (
-                <image
-                    x="15" y="115" width="110" height="140"
-                    href={userImage}
-                    clipPath="url(#avatar-clip-rounded)"
-                    preserveAspectRatio="xMidYMid slice"
-                />
-            ) : (
-                <text x="70" y="200" textAnchor="middle" fontSize="30">👽</text>
-            )}
+                {/* ID Header */}
+                <rect x="20" y="30" width="40" height="40" rx="8" fill="black" />
+                <path d="M30,50 L50,50 M40,40 L40,60" stroke="white" strokeWidth="4" />
 
-            {/* Info Lines (Right) - Safe Zone Right */}
-            <g transform="translate(130, 120)">
-                <text x="0" y="15" fontSize="10" fill="gray" fontWeight="bold">NAME</text>
-                <text x="0" y="35" fontSize={Math.min(nameFontSize, 14)} fontWeight="bold">{userName || "CÔNG DÂN GƯƠNG MẪU"}</text>
-                <line x1="0" y1="45" x2="160" y2="45" stroke="black" strokeWidth="1" />
+                <text x="80" y="55" fontSize="24" fontWeight="900" letterSpacing="-1" fill="#333">CITIZEN ID</text>
+                <text x="80" y="75" fontSize="12" fontFamily="monospace" fill="gray" letterSpacing="2">PLANET: Z-420</text>
 
-                <text x="0" y="75" fontSize="10" fill="gray" fontWeight="bold">DOB</text>
-                <text x="0" y="95" fontSize="14" fontFamily="monospace">2000-??-??</text>
+                {/* Photo Area (Left) - Rounded Modern */}
+                <rect x="15" y="115" width="110" height="140" fill="white" stroke="#ccc" strokeWidth="1" rx="15" />
+                {userImage ? (
+                    <image
+                        x="15" y="115" width="110" height="140"
+                        href={userImage}
+                        clipPath="url(#avatar-clip-rounded-modern)"
+                        preserveAspectRatio="xMidYMid slice"
+                    />
+                ) : (
+                    <text x="70" y="200" textAnchor="middle" fontSize="30">👽</text>
+                )}
 
-                <text x="0" y="135" fontSize="10" fill="gray" fontWeight="bold">CLASS</text>
-                <text x="0" y="155" fontSize="14" fontWeight="bold" fill="red">S-TIER</text>
+                {/* Info Lines (Right) */}
+                <g transform="translate(130, 120)">
+                    <text x="0" y="15" fontSize="10" fill="gray" fontWeight="bold">NAME</text>
+                    <text x="0" y="35" fontSize={Math.min(nameFontSize, 14)} fontWeight="bold" fill="#000">{userName || "CÔNG DÂN GƯƠNG MẪU"}</text>
+                    <line x1="0" y1="45" x2="160" y2="45" stroke="black" strokeWidth="1" opacity="0.2" />
+
+                    <text x="0" y="75" fontSize="10" fill="gray" fontWeight="bold">DOB</text>
+                    <text x="0" y="95" fontSize="14" fontFamily="monospace" fill="#000">2000-??-??</text>
+
+                    <text x="0" y="135" fontSize="10" fill="gray" fontWeight="bold">CLASS</text>
+                    <text x="0" y="155" fontSize="14" fontWeight="bold" fill="red" style={{ textShadow: "0 0 5px red" }}>S-TIER</text>
+                </g>
+
+                {/* Metallic Gold Chip */}
+                <rect x="25" y="300" width="50" height="35" fill="#FFD700" stroke="#B8860B" strokeWidth="1" rx="6" filter="url(#metallic-gold-chip)" />
+                <path d="M30,317 L70,317 M50,300 L50,335" stroke="#B8860B" strokeWidth="1" opacity="0.6" />
+
+                <text x="90" y="325" fontSize="12" fontFamily="monospace" fill="#333">ID: 84-098-FLEX-VN</text>
+
+                {/* Bottom Status Bar */}
+                <rect x="0" y="370" width="300" height="30" fill="black" rx="0 0 10 10" />
+                <text x="150" y="390" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold" fontFamily="sans-serif">Check-in hành tinh Z với tấm thẻ quyền năng nhất.</text>
             </g>
-
-            {/* Chip & Elements - Bottom Zone */}
-            <rect x="20" y="300" width="50" height="35" fill="#FFD700" stroke="black" strokeWidth="1" rx="4" />
-            <path d="M25,317 L65,317 M45,300 L45,335" stroke="black" strokeWidth="1" opacity="0.3" />
-
-            <text x="90" y="325" fontSize="12" fontFamily="monospace">ID: 84-098-FLEX-VN</text>
-
-            {/* Bottom Bar Code */}
-            <rect x="0" y="370" width="300" height="30" fill="black" />
-            <text x="150" y="390" textAnchor="middle" fill="white" fontSize="10" letterSpacing="5">Validation Required</text>
         </>
     ),
 

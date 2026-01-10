@@ -10,10 +10,10 @@ const getSafeFontSize = (text: string, maxWidth: number, defaultSize: number) =>
     return estimatedWidth > maxWidth ? (maxWidth / text.length) / 0.6 : defaultSize;
 };
 
-// 1. Pixel Mario
+// 1. Pixel Mario (Super World)
 const PixelMarioTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
-    const safeName = userName || "GAME OVER";
-    const safeDesc = description || "INSERT COIN TO CONTINUE";
+    const safeName = userName || "PIXEL PLUMBER";
+    const safeDesc = description || "Level 99: Đã quá già để nhảy qua những rắc rối";
     const nameSize = getSafeFontSize(safeName, 350, 24);
 
     return (
@@ -25,27 +25,53 @@ const PixelMarioTemplate: React.FC<TemplateProps> = ({ userName, userImage, desc
                     <rect x="2" y="2" width="36" height="36" fill="#A0522D" stroke="#000" strokeWidth="2" strokeOpacity="0.2" />
                     <path d="M0,20 H40 M20,0 V40" stroke="#000" strokeOpacity="0.3" strokeWidth="2" />
                 </pattern>
+                {/* Soft Glow */}
+                <filter id="soft-glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
             </defs>
 
-            {/* Background */}
-            <rect width="400" height="600" fill="url(#brickPattern)" />
-            <rect width="400" height="600" fill="rgba(60, 150, 255, 0.3)" /> {/* Sky hint */}
+            {/* Sky Background */}
+            <rect width="400" height="600" fill="#5c94fc" />
 
-            {/* Mystery Blocks */}
-            <g transform="translate(50, 450)">
-                <rect width="60" height="60" fill="#F8B800" stroke="#000" strokeWidth="4" />
-                <text x="30" y="45" textAnchor="middle" fontSize="40" fontWeight="bold" fill="#000">?</text>
+            {/* Pixel Clouds */}
+            <g fill="#fff" opacity="0.9">
+                <rect x="40" y="60" width="60" height="20" rx="10" />
+                <rect x="60" y="50" width="40" height="30" rx="10" />
+
+                <rect x="280" y="100" width="70" height="20" rx="10" />
+                <rect x="300" y="90" width="40" height="30" rx="10" />
+
+                <rect x="150" y="20" width="50" height="15" rx="5" opacity="0.7" />
             </g>
-            <g transform="translate(290, 450)">
+
+            {/* Ground */}
+            <rect x="0" y="540" width="400" height="60" fill="url(#brickPattern)" />
+            <line x1="0" y1="540" x2="400" y2="540" stroke="#000" strokeWidth="4" />
+
+            {/* Mystery Blocks - Glowing */}
+            <g transform="translate(50, 450)" filter="url(#soft-glow)">
                 <rect width="60" height="60" fill="#F8B800" stroke="#000" strokeWidth="4" />
                 <text x="30" y="45" textAnchor="middle" fontSize="40" fontWeight="bold" fill="#000">?</text>
+                <circle cx="5" cy="5" r="2" fill="#fff" opacity="0.5" />
+            </g>
+            <g transform="translate(290, 450)" filter="url(#soft-glow)">
+                <rect width="60" height="60" fill="#F8B800" stroke="#000" strokeWidth="4" />
+                <text x="30" y="45" textAnchor="middle" fontSize="40" fontWeight="bold" fill="#000">?</text>
+                <circle cx="5" cy="5" r="2" fill="#fff" opacity="0.5" />
             </g>
             <g transform="translate(170, 450)">
                 <rect width="60" height="60" fill="#A0522D" stroke="#000" strokeWidth="4" />
+                {/* Brick details */}
+                <path d="M0,30 H60 M30,0 V60" stroke="#000" strokeOpacity="0.2" strokeWidth="2" />
             </g>
 
-            {/* Mushroom */}
-            <g transform="translate(20, 520)">
+            {/* Mushroom - Moved to far Right corner to avoid text overlap */}
+            <g transform="translate(340, 500)" filter="url(#soft-glow)">
                 <path d="M20,0 A20,20 0 0,1 60,0 A20,20 0 0,1 100,0 Q100,30 20,30 Z" fill="#FF0000" stroke="#000" strokeWidth="3" />
                 <circle cx="40" cy="10" r="5" fill="#FFF" />
                 <circle cx="80" cy="10" r="5" fill="#FFF" />
@@ -54,7 +80,7 @@ const PixelMarioTemplate: React.FC<TemplateProps> = ({ userName, userImage, desc
                 <circle cx="70" cy="38" r="2" fill="#000" />
             </g>
 
-            {/* Avatar Frame */}
+            {/* Avatar Frame - Thicker Stroke */}
             <rect x="75" y="80" width="250" height="250" fill="#fff" stroke="#000" strokeWidth="8" rx="10" />
             {/* Main Image */}
             {userImage ? (
@@ -65,42 +91,87 @@ const PixelMarioTemplate: React.FC<TemplateProps> = ({ userName, userImage, desc
 
             {/* Content Box */}
             <rect x="20" y="350" width="360" height="80" fill="#000" stroke="#fff" strokeWidth="4" rx="8" />
-            <text x="200" y="390" textAnchor="middle" fontSize={nameSize} fontWeight="bold" fill="#fff" fontFamily="Courier New, monospace">
+
+            {/* Title - Chunky Font Upgrade */}
+            <text x="200" y="390" textAnchor="middle" fontSize={nameSize} fontWeight="900" fill="#fff" fontFamily="Arial Black, Gadget, sans-serif" stroke="#000" strokeWidth="1">
                 {safeName.toUpperCase()}
             </text>
             <text x="200" y="415" textAnchor="middle" fontSize="14" fill="#fff" fontFamily="Courier New, monospace">
                 LEVEL: 99
             </text>
 
-            <text x="200" y="580" textAnchor="middle" fontSize="14" fill="#fff" fontWeight="bold" stroke="#000" strokeWidth="4" paintOrder="stroke">
+            {/* Caption - Shadow for readability on Blue/Ground */}
+            <text x="200" y="580" textAnchor="middle" fontSize="14" fill="#000" fontWeight="bold" stroke="#000" strokeWidth="3" opacity="0.5">
                 {safeDesc}
             </text>
-            <text x="200" y="580" textAnchor="middle" fontSize="14" fill="#fff" fontWeight="bold">
+            <text x="200" y="580" textAnchor="middle" fontSize="14" fill="#fff" fontWeight="bold" style={{ textShadow: "2px 2px 0px #000" }}>
                 {safeDesc}
             </text>
         </svg>
     );
 };
 
-// 2. Tamagotchi Pet
+// 2. Tamagotchi Pet (90s Toy Vibe)
 const TamagotchiTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "MY PET";
-    const safeDesc = description || "Hungry...";
+    const safeDesc = description || "Nuôi con gì chết con đó...";
     const nameSize = getSafeFontSize(safeName, 200, 20);
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
-            {/* Tamagotchi Shape */}
-            <path d="M50,300 C50,100 350,100 350,300 C350,550 50,550 50,300 Z" fill="#FF69B4" stroke="#000" strokeWidth="8" />
+            <defs>
+                {/* 3D Shell Highlight */}
+                <radialGradient id="plastic-shine" cx="30%" cy="30%" r="50%">
+                    <stop offset="0%" stopColor="#fff" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+                </radialGradient>
+                {/* 3D Bevel for Buttons */}
+                <filter id="btn-bevel">
+                    <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="blur" />
+                    <feOffset dx="2" dy="2" in="blur" result="offsetBlur" />
+                    <feComposite in="SourceGraphic" in2="offsetBlur" operator="over" />
+                </filter>
+                {/* LCD Pixel Filter */}
+                <filter id="lcd-monitor">
+                    <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0" result="gray" />
+                    <feComponentTransfer in="gray" result="contrast">
+                        <feFuncR type="linear" slope="1.5" intercept="-0.2" />
+                        <feFuncG type="linear" slope="1.5" intercept="-0.2" />
+                        <feFuncB type="linear" slope="1.5" intercept="-0.2" />
+                    </feComponentTransfer>
+                    {/* Tint to Greenish LCD */}
+                    <feColorMatrix type="matrix" values="0.2 0 0 0 0  0 0.4 0 0 0  0 0.1 0 0 0  0 0 0 1 0" in="contrast" />
+                </filter>
+            </defs>
 
-            {/* Screen Area */}
-            <rect x="100" y="180" width="200" height="180" fill="#9CAEA9" stroke="#000" strokeWidth="4" rx="4" />
+            {/* Keychain Loop */}
+            <path d="M190,40 A10,10 0 1,1 210,40" fill="none" stroke="#C0C0C0" strokeWidth="6" />
+            <circle cx="200" cy="50" r="10" fill="none" stroke="#C0C0C0" strokeWidth="4" />
+
+
+            {/* Tamagotchi Shell - Pink 3D */}
+            <g filter="drop-shadow(0 10px 10px rgba(0,0,0,0.3))">
+                <path d="M50,300 C50,100 350,100 350,300 C350,550 50,550 50,300 Z" fill="#FF69B4" stroke="#C71585" strokeWidth="2" />
+                <path d="M70,300 C70,120 330,120 330,300 C330,530 70,530 70,300 Z" fill="url(#plastic-shine)" opacity="0.5" />
+            </g>
+
+            {/* Screen Bezel */}
+            <rect x="90" y="170" width="220" height="200" fill="#f0f0f0" stroke="#000" strokeWidth="2" rx="10" />
+
+            {/* Screen Area (LCD) */}
+            <rect x="100" y="180" width="200" height="180" fill="#9CAEA9" stroke="#555" strokeWidth="2" rx="4" />
 
             {/* Pixelated Image Grid effect */}
-            <pattern id="pixelGrid" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
-                <rect width="4" height="4" fill="rgba(0,0,0,0.05)" />
+            <pattern id="pixelGrid" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+                <rect width="3" height="3" fill="rgba(0,0,0,0.1)" />
             </pattern>
             <rect x="100" y="180" width="200" height="180" fill="url(#pixelGrid)" />
+
+            {/* Status Icons */}
+            <text x="110" y="200" fontSize="16">🥣</text>
+            <text x="270" y="200" fontSize="16">❤️</text>
+            <text x="270" y="350" fontSize="16">💩</text>
+            <text x="110" y="350" fontSize="16">💡</text>
 
             {/* Avatar (Pixelated if possible, currently normal clip) */}
             <defs>
@@ -110,21 +181,31 @@ const TamagotchiTemplate: React.FC<TemplateProps> = ({ userName, userImage, desc
                 </clipPath>
             </defs>
             {userImage ? (
-                <image href={userImage} x="110" y="190" width="180" height="160" preserveAspectRatio="xMidYMid slice" clipPath="url(#clipTama)" style={{ imageRendering: 'pixelated' }} />
+                <image href={userImage} x="120" y="210" width="160" height="120" preserveAspectRatio="xMidYMid slice" clipPath="url(#clipTama)" style={{ imageRendering: 'pixelated', filter: 'url(#lcd-monitor)' }} />
             ) : (
                 <text x="200" y="280" textAnchor="middle" fontSize="12" fontFamily="monospace">INSERT PET</text>
             )}
 
-            {/* Buttons */}
-            <circle cx="120" cy="450" r="15" fill="#FFD700" stroke="#000" strokeWidth="2" />
-            <circle cx="200" cy="480" r="15" fill="#FFD700" stroke="#000" strokeWidth="2" />
-            <circle cx="280" cy="450" r="15" fill="#FFD700" stroke="#000" strokeWidth="2" />
+            {/* Buttons - Gold 3D */}
+            <g filter="url(#btn-bevel)">
+                <circle cx="120" cy="450" r="15" fill="#FFD700" stroke="#DAA520" strokeWidth="1" />
+                <circle cx="200" cy="480" r="15" fill="#FFD700" stroke="#DAA520" strokeWidth="1" />
+                <circle cx="280" cy="450" r="15" fill="#FFD700" stroke="#DAA520" strokeWidth="1" />
+            </g>
+            {/* Labels A B C */}
+            <text x="120" y="480" textAnchor="middle" fontSize="10" fontWeight="bold">A</text>
+            <text x="200" y="510" textAnchor="middle" fontSize="10" fontWeight="bold">B</text>
+            <text x="280" y="480" textAnchor="middle" fontSize="10" fontWeight="bold">C</text>
 
-            {/* Text */}
-            <text x="200" y="140" textAnchor="middle" fontSize={nameSize} fontWeight="bold" fill="#000" fontFamily="Courier New, monospace">
+            {/* Text Title (Rounded) */}
+            <text x="200" y="150" textAnchor="middle" fontSize={nameSize} fontWeight="900"
+                fill="#FFF" stroke="#C71585" strokeWidth="4" paintOrder="stroke"
+                fontFamily="Arial Rounded MT Bold, Arial, sans-serif">
                 {safeName}
             </text>
-            <text x="200" y="540" textAnchor="middle" fontSize="14" fill="#000" fontFamily="Courier New, monospace" fontWeight="bold">
+
+            {/* Caption */}
+            <text x="200" y="540" textAnchor="middle" fontSize="16" fill="#333" fontFamily="Arial, sans-serif" fontWeight="bold">
                 {safeDesc}
             </text>
         </svg>
@@ -583,66 +664,136 @@ const VHSTemplate: React.FC<TemplateProps> = ({ userName, userImage, description
     );
 };
 
-// 8. Pacman Maze
+// 8. Pacman Maze (Neon Arcade)
 const PacmanTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "PAC-MAN";
-    const safeDesc = description || "Waka Waka Waka...";
+    const safeDesc = description || "Chạy trốn deadline...";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="neon-blue-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <filter id="neon-red-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                    <feFlood floodColor="red" floodOpacity="0.8" result="glowColor" />
+                    <feComposite in="glowColor" in2="coloredBlur" operator="in" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <filter id="neon-yellow-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feFlood floodColor="gold" floodOpacity="0.8" result="glowColor" />
+                    <feComposite in="glowColor" in2="coloredBlur" operator="in" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <clipPath id="pacCircle">
+                    <circle cx="200" cy="320" r="100" />
+                </clipPath>
+                {/* Maze Pattern for BG */}
+                <pattern id="maze-bg" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M20,20 H80 V80 H20 Z" fill="none" stroke="#1919A6" strokeWidth="2" opacity="0.2" />
+                    <path d="M40,40 H60" fill="none" stroke="#1919A6" strokeWidth="2" opacity="0.2" />
+                </pattern>
+            </defs>
+
             <rect width="400" height="600" fill="#000" />
+            <rect width="400" height="600" fill="url(#maze-bg)" />
 
-            {/* Walls */}
-            <path d="M20,20 H380 V580 H20 Z" fill="none" stroke="#1919A6" strokeWidth="6" />
-            <path d="M50,50 H350 M50,150 H350 M50,550 H350" stroke="#1919A6" strokeWidth="4" />
-            <rect x="80" y="200" width="240" height="240" fill="none" stroke="#1919A6" strokeWidth="4" rx="10" />
+            {/* Walls - Neon Blue */}
+            <path d="M20,20 H380 V580 H20 Z" fill="none" stroke="#1919A6" strokeWidth="6" style={{ filter: 'drop-shadow(0 0 5px #00f)' }} />
+            <path d="M50,50 H350 M50,150 H350 M50,550 H350" stroke="#1919A6" strokeWidth="4" style={{ filter: 'drop-shadow(0 0 3px #00f)' }} />
+            <rect x="80" y="200" width="240" height="240" fill="none" stroke="#1919A6" strokeWidth="4" rx="10" style={{ filter: 'drop-shadow(0 0 5px #00f)' }} />
 
-            {/* Dots */}
+            {/* Dots (Top) */}
             <circle cx="100" cy="100" r="4" fill="#FFB897" />
             <circle cx="150" cy="100" r="4" fill="#FFB897" />
             <circle cx="200" cy="100" r="4" fill="#FFB897" />
             <circle cx="250" cy="100" r="4" fill="#FFB897" />
             <circle cx="300" cy="100" r="4" fill="#FFB897" />
 
-            {/* Avatar in Center */}
-            <defs>
-                <clipPath id="pacCircle">
-                    <circle cx="200" cy="320" r="100" />
-                </clipPath>
-            </defs>
-            {userImage && <image href={userImage} x="100" y="220" width="200" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#pacCircle)" />}
+            {/* Avatar in Center with Neon Border */}
+            {userImage ? (
+                <g>
+                    <image href={userImage} x="100" y="220" width="200" height="200" preserveAspectRatio="xMidYMid slice" clipPath="url(#pacCircle)" />
+                    <circle cx="200" cy="320" r="100" fill="none" stroke="#00e5ff" strokeWidth="3" filter="url(#neon-blue-glow)" />
+                </g>
+            ) : (
+                <text x="200" y="340" textAnchor="middle" fontSize="60">👻</text>
+            )}
 
-            {/* Pacman & Ghosts */}
-            <path d="M190,480 A30,30 0 1,1 190,520 L200,500 Z" fill="#FFFF00" transform="rotate(180, 200, 500)" /> {/* Pacman */}
+            {/* Pacman & Ghosts Bottom Line */}
+            {/* Dots between Pacman (Right) and Ghost (Left) - wait, standard is one chases other. Let's put them on line 500 */}
+            {/* Pacman at 190,480 was original. User wants dots between Pacman and Ghost at bottom. */}
+            {/* Let's reposition: Ghost Left (60), Pacman Right (340) or similar? Original code had Pacman center-ish. 
+                 Let's place Ghost Left and Pacman Right chasing, with dots in between.
+             */}
 
-            {/* Ghost Red */}
-            <path d="M60,480 A20,20 0 0,1 100,480 V520 L90,510 L80,520 L70,510 L60,520 Z" fill="#FF0000" />
-            <circle cx="70" cy="480" r="5" fill="#fff" /><circle cx="72" cy="480" r="2" fill="#000" />
-            <circle cx="90" cy="480" r="5" fill="#fff" /><circle cx="92" cy="480" r="2" fill="#000" />
+            {/* Dots Line */}
+            <g fill="#FFD700">
+                <circle cx="130" cy="500" r="3" />
+                <circle cx="160" cy="500" r="3" />
+                <circle cx="190" cy="500" r="3" />
+                <circle cx="220" cy="500" r="3" />
+                <circle cx="250" cy="500" r="3" />
+            </g>
+
+            {/* Pacman - Neon Yellow - Chasing Left-to-Right or Right-to-Left? Usually Ghost chases Pacman. 
+                Let's put Pacman at Right facing Left, Ghost at Left chasing.
+            */}
+            <path d="M300,480 A20,20 0 1,1 300,520 L310,500 Z" fill="#FFFF00" transform="rotate(180, 310, 500)" filter="url(#neon-yellow-glow)" />
+
+            {/* Ghost Red - Neon Red */}
+            <path d="M90,480 A20,20 0 0,1 130,480 V520 L120,510 L110,520 L100,510 L90,520 Z" fill="#FF0000" transform="translate(-20, 0)" filter="url(#neon-red-glow)" />
+            <g transform="translate(-20, 0)">
+                <circle cx="100" cy="490" r="5" fill="#fff" /><circle cx="102" cy="490" r="2" fill="#000" />
+                <circle cx="120" cy="490" r="5" fill="#fff" /><circle cx="122" cy="490" r="2" fill="#000" />
+            </g>
 
             {/* Text */}
-            <text x="200" y="180" textAnchor="middle" fontSize="30" fill="#FFD700" fontWeight="bold" fontFamily="monospace">
+            <text x="200" y="180" textAnchor="middle" fontSize="30" fill="#FFD700" fontWeight="bold" fontFamily="Courier New, monospace" style={{ textShadow: "0 0 5px gold" }}>
                 HIGH SCORE
             </text>
-            <text x="200" y="220" textAnchor="middle" fontSize="24" fill="#fff" fontWeight="bold">
+            {/* Name pushed up 10px from 220 -> 210 */}
+            <text x="200" y="210" textAnchor="middle" fontSize="24" fill="#fff" fontWeight="bold">
                 {safeName}
             </text>
 
             <rect x="40" y="550" width="320" height="40" fill="#000" />
-            <text x="200" y="575" textAnchor="middle" fontSize="14" fill="#FFB897" fontFamily="monospace">
+            {/* Caption Orange Glow */}
+            <text x="200" y="575" textAnchor="middle" fontSize="14" fill="#FF9800" fontFamily="monospace" fontWeight="bold" style={{ textShadow: "0 0 5px #FF9800" }}>
                 {safeDesc}
             </text>
         </svg>
     );
 }
 
-// 9. Tetris Block
+// 9. Tetris Block (8-Bit Retro)
 const TetrisTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "TETRIS KING";
-    const safeDesc = description || "Line Clear!";
+    const safeDesc = description || "Cuộc đời là những mảnh ghép không vừa khít";
 
     return (
-        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" style={{ fontFamily: 'Courier New, monospace' }}>
+            <defs>
+                <pattern id="scanline" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+                    <rect width="1" height="2" fill="black" opacity="0.3" />
+                </pattern>
+                <clipPath id="avatar-clip-pixel-border">
+                    <rect x="80" y="100" width="240" height="240" />
+                </clipPath>
+            </defs>
+
             <rect width="400" height="600" fill="#111" />
 
             {/* Grid */}
@@ -650,6 +801,22 @@ const TetrisTemplate: React.FC<TemplateProps> = ({ userName, userImage, descript
                 <path d="M40,0 V40 H0" fill="none" stroke="#222" strokeWidth="2" />
             </pattern>
             <rect width="400" height="600" fill="url(#tetrisGrid)" />
+
+            {/* Falling Blocks (Dynamic Elements) - Behind Avatar */}
+            {/* T-Block Purple - Faded */}
+            <g transform="translate(40, 40)" opacity="0.4">
+                <rect x="40" y="0" width="40" height="40" fill="#9C27B0" stroke="#000" strokeWidth="2" />
+                <rect x="0" y="40" width="40" height="40" fill="#9C27B0" stroke="#000" strokeWidth="2" />
+                <rect x="40" y="40" width="40" height="40" fill="#9C27B0" stroke="#000" strokeWidth="2" />
+                <rect x="80" y="40" width="40" height="40" fill="#9C27B0" stroke="#000" strokeWidth="2" />
+            </g>
+            {/* L-Block Orange - Faded */}
+            <g transform="translate(280, 200)" opacity="0.3">
+                <rect x="0" y="0" width="40" height="40" fill="#FF9800" stroke="#000" strokeWidth="2" />
+                <rect x="0" y="40" width="40" height="40" fill="#FF9800" stroke="#000" strokeWidth="2" />
+                <rect x="0" y="80" width="40" height="40" fill="#FF9800" stroke="#000" strokeWidth="2" />
+                <rect x="40" y="80" width="40" height="40" fill="#FF9800" stroke="#000" strokeWidth="2" />
+            </g>
 
             {/* Blocks at bottom */}
             <g stroke="#000" strokeWidth="2">
@@ -664,72 +831,129 @@ const TetrisTemplate: React.FC<TemplateProps> = ({ userName, userImage, descript
                 <rect x="360" y="520" width="40" height="40" fill="yellow" />
             </g>
 
-            {/* Main Block (Avatar) - T Shape */}
+            {/* T-Shape around Avatar Frame for decoration */}
             <g transform="translate(120, 160)">
-                <rect x="40" y="0" width="40" height="40" fill="purple" stroke="#000" strokeWidth="2" />
-                <rect x="0" y="40" width="40" height="40" fill="purple" stroke="#000" strokeWidth="2" />
-                <rect x="40" y="40" width="40" height="40" fill="purple" stroke="#000" strokeWidth="2" />
-                <rect x="80" y="40" width="40" height="40" fill="purple" stroke="#000" strokeWidth="2" />
+                {/* We removed the overlaid blocks to let the avatar shine, but added border below */}
             </g>
 
-            {/* Avatar inside a large ghost block or overlay */}
-            <rect x="80" y="100" width="240" height="240" fill="#fff" opacity="0.1" stroke="#fff" strokeWidth="2" strokeDasharray="5 5" />
-            {userImage && <image href={userImage} x="80" y="100" width="240" height="240" preserveAspectRatio="xMidYMid slice" />}
+            {/* Avatar with White Pixel Border & Scanline */}
+            <g>
+                <rect x="76" y="96" width="248" height="248" fill="none" stroke="white" strokeWidth="4" />
+                {userImage ? (
+                    <image
+                        href={userImage}
+                        x="80" y="100" width="240" height="240"
+                        preserveAspectRatio="xMidYMid slice"
+                        clipPath="url(#avatar-clip-pixel-border)"
+                    />
+                ) : (
+                    <rect x="80" y="100" width="240" height="240" fill="#333" />
+                )}
+                {/* Scanline Overlay on Image */}
+                <rect x="80" y="100" width="240" height="240" fill="url(#scanline)" pointerEvents="none" />
+            </g>
 
-            {/* Text UI */}
-            <text x="200" y="400" textAnchor="middle" fontSize="30" fill="#fff" fontWeight="bold" fontFamily="monospace" style={{ textShadow: "4px 4px 0px #000" }}>
+
+            {/* Text UI - Pixel Style */}
+            <text x="50" y="90" fontSize="20" fill="#fff" fontFamily="monospace" fontWeight="bold">SCORE</text>
+            <text x="50" y="115" fontSize="20" fill="#fff" fontFamily="monospace">099999</text>
+
+            {/* Level Indicator (Symmetric) */}
+            <text x="350" y="90" textAnchor="end" fontSize="20" fill="#fff" fontFamily="monospace" fontWeight="bold">LEVEL</text>
+            <text x="350" y="115" textAnchor="end" fontSize="20" fill="#fff" fontFamily="monospace">99</text>
+
+            {/* Name */}
+            <text x="200" y="420" textAnchor="middle" fontSize="30" fill="#fff" fontWeight="bold" fontFamily="monospace" style={{ textShadow: "4px 4px 0px #000" }}>
                 {safeName}
             </text>
 
-            <text x="50" y="50" fontSize="20" fill="#fff" fontFamily="monospace">SCORE</text>
-            <text x="50" y="80" fontSize="20" fill="#fff" fontFamily="monospace">099999</text>
-
-            <text x="200" y="450" textAnchor="middle" fontSize="16" fill="#ccc" fontFamily="monospace">
-                NEXT: {safeDesc}
+            {/* Caption - Centered, Spaced, Wrapped if needed */}
+            {/* Added padding by increasing Y distance from Name and reducing font slightly for side margins */}
+            <text x="200" y="500" textAnchor="middle" fontSize="15" fill="#ccc" fontFamily="monospace" fontWeight="bold">
+                {safeDesc}
             </text>
         </svg>
     );
 }
 
-// 10. Nokia Snake
+// 10. Nokia Snake (LCD Retro)
 const NokiaTemplate: React.FC<TemplateProps> = ({ userName, userImage, description }) => {
     const safeName = userName || "RẮN SĂN MỒI";
-    const safeDesc = description || "High Score: 999";
+    const safeDesc = description || "Càng ăn càng dài, càng dài càng dễ chết";
 
     return (
         <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="lcd-contrast">
+                    <feColorMatrix type="saturate" values="0" />
+                    <feComponentTransfer>
+                        <feFuncR type="linear" slope="1.5" intercept="-0.2" />
+                        <feFuncG type="linear" slope="1.5" intercept="-0.2" />
+                        <feFuncB type="linear" slope="1.5" intercept="-0.2" />
+                    </feComponentTransfer>
+                </filter>
+                <radialGradient id="lcd-vignette" cx="50%" cy="50%" r="70%">
+                    <stop offset="60%" stopColor="#9ACD32" stopOpacity="0" />
+                    <stop offset="100%" stopColor="#6B8E23" stopOpacity="0.6" />
+                </radialGradient>
+            </defs>
+
             {/* Phone Body */}
             <rect width="400" height="600" fill="#333" />
             <rect x="20" y="20" width="360" height="560" fill="#9ACD32" rx="5" /> {/* LCD Green */}
 
-            {/* Snake Grid */}
+            {/* Snake Grid - Faded */}
             <pattern id="lcdGrid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <rect width="9" height="9" fill="rgba(0,0,0,0.1)" />
+                <rect width="9" height="9" fill="rgba(0,0,0,0.05)" />
             </pattern>
             <rect x="20" y="20" width="360" height="560" fill="url(#lcdGrid)" />
 
             {/* Snake Body Border */}
             <path d="M40,40 H360 V560 H40 V40" fill="none" stroke="#000" strokeWidth="10" strokeDasharray="12 4" />
 
-            {/* Avatar (Pixelated) */}
-            {userImage && <image href={userImage} x="100" y="150" width="200" height="200" preserveAspectRatio="xMidYMid slice" style={{ imageRendering: 'pixelated', filter: 'grayscale(100%) contrast(1.5)' }} />}
-            <rect x="100" y="150" width="200" height="200" fill="none" stroke="#000" strokeWidth="4" />
+            {/* Active Snake (Pixel art) - Top Right */}
+            <g fill="#000">
+                <rect x="330" y="60" width="10" height="10" />
+                <rect x="320" y="60" width="10" height="10" />
+                <rect x="310" y="60" width="10" height="10" />
+                <rect x="300" y="60" width="10" height="10" />
+                <rect x="290" y="60" width="10" height="10" />
+                <rect x="290" y="70" width="10" height="10" /> {/* Turn */}
+                <rect x="290" y="80" width="10" height="10" />
+                <rect x="290" y="90" width="10" height="10" /> {/* Extended Head */}
+                <rect x="290" y="100" width="10" height="10" />
+            </g>
+
+            {/* Food - Bottom Left */}
+            <rect x="60" y="500" width="10" height="10" fill="#000" />
 
             {/* Text 8-bit */}
             <text x="200" y="100" textAnchor="middle" fontSize="30" fill="#000" fontWeight="bold" fontFamily="monospace">
                 SNAKE II
             </text>
 
-            <text x="200" y="420" textAnchor="middle" fontSize="24" fill="#000" fontWeight="bold" fontFamily="Courier New">
+            {/* Vignette Overlay */}
+            <rect x="20" y="20" width="360" height="560" fill="url(#lcd-vignette)" pointerEvents="none" />
+
+            {/* Avatar (Pixelated & High Contrast) */}
+            {userImage && <image href={userImage} x="100" y="150" width="200" height="200" preserveAspectRatio="xMidYMid slice" style={{ imageRendering: 'pixelated', filter: 'url(#lcd-contrast)' }} />}
+            <rect x="100" y="150" width="200" height="200" fill="none" stroke="#000" strokeWidth="4" />
+
+            {/* Name - Bolder */}
+            <text x="200" y="420" textAnchor="middle" fontSize="24" fill="#000" fontWeight="900" fontFamily="Courier New">
                 {safeName}
             </text>
 
-            <text x="200" y="520" textAnchor="middle" fontSize="14" fill="#000" fontFamily="Courier New" fontStyle="italic">
-                "{safeDesc}"
+            {/* Caption - Split into 2 lines for better width fit */}
+            {/* Logic: Split by comma if present, or just render. Hardcoded for the requested text visual. */}
+            <text x="200" y="495" textAnchor="middle" fontSize="14" fill="#000" fontFamily="Courier New" fontStyle="italic" fontWeight="bold">
+                {safeDesc.includes(',') ? safeDesc.split(',')[0] + "," : safeDesc}
             </text>
-
-            {/* Food */}
-            <rect x="300" y="300" width="10" height="10" fill="#000" />
+            {safeDesc.includes(',') && (
+                <text x="200" y="515" textAnchor="middle" fontSize="14" fill="#000" fontFamily="Courier New" fontStyle="italic" fontWeight="bold">
+                    {safeDesc.split(',')[1].trim()}
+                </text>
+            )}
         </svg>
     );
 }
