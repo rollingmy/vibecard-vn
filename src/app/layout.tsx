@@ -6,12 +6,14 @@ const beVietnamPro = Be_Vietnam_Pro({
   weight: ["300", "400", "500", "600", "700", "900"],
   subsets: ["vietnamese"],
   variable: "--font-be-vietnam-pro",
+  display: 'swap',
 });
 
 const vt323 = VT323({
   weight: "400",
   subsets: ["latin", "vietnamese"],
   variable: "--font-vt323",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
