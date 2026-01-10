@@ -1431,4 +1431,70 @@ export const GenZTheme = {
             </text>
         </svg>
     ),
+
+    // ===================================
+    // 34. FLEXING TIME (Luxury Watch)
+    // ===================================
+    'flexing-time': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+        <>
+            <defs>
+                <linearGradient id="gold-grad-watch" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FDB931" />
+                    <stop offset="30%" stopColor="#FFD700" />
+                    <stop offset="70%" stopColor="#FDB931" />
+                    <stop offset="100%" stopColor="#FFD700" />
+                </linearGradient>
+                <filter id="diamond-sparkle">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0" />
+                    <feComposite operator="in" in2="SourceGraphic" />
+                </filter>
+                <clipPath id="avatar-clip-watch">
+                    <circle cx="150" cy="180" r="90" />
+                </clipPath>
+            </defs>
+
+            {/* Background: Matte Black */}
+            <rect width="300" height="400" fill="#111" />
+            <rect width="300" height="400" fill="url(#noise)" opacity="0.1" />
+
+            {/* Watch Bezel / Frame */}
+            <circle cx="150" cy="180" r="105" fill="none" stroke="url(#gold-grad-watch)" strokeWidth="10" />
+            <circle cx="150" cy="180" r="105" fill="none" stroke="#fff" strokeWidth="1" strokeDasharray="2 10" opacity="0.5" /> {/* Diamonds marks */}
+
+            {/* Lugs / Strap hints */}
+            <path d="M100,80 L80,20 L220,20 L200,80" fill="#222" stroke="url(#gold-grad-watch)" strokeWidth="2" />
+            <path d="M100,280 L80,340 L220,340 L200,280" fill="#222" stroke="url(#gold-grad-watch)" strokeWidth="2" />
+
+            {/* Avatar Face */}
+            {userImage ? (
+                <image
+                    x="60" y="90" width="180" height="180"
+                    href={userImage}
+                    clipPath="url(#avatar-clip-watch)"
+                    preserveAspectRatio="xMidYMid slice"
+                />
+            ) : (
+                <text x="150" y="200" textAnchor="middle" fontSize="80">⌚</text>
+            )}
+
+            {/* Watch Hands Overlay */}
+            <circle cx="150" cy="180" r="5" fill="url(#gold-grad-watch)" />
+            <line x1="150" y1="180" x2="150" y2="120" stroke="url(#gold-grad-watch)" strokeWidth="4" strokeLinecap="round" /> {/* Hour */}
+            <line x1="150" y1="180" x2="200" y2="180" stroke="url(#gold-grad-watch)" strokeWidth="3" strokeLinecap="round" /> {/* Minute */}
+
+            {/* Text Components */}
+            <text x="150" y="320" textAnchor="middle" fontSize={Math.min(nameFontSize, 24)} fontWeight="900" fill="url(#gold-grad-watch)" fontFamily="Didot, serif" style={{ letterSpacing: "2px" }}>
+                {userName || "RICH KID"}
+            </text>
+
+            <text x="150" y="350" textAnchor="middle" fontSize="36" fontWeight="bold" fill="#fff" style={{ textShadow: "0 0 10px gold" }}>
+                $5.000.000
+            </text>
+
+            <text x="150" y="380" textAnchor="middle" fontSize="10" fontStyle="italic" fill="#aaa">
+                (Hàng Rep 1:1 nhưng nhìn như Auth)
+            </text>
+        </>
+    ),
 };

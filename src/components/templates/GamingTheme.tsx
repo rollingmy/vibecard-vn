@@ -968,4 +968,5 @@ export const GamingTheme = {
             </g>
         </>
     ),
+
 };

@@ -912,7 +912,7 @@ export const FlexTheme = {
         </>
     ),
 
-    'the-bai-ma-thuat': ({ userName, userImage, nameFontSize }: TemplateProps) => (
+    'the-bai-ma-thuat': ({ userName, userImage, nameFontSize, description }: TemplateProps) => (
         <>
             <defs>
                 <clipPath id="avatar-clip-square">
@@ -953,12 +953,32 @@ export const FlexTheme = {
 
             {/* Description Box - Safe Zone Bottom */}
             <rect x="25" y="310" width="250" height="70" fill="#F5DEB3" stroke="black" strokeWidth="2" />
-            <text x="35" y="330" fontSize="14" fontWeight="bold">[{userName || "SUMMONER"}]</text>
-            <text x="35" y="350" fontSize="10" fontFamily="serif">"Người sở hữu tấm thẻ này có khả năng</text>
-            <text x="35" y="362" fontSize="10" fontFamily="serif">thức đêm vô tận và ngủ bù vào ban ngày."</text>
+            <text x="35" y="328" fontSize="14" fontWeight="bold">[{userName || "SUMMONER"}]</text>
+
+            <foreignObject x="25" y="335" width="250" height="30">
+                <div xmlns="http://www.w3.org/1999/xhtml" style={{
+                    fontFamily: 'serif',
+                    fontSize: '10px',
+                    fontStyle: 'italic',
+                    color: '#000',
+                    padding: '0 5px',
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    lineHeight: '1.2'
+                }}>
+                    "{description || "Người sở hữu tấm thẻ này có khả năng thức đêm vô tận và ngủ bù vào ban ngày."}"
+                </div>
+            </foreignObject>
+
+            <line x1="25" y1="365" x2="275" y2="365" stroke="black" strokeWidth="1" />
 
             {/* ATK/DEF */}
-            <text x="180" y="375" fontSize="10" fontWeight="bold">ATK/ 9999  DEF/ 9999</text>
+            <text x="270" y="375" textAnchor="end" fontSize="10" fontWeight="bold">ATK/ 9999  DEF/ 9999</text>
         </>
     ),
 
