@@ -4,12 +4,26 @@ import React from "react";
 import templates from "@/data/templates.json";
 import { FlexTheme } from "@/components/templates/FlexTheme";
 import { LoveTheme } from "@/components/templates/LoveTheme";
+import { OfficeLifeTemplates } from "@/components/templates/OfficeTheme";
+import { GamingTheme } from "@/components/templates/GamingTheme";
+import { GenZTheme } from "@/components/templates/GenZTheme";
+import { RetroTemplates } from "@/components/templates/RetroTheme";
+import { DarkHumorTemplates } from "@/components/templates/DarkHumorTheme";
+import { ZodiacTemplates } from "@/components/templates/ZodiacTheme";
+import { TravelTemplates } from "@/components/templates/TravelTheme";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 const AllTemplates = {
     ...FlexTheme,
-    ...LoveTheme
+    ...LoveTheme,
+    ...OfficeLifeTemplates,
+    ...GamingTheme,
+    ...GenZTheme,
+    ...RetroTemplates,
+    ...DarkHumorTemplates,
+    ...ZodiacTemplates,
+    ...TravelTemplates
 };
 
 
